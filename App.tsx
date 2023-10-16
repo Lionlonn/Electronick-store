@@ -2,16 +2,17 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
-import { Product } from './src/entities/product/ui/card'
+import { Product } from './src/entities/product/ui'
+
+
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
-  View,
 } from 'react-native';
+
 
 
 export const App = () => {
