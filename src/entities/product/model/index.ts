@@ -1,14 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { ProductApi } from '../api'
+
+
+export const addFavoritesById = createAsyncThunk(
+    'favorites/addToFavorites',
+    async (id: number) => {
+        // const response = await ProductApi.getProduct(id)
+        return id
+
+    }
+)
+
+export const removeFavoritesById = createAsyncThunk(
+    'favorites/removeToFavorites',
+    async (id: number) => {
+        const response = await ProductApi.getProduct(id)
+        return id
+
+    }
+)
+
+
+
 
 export interface FavouritesToggle {
-    isFavorites: boolean,
-    id: number
+    favorites: { [id: number]: boolean}
 }
 
 const initialState: FavouritesToggle = {
-    isFavorites: false,
-    id: 0
+    favorites: {},
 }
 
 
@@ -16,17 +37,30 @@ export const favoritesSlice = createSlice({
     name: 'favorites',
     initialState,
     reducers: {
-        add: (state) => {
-            state.isFavorites = true
-        },
-        remove: (state) => {
-            state.isFavorites = false
-        },
-        addToFavorite: (state, action: PayloadAction<boolean>) => {
-            state.isFavorites = action.payload
-        }
+        // addToFavorites: (state, action: PayloadAction<number>) => {
+        //     const id = action.payload
+        //     state.favorites[id] = true
+            
+        // },
+        // removeFromFavorites: (state, action: PayloadAction<number>) => {
+        //     const id = action.payload
+        //     delete state.favorites[id]
+        // }
+
+    },
+    extraReducers: (builder) => {
+        builder
+        .addCase(addFavoritesById.fulfilled, (state, action) => {
+            const id = action.payload
+            state.favorites[id] = true
+       })
+       .addCase(removeFavoritesById.fulfilled, (state, action) => {
+        const id = action.payload
+        state.favorites[id] = false
+   })
     }
 })
 
-export const { add, remove, addToFavorite } = favoritesSlice.actions
+// export const { addToFavorites, removeFromFavorites, } = favoritesSlice.actions
 export default favoritesSlice.reducer 
+

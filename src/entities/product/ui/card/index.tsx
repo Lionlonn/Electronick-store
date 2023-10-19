@@ -2,19 +2,15 @@ import React from "react";
 import { Alert, Button, Image, Text, View } from "react-native";
 import { page } from '../card/style'
 
-import type { RootState } from "../../../../app/store";
-import { useSelector, useDispatch } from "react-redux";
-import { add, remove } from '../../model/index'
+interface Props {
+    addToFavorites: () => void
+    removeToFavorites: () => void
+}
 
 
-
-export const ProductCard = () => {
-    const favorite = useSelector((state: RootState) => state.favourite.isFavorites)
-    const dispatch = useDispatch()
-
+export const ProductCard:React.FC<Props> = (props: Props) => {
     
-    
-    
+      
 
     return (
         
@@ -29,11 +25,11 @@ export const ProductCard = () => {
                 <Text style={page.container}>URA URA</Text>
                 <Button 
                     title="добавить"
-                    onPress={() => dispatch(add())}
+                    onPress={props.addToFavorites}
                 />
                 <Button 
                     title="удалить"
-                    onPress={() => dispatch(remove())}
+                    onPress={props.removeToFavorites}
                     />
             </View>
             
