@@ -18,7 +18,6 @@ import {
 export const App = () => {
   return (
       <>
-        <Text>Hello World</Text>
         <Product />
       </>
   );
