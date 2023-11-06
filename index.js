@@ -9,6 +9,7 @@ import {LogBox} from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './src/app/store/index.ts'
 import { productsAll } from './src/entities/product/model';
+import { PaperProvider } from 'react-native-paper';
 
 
 const Wrapper = () => {
@@ -16,12 +17,13 @@ const Wrapper = () => {
     
     return (
         <Provider store={store}>
-            <App/>
+            <PaperProvider>
+                <App/>
+            </PaperProvider>
         </Provider>
     )
 }
 store.dispatch(productsAll())
-
 
 
 AppRegistry.registerComponent(appName, () => Wrapper);

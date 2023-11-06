@@ -1,10 +1,6 @@
 
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import { Product } from './src/entities/product/ui'
-
-
+import * as React from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -12,13 +8,14 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
+import { ProductsList } from './src/widgets/products-list/ui';
 
 
 
 export const App = () => {
   return (
       <>
-        <Product />
+        <ProductsList/>
       </>
   );
 }

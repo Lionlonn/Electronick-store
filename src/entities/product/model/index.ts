@@ -1,24 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { ProductApi, Product } from '../api'
+import { ProductApi, ProductItem } from '../api'
 import  StatusFlag  from '../../../shared/types/statusFlag'
 
 
 
 
 export interface products {
-    items : Product[] | undefined,
+    item : ProductItem[] | undefined,
     status: null | StatusFlag
 }
 
 const initialState:products = {
-    items: [],
+    item: [],
     status: null
 }
 
 export const productsAll = createAsyncThunk(
     "products/productsAll",
-    async (arg, thunkAPI) => {
+    async () => {
         const response = await ProductApi.getProduct();
         return response;
     }
@@ -36,7 +36,7 @@ const productsSlice = createSlice({
         })
         .addCase(productsAll.fulfilled, (state, action) => {
             state.status = StatusFlag.Fulfilled
-            state.items = action.payload
+            state.item = action.payload
         })
         .addCase(productsAll.rejected, (state) => {
             state.status = StatusFlag.Rejected

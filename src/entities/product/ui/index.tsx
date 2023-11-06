@@ -1,23 +1,38 @@
 import React, { useEffect, useId } from "react";
-import { Text } from "react-native";
 import { ProductCard } from "./card";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../app/store";
 import { useActionCreators, useAppDispatch, useStateSelector } from "../../../shared/hooks/hooks";
-import { createSelector } from 'reselect';
+import { addToFavorite } from "../../../features/favorite/model";
+import { ProductItem } from "../api";
+import { store } from "../../../app/store";
 
 
+interface Props {
+    item: ProductItem,
+}
 
-export const Product = () => {
-    
-    
-    const { items, status} = useStateSelector(state => state.products)
-    
-    
 
+export const Product = (props:Props) => {
+    const dispatch = useAppDispatch()
+
+    const handleAddToFavorite = (product:ProductItem) => {
+        dispatch(addToFavorite(product))
+        
+        console.log(product, 'productss');
+        console.log(store.getState());
+        
+    }
+
+    
+    
+    
+    
+    
     return (
         <>
-            <ProductCard  items={items}/>
+            <ProductCard  
+                item={props.item} handleAddToFavorite={handleAddToFavorite}
+            />
+            
         </>
     )
 }

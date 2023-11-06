@@ -69,7 +69,7 @@ export const page = StyleSheet.create({
     },
     addFaforites: {
         position: 'absolute',
-        top: 5,
+        top: 0,
         right: 10
     }
 })

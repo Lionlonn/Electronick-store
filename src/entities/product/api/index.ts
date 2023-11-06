@@ -1,13 +1,14 @@
 
 import { instance } from '../../../shared/api/instance'
 
-export type Product = {
+export type ProductItem = {
     name: string,
     category: string,
     id: number,
     price:number,
     rating:number,
     img: string,
+    cartQuantity: number
 }
 
 

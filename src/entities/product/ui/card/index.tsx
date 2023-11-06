@@ -1,56 +1,60 @@
 import React from "react";
-import { Alert, Image, Text, View } from "react-native";
+import { Alert, Image, Text, View} from "react-native";
 import { page } from '../card/style'
 import { useSelector } from "react-redux";
 import { useStateSelector } from "../../../../shared/hooks/hooks";
-import { Product } from "../../api";
+import { ProductItem } from "../../api";
 import RatingImage from "../../image/star.svg"
-import Button from "../../../../shared/buttons/button";
+import Faforite from "../../../../features/favorite/ui";
+import { Button } from "react-native-paper";
 
 interface Props {
-    items: Product[] | undefined 
+    item: ProductItem,
+    handleAddToFavorite: (product: ProductItem) => void,
 }
 
 
 export const ProductCard = (props:Props) => {
 
-
+    const {name, category, id, price, rating, img} = props.item
+    
+   
+    
     return (
         
-        <>
+        <>  
             <View style={page.container}>
                 <View>
-                    {props.items?.map( product => 
-                    <View 
-                        key={product.id}
+                <View 
+                        key={id}
                         style={[page.wrapper,  page.shadowProp]}>
 
                         <View style={page.imageBlock}>
                             <Image  
                                 style = {page.image}
                                 source = {{
-                                    uri: product.img
+                                    uri: img
                                 }}
                             />
-                            <Button onPress={()=> {}} title="" style={page.addFaforites} favorites={false}/>
+                            <View style={page.addFaforites}><Faforite handleAddToFavorite={() => props.handleAddToFavorite(props.item)}/></View>
                         </View>
                         
                         <View >
-                            <Text style={page.title}>{product.name}</Text>
+                            <Text style={page.title}>{name}</Text>
                             <View style={page.info}>
-                                <Text>{product.category}</Text>
+                                <Text>{category}</Text>
                                 <View style={page.icon}></View>
-                                <Text>{product.rating}</Text>
+                                <Text>{rating}</Text>
                                 <RatingImage width={12} height={12} />
                             </View>
                             
-                            <Text>{product.price}</Text>
+                            <Text>{price}</Text>
                             
                         </View>
                         
 
                         
-                    </View>)}
+                    </View>
                 </View>
                 
                 
@@ -59,5 +63,4 @@ export const ProductCard = (props:Props) => {
         </>
     ) 
 }
-
 
