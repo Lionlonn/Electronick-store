@@ -8,7 +8,7 @@ export type ProductItem = {
     price:number,
     rating:number,
     img: string,
-    cartQuantity: number
+    favorite: boolean
 }
 
 

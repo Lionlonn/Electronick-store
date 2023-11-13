@@ -4,18 +4,13 @@ import { ProductItem } from '../../../entities/product/api'
 
 
 export interface favorite {
-    items: ProductItem[] | undefined,
-    itemsTotalQuantity: number,
-    itemsTotalAmount: number
+    items: ProductItem[],
 }
 
 
 const initialState: favorite = {
     items: [],
-    itemsTotalQuantity: 0,
-    itemsTotalAmount: 0,
 }
-
 
 
 
@@ -23,26 +18,28 @@ const favoriteSlice = createSlice({
     name: "favorite",
     initialState,
     reducers: {
-        addToFavorite(state, action) {
-            const itemIndex = state.items?.findIndex( 
-                item => item.id === action.payload.id
-            )
-            if (itemIndex ) {
-                if (itemIndex >= 0 && state.items) {
-                    state.items[itemIndex].cartQuantity +=1
-                } else {
-                    const tempProduct = { ...action.payload, cartQuantity: 1}
-                    state.items?.push(tempProduct);
-                }
+        addToFavorite(state, action: PayloadAction<ProductItem>) {
+            
+            let existItemIndex = state.items.findIndex(item => item.id === action.payload.id)
+
+            if (existItemIndex >= 0) {
+                return
+            } else {
+                let buildFavoriteItem = { ...action.payload};
+                state.items?.push(buildFavoriteItem);
             }
+
+            
+            
             
             
         },
-        removeToFavorite(state, action) {
-            
+        removeFromFavorite(state, action) {
+            let filteredItems = state.items.filter(item => item.id !== action.payload.id)
+            state.items = filteredItems
         }
     }
 })
 
-export const { addToFavorite } = favoriteSlice.actions;
+export const { addToFavorite, removeFromFavorite } = favoriteSlice.actions;
 export default favoriteSlice.reducer;

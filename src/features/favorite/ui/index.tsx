@@ -3,7 +3,8 @@ import { Button, IconButton } from 'react-native-paper'
 import Favorite from '../../Image/heart.svg'
 
 interface Props {
-  handleAddToFavorite: () => void | undefined
+  toggleFavorite: () => void | undefined,
+  isFavorite: boolean
 }
 
 
@@ -12,8 +13,8 @@ export default function Faforite(props:Props) {
     <IconButton mode='outlined' icon={Favorite} style={[{
       width: 32,
       height: 32,
-      backgroundColor: '#FFF',
+      backgroundColor: props.isFavorite ? 'red' : "#FFF",
       borderColor: "#FFF"
-    }]} onPress={props.handleAddToFavorite}/>
+    }]} onPress={props.toggleFavorite}/>
   )
 }

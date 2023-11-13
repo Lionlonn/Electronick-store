@@ -1,24 +1,24 @@
 import React from "react";
 import { Alert, Image, Text, View} from "react-native";
 import { page } from '../card/style'
-import { useSelector } from "react-redux";
-import { useStateSelector } from "../../../../shared/hooks/hooks";
 import { ProductItem } from "../../api";
 import RatingImage from "../../image/star.svg"
 import Faforite from "../../../../features/favorite/ui";
-import { Button } from "react-native-paper";
+import { useStateSelector } from "../../../../shared/hooks/hooks";
 
 interface Props {
     item: ProductItem,
-    handleAddToFavorite: (product: ProductItem) => void,
+    handleToggleFavorite: (product: ProductItem) => void,
+    isFavorite: boolean
 }
 
 
 export const ProductCard = (props:Props) => {
-
     const {name, category, id, price, rating, img} = props.item
     
    
+
+    
     
     return (
         
@@ -36,7 +36,11 @@ export const ProductCard = (props:Props) => {
                                     uri: img
                                 }}
                             />
-                            <View style={page.addFaforites}><Faforite handleAddToFavorite={() => props.handleAddToFavorite(props.item)}/></View>
+                            <View style={page.addFaforites}><Faforite 
+                                toggleFavorite={() => {props.handleToggleFavorite(props.item)}}
+                                isFavorite={props.isFavorite}
+
+                            /></View>
                         </View>
                         
                         <View >
