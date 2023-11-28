@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { ProductItem } from '../../../entities/product/api'
+import { ProductItem } from 'entities/product'
 
 
 export interface favorite {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert, Image, Text, View} from "react-native";
 import { page } from '../card/style'
-import { ProductItem } from "../../api";
+import { ProductItem } from "entities/product";
 import RatingImage from "../../image/star.svg"
 import { Favorite } from "features/favorite"
 

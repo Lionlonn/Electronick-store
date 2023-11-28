@@ -1,5 +1,5 @@
 
-import { instance } from '../../../shared/api/instance'
+import { instance } from 'shared/api'
 
 export type ProductItem = {
     name: string,

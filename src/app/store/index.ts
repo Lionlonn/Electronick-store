@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import productsReducer from '../../entities/product/model/index'
-import favoriteReducer from '../../features/favorite/model/index'
+import productsReducer from 'entities/product/model/index'
+import favoriteReducer from 'features/favorite/model/index'
 
 
 export const store = configureStore({
