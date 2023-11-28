@@ -1,9 +1,10 @@
 import React, { useEffect, useId } from "react";
 import { ProductCard } from "./card";
-import { useActionCreators, useAppDispatch, useStateSelector } from "../../../shared/hooks/hooks";
-import { addToFavorite, removeFromFavorite } from "../../../features/favorite/model";
+import { useAppDispatch, useStateSelector } from "shared/hooks";
+
+import { addToFavorite, removeFromFavorite } from "features/favorite";
 import { ProductItem } from "../api";
-import { store } from "../../../app/store";
+import { store } from "app/store";
 
 
 interface Props {

@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import { ProductsList } from './src/widgets/products-list/ui';
+import  { ProductsList }  from 'widgets/products-list/ui/index';
 
 
 

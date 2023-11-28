@@ -26,6 +26,6 @@ const Wrapper = () => {
 store.dispatch(productsAll())
 
 
-AppRegistry.registerComponent(appName, () => Wrapper);
+AppRegistry.registerComponent("AwesomeProject", () => Wrapper);
 LogBox.ignoreLogs(['Remote debugger']);
 

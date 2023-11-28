@@ -1,5 +1,5 @@
 import React from "react";
-import { useStateSelector } from "../../../shared/hooks/hooks";
+import { useStateSelector } from "shared/hooks";
 import { Product } from "../../../entities/product/ui";
 
 

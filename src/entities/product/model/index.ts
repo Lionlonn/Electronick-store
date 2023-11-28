@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { ProductApi, ProductItem } from '../api'
-import  StatusFlag  from '../../../shared/types/statusFlag'
+import  {StatusFlag}  from 'shared/types'
 
 
 

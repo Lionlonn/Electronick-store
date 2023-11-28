@@ -3,8 +3,8 @@ import { Alert, Image, Text, View} from "react-native";
 import { page } from '../card/style'
 import { ProductItem } from "../../api";
 import RatingImage from "../../image/star.svg"
-import Faforite from "../../../../features/favorite/ui";
-import { useStateSelector } from "../../../../shared/hooks/hooks";
+import { Favorite } from "features/favorite"
+
 
 interface Props {
     item: ProductItem,
@@ -36,7 +36,7 @@ export const ProductCard = (props:Props) => {
                                     uri: img
                                 }}
                             />
-                            <View style={page.addFaforites}><Faforite 
+                            <View style={page.addFaforites}><Favorite 
                                 toggleFavorite={() => {props.handleToggleFavorite(props.item)}}
                                 isFavorite={props.isFavorite}
 
