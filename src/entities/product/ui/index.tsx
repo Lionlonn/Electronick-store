@@ -1,4 +1,4 @@
-import React, { useEffect, useId } from "react";
+import React from "react";
 import { ProductCard } from "./card";
 import { useAppDispatch, useStateSelector } from "shared/hooks";
 
@@ -17,7 +17,6 @@ export const Product = (props:Props) => {
     const favoriteItems = useStateSelector(state => state.favorite.items)
     const isFavorite = favoriteItems.some(product => product.id === props.item.id)
 
-    
     const handleToggleFavorite = (product: ProductItem) => {
         if (isFavorite) {
             dispatch(removeFromFavorite(product))
@@ -27,8 +26,6 @@ export const Product = (props:Props) => {
             console.log(store.getState().favorite);
         }
     }
-    
-    
     
     return (
         <>

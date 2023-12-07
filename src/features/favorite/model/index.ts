@@ -27,11 +27,7 @@ const favoriteSlice = createSlice({
             } else {
                 let buildFavoriteItem = { ...action.payload};
                 state.items?.push(buildFavoriteItem);
-            }
-
-            
-            
-            
+            } 
             
         },
         removeFromFavorite(state, action) {

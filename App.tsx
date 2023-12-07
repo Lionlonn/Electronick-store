@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
+import { HomePage } from 'src/pages/home/ui/intex';
 import  { ProductsList }  from 'widgets/products-list';
 
 
@@ -15,7 +16,8 @@ import  { ProductsList }  from 'widgets/products-list';
 export const App = () => {
   return (
       <>
-        <ProductsList/>
+        <HomePage/>
+        
       </>
   );
 }
