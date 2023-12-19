@@ -1,12 +1,17 @@
 import React from "react";
-import { ProductCard } from "src/entities/product/ui/card";
-import { ProductsList } from "src/widgets/products-list";
+import { Categories } from "src/entities/categories/ui";
+import { Button, Text, TouchableOpacity } from "react-native";
+import { Filter } from "src/widgets/filter";
 
 
-export const HomePage = () => {
+
+
+export const HomePage = ({navigation}: any) => {
     return (
-        <>
-            <ProductsList/>
+        <>  
+            
+            <Categories navigation={navigation}/>
+            <Filter/>
         </>
     )
 }

@@ -9,15 +9,21 @@ import {
   Text,
 } from 'react-native';
 import { HomePage } from 'src/pages/home/ui/intex';
+import { WorkSpacesPage } from 'src/pages/workspaces/ui';
 import  { ProductsList }  from 'widgets/products-list';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-
+const Stack = createNativeStackNavigator();
 
 export const App = () => {
   return (
       <>
-        <HomePage/>
-        
+        <Stack.Navigator>
+          <Stack.Screen name='HomePage' component={HomePage}/>
+          <Stack.Screen name='WorkSpaces' component={WorkSpacesPage}/>
+        </Stack.Navigator>
+        {/* <HomePage/> */}
+        {/* <WorkSpacesPage/> */}
       </>
   );
 }

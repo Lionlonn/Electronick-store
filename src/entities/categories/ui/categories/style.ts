@@ -1,25 +1,45 @@
-import {StyleSheet } from "react-native";
+import {StyleSheet, StatusBar} from "react-native";
 
 export const categoryStyle = StyleSheet.create({
     container: {
-        width: 100,
-        height: 100
+      flex: 1,
+      margin: 20,
+      
+    },
+    sectionHeader: {
+        fontWeight: '800',
+        fontSize: 18,
+        color: '#040B14',
+        marginTop: 20,
+        marginBottom: 5,
     },
     item: {
-        width: 50,
-        height: 50,
-        marginBottom: 40
-        
+        margin: 10,
+        backgroundColor: '#F4F5F7',
+        width: 136,
+        height: 178,
+        alignItems: 'center',
+        paddingTop: 8,
+        paddingBottom: 8,
+        borderRadius: 8
 
     },
-    title: {
-        marginTop: 60,
-        width: 100,
-        height: 100,
+    itemTitle: {
+        color: '#000',
+        fontFamily: 'Avenir',
+        fontSize: 16,
+        fontStyle: 'normal',
+        fontWeight: '800',
+        marginTop: 20,
+    },
+    itemCount: {
+        color: '#A6A798',
+        fontSize: 12,
+        fontWeight: '500'
     },
     image: {
-        width: 100,
-        height: 100,
+        width: 0,
+        height: 0,
         
     }
 

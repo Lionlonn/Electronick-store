@@ -10,17 +10,21 @@ import { Provider } from 'react-redux';
 import { store } from './src/app/store/index.ts'
 import { productsAll } from './src/entities/product/model';
 import { PaperProvider } from 'react-native-paper';
+import {NavigationContainer} from '@react-navigation/native';
 
 
 const Wrapper = () => {
 
     
     return (
-        <Provider store={store}>
-            <PaperProvider>
-                <App/>
-            </PaperProvider>
-        </Provider>
+        <NavigationContainer>
+            <Provider store={store}>
+                <PaperProvider>
+                    <App/>
+                </PaperProvider>
+            </Provider>
+        </NavigationContainer>
+        
     )
 }
 store.dispatch(productsAll())
