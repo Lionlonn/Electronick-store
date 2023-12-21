@@ -1,6 +1,7 @@
 
 
 import * as React from 'react';
+import { useState } from 'react'
 import {
   SafeAreaView,
   ScrollView,
@@ -15,13 +16,21 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
+
+
+
 export const App = () => {
+  
+  
+  
   return (
       <>
+        
         <Stack.Navigator>
           <Stack.Screen name='HomePage' component={HomePage}/>
           <Stack.Screen name='WorkSpaces' component={WorkSpacesPage}/>
         </Stack.Navigator>
+        
         {/* <HomePage/> */}
         {/* <WorkSpacesPage/> */}
       </>
