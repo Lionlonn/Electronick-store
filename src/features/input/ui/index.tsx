@@ -12,12 +12,13 @@ export const InputText = () => {
                 onChangeText={onChangeText}
                 value={text}  
                 placeholder="Search product name"
-                
+                placeholderTextColor="#888C93"
+                underlineColorAndroid='transparent'
+                autoCorrect={false}
             />
         </>
     )
 }
-
 
 const styles = StyleSheet.create({
     input: {
@@ -28,9 +29,10 @@ const styles = StyleSheet.create({
         borderColor: "#C9CEDA",
         paddingLeft: 24,
         margin: 12,
-        color: '#888C93',
+        color: 'black',
         fontWeight: '400',
         fontSize: 16,
+        fontFamily: 'Avenir-Roman'
     },
     
 })
