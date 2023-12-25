@@ -10,8 +10,9 @@ export const HomePage = ({navigation}: any) => {
     return (
         <>  
             
-            <Categories navigation={navigation}/>
+            
             <Filter/>
+            <Categories navigation={navigation}/>
         </>
     )
 }
