@@ -1,62 +1,83 @@
 import React, { useState } from "react";
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {Button, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import  Filter  from '../image/filter.svg'
 import { IconButton } from "react-native-paper";
-import { Checkbox } from 'react-native-paper';
-const DATA = [
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
-]
+import CheckBox from '@react-native-community/checkbox';
+// const DATA = [
+//     { label: 'Item 1', checked: false },
+//     { label: 'Item 2', checked: false },
+//     { label: 'Item 3', checked: false },
+//     { label: 'Item 4', checked: false },
+//     { label: 'Item 5', checked: false },
+//     { label: 'Item 6', checked: false },
+//     { label: 'Item 7', checked: false },
+//     { label: 'Item 8', checked: false },
+// ]
 interface Item {
     label: string,
-    value: string
+    checked: boolean
 }
 
-const RenderItem = ({label, value}: Item) => {
+const RenderItem = ({label, checked}: Item) => {
+    const [isChecked, setChecked] = React.useState(checked);
     return (
         <View>
             <Text>{label}</Text>
-            <Text>{value}</Text>
+            
+            <CheckBox
+                disabled={false}
+                value={isChecked}
+                onValueChange={(checked) => setChecked(checked)}
+                tintColors={{true: "#BA5C3D", false: "Grey deeper"}}
+                onAnimationType="bounce"
+            />
         </View>
     )
 }
 
 export const FilterButton = () => {
-    const [value, setValue] = useState<string | null>(null)
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [checked, setChecked] = React.useState(false);
+    const [ data, setData ] = useState<Item[]>([
+        { label: 'Item 1', checked: false },
+        { label: 'Item 2', checked: false },
+        { label: 'Item 3', checked: false },
+        { label: 'Item 4', checked: false },
+        { label: 'Item 5', checked: false },
+        { label: 'Item 6', checked: false },
+        { label: 'Item 7', checked: false },
+        { label: 'Item 8', checked: false },
+    ])
+    
+
+    
+    console.log(data);
     
     return (
+
         <View>
+            
             <IconButton
                 style={styles.button}
-                icon={()=> <Filter/>}
+                icon={() => <Filter/>}
                 size={20}
                 onPress={() => {
                     setIsOpen(!isOpen)
                 }}
             />
             
-
-
+            
+            
             {isOpen && (
                 <FlatList 
-                    data={DATA}
+                    
+                    data={data}
+                    keyExtractor={(item) => item.label}
                     renderItem={({item}) => (
-                        <View>
-                            <Text>{item.label}</Text>
-                            {/* <Checkbox 
-                                color="black"
-                                status={checked ? 'checked': 'unchecked'}
-                                onPress={() => {
-                                    setChecked(!checked)
-                                }} /> */}
+                        <View >
+                            
+
+                            <RenderItem {...item}/>
+                            
                         </View>
                         
                         
@@ -93,5 +114,9 @@ const styles = StyleSheet.create({
     button: {
         width: 40,
         height: 40
+    },
+    checkbox: {
+        width: 20,
+        height: 20,
     }
 })
