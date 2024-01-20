@@ -3,23 +3,22 @@ import {Button, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-
 import  Filter  from '../image/filter.svg'
 import { IconButton } from "react-native-paper";
 import CheckBox from '@react-native-community/checkbox';
-// const DATA = [
-//     { label: 'Item 1', checked: false },
-//     { label: 'Item 2', checked: false },
-//     { label: 'Item 3', checked: false },
-//     { label: 'Item 4', checked: false },
-//     { label: 'Item 5', checked: false },
-//     { label: 'Item 6', checked: false },
-//     { label: 'Item 7', checked: false },
-//     { label: 'Item 8', checked: false },
-// ]
+
 interface Item {
     label: string,
     checked: boolean
+    onChange?: (label: string, checked: boolean) => void
 }
 
-const RenderItem = ({label, checked}: Item) => {
+const RenderItem = ({label, checked, onChange}: Item ) => {
     const [isChecked, setChecked] = React.useState(checked);
+
+    const handleValueChange = (newValue: boolean) => {
+        setChecked(newValue)
+        if (onChange) onChange(label, newValue)
+
+    }
+
     return (
         <View>
             <Text>{label}</Text>
@@ -27,17 +26,22 @@ const RenderItem = ({label, checked}: Item) => {
             <CheckBox
                 disabled={false}
                 value={isChecked}
-                onValueChange={(checked) => setChecked(checked)}
+                onValueChange={handleValueChange}
                 tintColors={{true: "#BA5C3D", false: "Grey deeper"}}
                 onAnimationType="bounce"
             />
         </View>
     )
-}
+
+
+}   
+
+
 
 export const FilterButton = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [ data, setData ] = useState<Item[]>([
+        
         { label: 'Item 1', checked: false },
         { label: 'Item 2', checked: false },
         { label: 'Item 3', checked: false },
@@ -48,10 +52,14 @@ export const FilterButton = () => {
         { label: 'Item 8', checked: false },
     ])
     
-
-    
-    console.log(data);
-    
+    const handleCheckboxChange = (label: string, checked: boolean) => {
+        const index = data.findIndex(item => item.label === label);
+        console.log(index)
+        const newData = [...data];
+        newData[index] = {...newData[index], checked};
+        setData(newData);
+        
+    }
     return (
 
         <View>
@@ -66,7 +74,6 @@ export const FilterButton = () => {
             />
             
             
-            
             {isOpen && (
                 <FlatList 
                     
@@ -76,7 +83,7 @@ export const FilterButton = () => {
                         <View >
                             
 
-                            <RenderItem {...item}/>
+                            <RenderItem {...item} onChange={handleCheckboxChange}/>
                             
                         </View>
                         
