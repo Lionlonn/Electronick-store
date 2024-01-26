@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {Button, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, { useRef, useState } from "react";
+import {Animated, Button, Easing, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import  Filter  from '../image/filter.svg'
 import { IconButton } from "react-native-paper";
 import CheckBox from '@react-native-community/checkbox';
@@ -20,9 +20,8 @@ const RenderItem = ({label, checked, onChange}: Item ) => {
     }
 
     return (
-        <View>
-            <Text>{label}</Text>
-            
+        <View style={styles.listItem}>
+            <Text style={styles.itemLabel}>{label}</Text>
             <CheckBox
                 disabled={false}
                 value={isChecked}
@@ -40,6 +39,7 @@ const RenderItem = ({label, checked, onChange}: Item ) => {
 
 export const FilterButton = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const height = useRef(new Animated.Value(0)).current;
     const [ data, setData ] = useState<Item[]>([
         
         { label: 'Item 1', checked: false },
@@ -60,6 +60,27 @@ export const FilterButton = () => {
         setData(newData);
         
     }
+
+
+    const toggleList = () => {
+        Animated.timing(height, {
+          toValue: isOpen ? 0 : 500, // Установите желаемую высоту списка
+          duration: 500,
+          easing: Easing.linear,
+          useNativeDriver: false,
+        }).start(() => {
+            if (isOpen == true) {
+                height.setValue(0)
+            }
+        });
+        
+        
+        console.log(isOpen)
+        setIsOpen(!isOpen);
+      };
+    
+
+
     return (
 
         <View>
@@ -69,27 +90,27 @@ export const FilterButton = () => {
                 icon={() => <Filter/>}
                 size={20}
                 onPress={() => {
-                    setIsOpen(!isOpen)
+                    // setIsOpen(!isOpen)
+                    toggleList()
                 }}
             />
-            
-            
-            {isOpen && (
-                <FlatList 
-                    
-                    data={data}
-                    keyExtractor={(item) => item.label}
-                    renderItem={({item}) => (
-                        <View >
-                            
 
-                            <RenderItem {...item} onChange={handleCheckboxChange}/>
+            {isOpen && (
+                <Animated.View style={{ height, overflow: 'hidden' }}>
+                    <FlatList 
+                        data={data}
+                        keyExtractor={(item) => item.label}
+                        // style={isOpen ? styles.true : styles.false}
+                        renderItem={({item}) => (
+                            <View >
+                                <RenderItem {...item} onChange={handleCheckboxChange}/>
+                            </View>
                             
-                        </View>
-                        
-                        
-                    )}    
-                />
+                            
+                        )}    
+                    />
+                </Animated.View>
+                
             )}
             
         </View>
@@ -125,5 +146,26 @@ const styles = StyleSheet.create({
     checkbox: {
         width: 20,
         height: 20,
+    },
+    true: {
+        opacity: 1, 
+        transition:'2s'
+    },
+    false: {
+        opacity: 0
+    },
+    listItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 22,
+        paddingRight: 20,
+        marginBottom: 20,
+
+        
+    },
+    itemLabel: {
+        fontFamily: 'Avenir-Roman',
+        fontSize: 16,
+        fontWeight: '400'
     }
 })
