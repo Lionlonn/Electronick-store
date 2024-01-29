@@ -61,29 +61,38 @@ export const FilterButton = () => {
         
     }
 
+    const animatedController = useRef(new Animated.Value(0)).current;
+    const [bodySectionHeight, setBodySectionHeight] = useState(0);
 
-    const toggleList = () => {
-        Animated.timing(height, {
-          toValue: isOpen ? 0 : 500, // Установите желаемую высоту списка
-          duration: 500,
-          easing: Easing.linear,
-          useNativeDriver: false,
-        }).start(() => {
-            if (isOpen == true) {
-                height.setValue(0)
-            }
-        });
-        
-        
-        console.log(isOpen)
+    const bodyHeight = animatedController.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1000],
+    });
+    const toggleListItem = () => {
+        if (isOpen) {
+          Animated.timing(animatedController, {
+            duration: 300,
+            toValue: 0,
+            useNativeDriver: false
+          }).start();
+        } else {
+          Animated.timing(animatedController, {
+            duration: 300,
+            toValue: 1,
+            useNativeDriver: false
+          }).start();
+        }
         setIsOpen(!isOpen);
-      };
+    };
+
+    
+    
     
 
 
     return (
 
-        <View>
+        <View style={styles.container}>
             
             <IconButton
                 style={styles.button}
@@ -91,11 +100,25 @@ export const FilterButton = () => {
                 size={20}
                 onPress={() => {
                     // setIsOpen(!isOpen)
-                    toggleList()
+                    toggleListItem()
                 }}
             />
-
-            {isOpen && (
+            <Animated.View style={[styles.background, {height:bodyHeight}]}>
+                    <FlatList 
+                        data={data}
+                        keyExtractor={(item) => item.label}
+                        // style={{position: 'absolute'}}
+                        renderItem={({item}) => (
+                            <View >
+                                <RenderItem {...item} onChange={handleCheckboxChange}/>
+                            </View>
+                            
+                            
+                        )}    
+                    />
+            </Animated.View>
+            
+            {/* {isOpen && (
                 <Animated.View style={{ height, overflow: 'hidden' }}>
                     <FlatList 
                         data={data}
@@ -111,48 +134,24 @@ export const FilterButton = () => {
                     />
                 </Animated.View>
                 
-            )}
+            )} */}
             
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    dropdown: {
+    container: {
+        flex: 1,
         
-        margin: 16,
-        
-        height: 50,
-        backgroundColor: 'white',
-        borderRadius: 12,
-        padding: 12,
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 1,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 1.41,
-        
-        elevation: 2,
-    },
-    icon: {
-        margin: 5
     },
     button: {
         width: 40,
-        height: 40
+        height: 40,
     },
     checkbox: {
         width: 20,
         height: 20,
-    },
-    true: {
-        opacity: 1, 
-        transition:'2s'
-    },
-    false: {
-        opacity: 0
     },
     listItem: {
         flexDirection: 'row',
@@ -160,12 +159,23 @@ const styles = StyleSheet.create({
         paddingLeft: 22,
         paddingRight: 20,
         marginBottom: 20,
-
+        marginTop: 20
+        
         
     },
     itemLabel: {
         fontFamily: 'Avenir-Roman',
         fontSize: 16,
         fontWeight: '400'
+    },
+    background: {
+        backgroundColor: "#FFF",
+        position: 'absolute',
+        top: 51,
+        right: 330,
+        width: '100%',
+        zIndex: 1,
+        borderRadius: 16
     }
+   
 })
