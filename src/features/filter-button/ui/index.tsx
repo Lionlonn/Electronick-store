@@ -1,34 +1,38 @@
 import React, { useRef, useState } from "react";
-import {Animated, Button, Easing, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Animated, Button, Easing, FlatList, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import  Filter  from '../image/filter.svg'
 import { IconButton } from "react-native-paper";
 import CheckBox from '@react-native-community/checkbox';
 
 interface Item {
-    label: string,
-    checked: boolean
-    onChange?: (label: string, checked: boolean) => void
+    title: string;
+    data: Array<{ label: string; checked: boolean }>;
+    
 }
 
-const RenderItem = ({label, checked, onChange}: Item ) => {
+const RenderItem = ({label, checked,  onChange}: 
+    {label: string, checked: boolean, onChange:(label: string, checked: boolean) => void}) => {
+        
     const [isChecked, setChecked] = React.useState(checked);
-
     const handleValueChange = (newValue: boolean) => {
         setChecked(newValue)
         if (onChange) onChange(label, newValue)
-
     }
+
+    
 
     return (
         <View style={styles.listItem}>
-            <Text style={styles.itemLabel}>{label}</Text>
-            <CheckBox
-                disabled={false}
-                value={isChecked}
-                onValueChange={handleValueChange}
-                tintColors={{true: "#BA5C3D", false: "Grey deeper"}}
-                onAnimationType="bounce"
-            />
+            <View key={label}>
+                <Text style={styles.itemLabel}>{label}</Text>
+                <CheckBox
+                    disabled={false}
+                    value={isChecked}
+                    onValueChange={handleValueChange}
+                    tintColors={{true: "#BA5C3D", false: "Grey deeper"}}
+                    onAnimationType="bounce"
+                />
+            </View>  
         </View>
     )
 
@@ -41,22 +45,34 @@ export const FilterButton = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const height = useRef(new Animated.Value(0)).current;
     const [ data, setData ] = useState<Item[]>([
+        {   
+            title: 'Products Type',
+            data: [
+                { label: 'Laptops', checked: false },
+                { label: 'Tables', checked: false },
+                { label: 'Keyboard', checked: false },
+                { label: 'Chairs', checked: false },
+            ]
+        },
+        {   
+            title: 'brand',
+            data: [
+                { label: 'Laptops', checked: false },
+                { label: 'Tables', checked: false },
+                { label: 'Keyboard', checked: false },
+                { label: 'Chairs', checked: false },
+            ]
+        }
         
-        { label: 'Item 1', checked: false },
-        { label: 'Item 2', checked: false },
-        { label: 'Item 3', checked: false },
-        { label: 'Item 4', checked: false },
-        { label: 'Item 5', checked: false },
-        { label: 'Item 6', checked: false },
-        { label: 'Item 7', checked: false },
-        { label: 'Item 8', checked: false },
     ])
     
     const handleCheckboxChange = (label: string, checked: boolean) => {
-        const index = data.findIndex(item => item.label === label);
-        console.log(index)
-        const newData = [...data];
-        newData[index] = {...newData[index], checked};
+        const newData = data.map((item) => {
+            const updateProductData = item.data.map((dataItem) =>
+                dataItem.label == label ? {...dataItem, checked} : dataItem
+            );
+            return {...item, data: updateProductData}
+        })
         setData(newData);
         
     }
@@ -85,11 +101,6 @@ export const FilterButton = () => {
         setIsOpen(!isOpen);
     };
 
-    
-    
-    
-
-
     return (
 
         <View style={styles.container}>
@@ -99,42 +110,24 @@ export const FilterButton = () => {
                 icon={() => <Filter/>}
                 size={20}
                 onPress={() => {
-                    // setIsOpen(!isOpen)
                     toggleListItem()
                 }}
             />
             <Animated.View style={[styles.background, {height:bodyHeight}]}>
-                    <FlatList 
-                        data={data}
+                    
+                    <SectionList 
+                        sections={data}
                         keyExtractor={(item) => item.label}
-                        // style={{position: 'absolute'}}
                         renderItem={({item}) => (
-                            <View >
+                            <View>
                                 <RenderItem {...item} onChange={handleCheckboxChange}/>
                             </View>
-                            
-                            
-                        )}    
+                        )}
+                        renderSectionHeader={({section: {title}}) => (
+                            <Text>{title}</Text>
+                        )}
                     />
             </Animated.View>
-            
-            {/* {isOpen && (
-                <Animated.View style={{ height, overflow: 'hidden' }}>
-                    <FlatList 
-                        data={data}
-                        keyExtractor={(item) => item.label}
-                        // style={isOpen ? styles.true : styles.false}
-                        renderItem={({item}) => (
-                            <View >
-                                <RenderItem {...item} onChange={handleCheckboxChange}/>
-                            </View>
-                            
-                            
-                        )}    
-                    />
-                </Animated.View>
-                
-            )} */}
             
         </View>
     )
@@ -159,14 +152,16 @@ const styles = StyleSheet.create({
         paddingLeft: 22,
         paddingRight: 20,
         marginBottom: 20,
-        marginTop: 20
+        marginTop: 20,
         
         
     },
     itemLabel: {
-        fontFamily: 'Avenir-Roman',
+        fontFamily: 'Avenir-Black',
         fontSize: 16,
-        fontWeight: '400'
+        fontWeight: '500',
+        color: '#040B14',
+        fontStyle: 'normal'
     },
     background: {
         backgroundColor: "#FFF",
