@@ -23,16 +23,14 @@ const RenderItem = ({label, checked,  onChange}:
 
     return (
         <View style={styles.listItem}>
-            <View key={label}>
-                <Text style={styles.itemLabel}>{label}</Text>
-                <CheckBox
-                    disabled={false}
-                    value={isChecked}
-                    onValueChange={handleValueChange}
-                    tintColors={{true: "#BA5C3D", false: "Grey deeper"}}
-                    onAnimationType="bounce"
-                />
-            </View>  
+            <Text style={styles.itemLabel}>{label}</Text>
+            <CheckBox
+                disabled={false}
+                value={isChecked}
+                onValueChange={handleValueChange}
+                tintColors={{true: "#BA5C3D", false: "Grey deeper"}}
+                onAnimationType="bounce"
+            />
         </View>
     )
 
@@ -124,7 +122,7 @@ export const FilterButton = () => {
                             </View>
                         )}
                         renderSectionHeader={({section: {title}}) => (
-                            <Text>{title}</Text>
+                            <Text style={styles.headerItem}>{title}</Text>
                         )}
                     />
             </Animated.View>
@@ -155,6 +153,17 @@ const styles = StyleSheet.create({
         marginTop: 20,
         
         
+    },
+    headerItem: {
+        fontFamily: 'Avenir-Black',
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#8A8B7A',
+        fontStyle: 'normal',
+        paddingLeft: 22,
+        paddingRight: 20,
+        marginBottom: 20,
+        marginTop: 20,
     },
     itemLabel: {
         fontFamily: 'Avenir-Black',

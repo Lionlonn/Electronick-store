@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-import { FilterButton } from "src/features/filter-button/ui";
 import { InputText } from "src/features/input/ui";
 
 export const Filter = () => {
@@ -12,7 +11,6 @@ export const Filter = () => {
             <View style={styles.filterStyle}>
                 
                 <InputText/>
-                {/* <FilterButton/> */}
             </View>
             
             

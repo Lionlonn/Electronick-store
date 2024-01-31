@@ -36,9 +36,10 @@ export const ProductCard = (props:Props) => {
                                     uri: img
                                 }}
                             />
-                            <View style={page.addFaforites}><Favorite 
-                                toggleFavorite={() => {props.handleToggleFavorite(props.item)}}
-                                isFavorite={props.isFavorite}
+                            <View style={page.addFaforites}>
+                                <Favorite 
+                                    toggleFavorite={() => {props.handleToggleFavorite(props.item)}}
+                                    isFavorite={props.isFavorite}
 
                             /></View>
                         </View>
