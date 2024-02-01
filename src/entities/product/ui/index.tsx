@@ -4,8 +4,6 @@ import { useAppDispatch, useStateSelector } from "shared/hooks";
 
 import { addToFavorite, removeFromFavorite } from "features/favorite";
 import { ProductItem } from "../api";
-import { store } from "app/store";
-import { FlatList } from "react-native";
 
 
 interface Props {

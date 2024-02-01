@@ -1,0 +1,1 @@
+export type { FilterData } from './api/index'

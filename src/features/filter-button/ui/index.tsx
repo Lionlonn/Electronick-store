@@ -18,9 +18,6 @@ const RenderItem = ({label, checked,  onChange}:
         setChecked(newValue)
         if (onChange) onChange(label, newValue)
     }
-
-    
-
     return (
         <View style={styles.listItem}>
             <Text style={styles.itemLabel}>{label}</Text>
@@ -100,7 +97,6 @@ export const FilterButton = () => {
     };
 
     return (
-
         <View style={styles.container}>
             
             <IconButton
@@ -112,7 +108,6 @@ export const FilterButton = () => {
                 }}
             />
             <Animated.View style={[styles.background, {height:bodyHeight}]}>
-                    
                     <SectionList 
                         sections={data}
                         keyExtractor={(item) => item.label}
@@ -126,7 +121,6 @@ export const FilterButton = () => {
                         )}
                     />
             </Animated.View>
-            
         </View>
     )
 }

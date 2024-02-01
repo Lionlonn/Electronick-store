@@ -19,9 +19,9 @@ const favoriteSlice = createSlice({
     initialState,
     reducers: {
         addToFavorite(state, action: PayloadAction<ProductItem>) {
-            
             let existItemIndex = state.items.findIndex(item => item.id === action.payload.id)
 
+            
             if (existItemIndex >= 0) {
                 return
             } else {
