@@ -9,10 +9,6 @@ import { Button, Text } from "react-native-paper";
 export const ProductsList = () => {
     const { item, status } = useStateSelector(state => state.products)
     
-    
-    
-    
-
     return (
         <>
            
@@ -24,12 +20,6 @@ export const ProductsList = () => {
                     </TouchableOpacity>
                 )}
             />
-                
-            {/* {item?.map(item => (
-                    <Product key={item.id} item={item}/>
-                
-            ))} */}
-            
         </>
     )
 }

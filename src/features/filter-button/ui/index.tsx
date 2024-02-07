@@ -4,50 +4,29 @@ import  Filter  from '../image/filter.svg'
 import { IconButton } from "react-native-paper";
 import CheckBox from '@react-native-community/checkbox';
 import { RenderItem } from "./render-item/index"
+import { FilterData } from "../api";
 
 interface Item {
-    title: string;
-    data: Array<{ label: string; checked: boolean }>;
-    
+    item: FilterData[]
 }
 
 
 
 
 
-export const FilterButton = () => {
+export const FilterButton = (props: Item) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const height = useRef(new Animated.Value(0)).current;
-    const [ data, setData ] = useState<Item[]>([
-        {   
-            title: 'Products Type',
-            data: [
-                { label: 'Laptops', checked: false },
-                { label: 'Tables', checked: false },
-                { label: 'Keyboard', checked: false },
-                { label: 'Chairs', checked: false },
-            ]
-        },
-        {   
-            title: 'brand',
-            data: [
-                { label: 'Laptops', checked: false },
-                { label: 'Tables', checked: false },
-                { label: 'Keyboard', checked: false },
-                { label: 'Chairs', checked: false },
-            ]
-        }
-        
-    ])
     
     const handleCheckboxChange = (label: string, checked: boolean) => {
-        const newData = data.map((item) => {
+        const newData = props.item.map((item) => {
             const updateProductData = item.data.map((dataItem) =>
                 dataItem.label == label ? {...dataItem, checked} : dataItem
+                
             );
+            
             return {...item, data: updateProductData}
         })
-        setData(newData);
         
     }
 
@@ -74,7 +53,6 @@ export const FilterButton = () => {
         }
         setIsOpen(!isOpen);
     };
-
     return (
         <View style={styles.container}>
             
@@ -86,9 +64,10 @@ export const FilterButton = () => {
                     toggleListItem()
                 }}
             />
+            
             <Animated.View style={[styles.background, {height:bodyHeight}]}>
                     <SectionList 
-                        sections={data}
+                        sections={props.item}
                         keyExtractor={(item) => item.label}
                         renderItem={({item}) => (
                             <View>

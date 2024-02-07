@@ -1,8 +1,13 @@
 import React from "react";
 import {StyleSheet, TextInput, View} from 'react-native';
+import { FilterData } from "src/features/filter-button";
 import { FilterButton } from "src/features/filter-button/ui";
 
-export const InputText = () => {
+interface Props {
+    item: FilterData[]
+}
+
+export const InputText = (props: Props) => {
     const [text, onChangeText] = React.useState('');
 
 
@@ -19,7 +24,7 @@ export const InputText = () => {
                     autoCorrect={false}
                 />
                 <View style={styles.inputInnerContainer}>
-                    <FilterButton/>
+                    <FilterButton item={props.item}/>
                 </View>
             </View>
             

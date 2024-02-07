@@ -16,7 +16,7 @@ interface Props {
 export const ProductCard = (props:Props) => {
     const {name, category, id, price, rating, img} = props.item
     
-   
+    
 
     
     

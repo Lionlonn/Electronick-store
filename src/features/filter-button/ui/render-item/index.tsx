@@ -7,7 +7,7 @@ import CheckBox from '@react-native-community/checkbox';
 
 export const RenderItem = ({label, checked,  onChange}: 
     {label: string, checked: boolean, onChange:(label: string, checked: boolean) => void}) => {
-        
+    
     const [isChecked, setChecked] = React.useState(checked);
     const handleValueChange = (newValue: boolean) => {
         setChecked(newValue)
@@ -25,8 +25,6 @@ export const RenderItem = ({label, checked,  onChange}:
             />
         </View>
     )
-
-
 }   
 
 const styles = StyleSheet.create({
