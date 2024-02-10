@@ -1,55 +1,49 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Text, StyleSheet, Pressable, View } from 'react-native';
-import Heart from '../../entities/product/image/heart.svg'
-import Basket from './image/basket.svg'
 
-interface Props {
-    onPress: () => {} | null | undefined,
-    title: string,
-    style: object,
-    favorites: boolean
+
+
+type Props = {
+    buttonColor: "white" | "yellow",
+    type?: "Button" | 'Cansel' | "Apply",
+    onClick: () => void
 }
 
-export default function Button(props:Props) {
-  const { onPress, title = 'Save', style, favorites } = props;
-  return (
-    <Pressable style={props.style} onPress={onPress}>
-        { favorites 
-            ? <View style={styles.buttonFavorite}>
-                    <Heart width={20} height={20}/>
-                </View> 
-            : <View style={styles.buttonBasket}>
-                    <Basket width={24} height={24}/>
-                </View> 
-        }
-        
-        <Text style={styles.text}>{title}</Text>
-    </Pressable>
-  );
+
+
+
+
+export const Button: FC<Props> = ({buttonColor, type, onClick}) => {
+
+
+    return (
+        <Pressable onPress={onClick} style={({pressed}) => [
+            styles.button,
+            {backgroundColor: pressed ? 'grey' : buttonColor === 'white' ? "#f5f5f5": "#FFFF00"},
+        ]}>
+            <Text style={styles.title}>{type}</Text>
+        </Pressable>
+    )
 }
 
+Button.defaultProps = {
+    buttonColor: "white",
+    type: "Button"
+}
 const styles = StyleSheet.create({
-    buttonFavorite: {
-        width: 32,
-        height: 32,
-        alignItems:"center",
-        justifyContent: "center",
-        backgroundColor: "#FFF",
-        borderRadius: 22,
+    button: {
+        width: 150,
+        height: 42,
+        borderRadius: 8,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 10,
     },
-    buttonBasket: {
-        width: 70,
-        height: 70,
-        alignItems:"center",
-        justifyContent: "center",
-        backgroundColor: "black",
-        borderRadius: 50,
-    },
-    text: {
+    title: {
         fontSize: 16,
-        lineHeight: 21,
-        fontWeight: 'bold',
-        letterSpacing: 0.25,
-        color: 'white',
+        fontFamily: "Avenir-Black",
+        color: 'black'
     },
+    
 });

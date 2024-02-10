@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import {Animated, Button, Easing, FlatList, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Animated, Easing, FlatList, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import  Filter  from '../image/filter.svg'
 import { IconButton } from "react-native-paper";
-import CheckBox from '@react-native-community/checkbox';
 import { RenderItem } from "./render-item/index"
 import { FilterData } from "../api";
+import { Button } from 'shared/ui/index'
 
 interface Item {
     item: FilterData[]
@@ -35,7 +35,7 @@ export const FilterButton = (props: Item) => {
 
     const bodyHeight = animatedController.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, 1000],
+        outputRange: [0, 550],
     });
     const toggleListItem = () => {
         if (isOpen) {
@@ -55,29 +55,30 @@ export const FilterButton = (props: Item) => {
     };
     return (
         <View style={styles.container}>
-            
             <IconButton
                 style={styles.button}
                 icon={() => <Filter/>}
                 size={20}
-                onPress={() => {
-                    toggleListItem()
-                }}
+                onPress={() => toggleListItem()}
             />
-            
+
             <Animated.View style={[styles.background, {height:bodyHeight}]}>
-                    <SectionList 
-                        sections={props.item}
-                        keyExtractor={(item) => item.label}
-                        renderItem={({item}) => (
-                            <View>
-                                <RenderItem {...item} onChange={handleCheckboxChange}/>
-                            </View>
-                        )}
-                        renderSectionHeader={({section: {title}}) => (
-                            <Text style={styles.headerItem}>{title}</Text>
-                        )}
-                    />
+                <SectionList 
+                    sections={props.item}
+                    keyExtractor={(item) => item.label}
+                    renderItem={({item}) => (
+                        <View>
+                            <RenderItem {...item} onChange={handleCheckboxChange}/>
+                        </View>
+                    )}
+                    renderSectionHeader={({section: {title}}) => (
+                        <Text style={styles.headerItem}>{title}</Text>
+                    )}
+                />
+                <View style={[styles.sectionButton,{display: isOpen ? 'flex' : 'none'}]}>
+                    <Button buttonColor="white" onClick={() => console.log('e')} />
+                    <Button buttonColor="yellow" onClick={() => console.log('e')} />
+                </View>
             </Animated.View>
         </View>
     )
@@ -115,6 +116,11 @@ const styles = StyleSheet.create({
         width: '100%',
         zIndex: 1,
         borderRadius: 16
+    },
+    sectionButton: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: 30
     }
    
 })

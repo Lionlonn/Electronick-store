@@ -12,6 +12,7 @@ interface Item  {
 export const Filter = () => {
     const dispatch = useAppDispatch()
     const {items, status} = useStateSelector(state => state.filter)
+
     useEffect(() => {
         dispatch(fetchFilterData());
     }, [dispatch])
@@ -19,6 +20,7 @@ export const Filter = () => {
     if (status !== 1) {
         return <Text>...Loading</Text>
     }
+    
     const isChecked = items.some(item => item.data.map(item => item.label === item.label))
     const handleToggleChecked = (item: ({title: string, label: string})) => {
         isChecked 
