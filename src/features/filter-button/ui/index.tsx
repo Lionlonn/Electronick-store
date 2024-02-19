@@ -1,23 +1,23 @@
 import React, { useRef, useState } from "react";
-import {Animated, Easing, FlatList, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Animated, Dimensions, Easing, FlatList, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import  Filter  from '../image/filter.svg'
 import { IconButton } from "react-native-paper";
 import { RenderItem } from "./render-item/index"
 import { FilterData } from "../api";
 import { Button } from 'shared/ui/index'
 
+
 interface Item {
     item: FilterData[]
 }
 
-
+const { width, height } = Dimensions.get('window')
 
 
 
 export const FilterButton = (props: Item) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const height = useRef(new Animated.Value(0)).current;
-    
+    console.log(width, height)    
     const handleCheckboxChange = (label: string, checked: boolean) => {
         const newData = props.item.map((item) => {
             const updateProductData = item.data.map((dataItem) =>
@@ -31,8 +31,7 @@ export const FilterButton = (props: Item) => {
     }
 
     const animatedController = useRef(new Animated.Value(0)).current;
-    const [bodySectionHeight, setBodySectionHeight] = useState(0);
-
+    const bodyWidth = width
     const bodyHeight = animatedController.interpolate({
         inputRange: [0, 1],
         outputRange: [0, 550],
@@ -55,43 +54,57 @@ export const FilterButton = (props: Item) => {
     };
     return (
         <View style={styles.container}>
-            <IconButton
+            <IconButton 
                 style={styles.button}
                 icon={() => <Filter/>}
                 size={20}
                 onPress={() => toggleListItem()}
             />
+            <Animated.View style={[styles.background, {width: bodyWidth ,height:bodyHeight}]}>
+                    
+                    <Text style={styles.titleFilter}>Filter by</Text>
 
-            <Animated.View style={[styles.background, {height:bodyHeight}]}>
-                <SectionList 
-                    sections={props.item}
-                    keyExtractor={(item) => item.label}
-                    renderItem={({item}) => (
-                        <View>
-                            <RenderItem {...item} onChange={handleCheckboxChange}/>
-                        </View>
-                    )}
-                    renderSectionHeader={({section: {title}}) => (
-                        <Text style={styles.headerItem}>{title}</Text>
-                    )}
-                />
-                <View style={[styles.sectionButton,{display: isOpen ? 'flex' : 'none'}]}>
-                    <Button buttonColor="white" onClick={() => console.log('e')} />
-                    <Button buttonColor="yellow" onClick={() => console.log('e')} />
-                </View>
+                    <SectionList 
+                        sections={props.item}
+                        keyExtractor={(item) => item.label}
+                        renderItem={({item}) => (
+                            <View>
+                                <RenderItem {...item} onChange={handleCheckboxChange}/>
+                            </View>
+                        )}
+                        renderSectionHeader={({section: {title}}) => (
+                            <Text style={styles.headerItem}>{title}</Text>
+                        )}
+                    />
+                    <View style={[styles.sectionButton,{display: isOpen ? 'flex' : 'none'}]}>
+                        <Button buttonColor="white" onClick={toggleListItem} />
+                        <Button buttonColor="yellow" onClick={toggleListItem} />
+                    </View>
             </Animated.View>
+            
+            
+            
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        
+        flex: 1
     },
     button: {
         width: 40,
         height: 40,
+    },
+    titleFilter: {
+        fontFamily: 'Avenir-Black',
+        fontWeight: '900',
+        fontSize: 21,
+        color: 'black',
+        paddingLeft: 22,
+        paddingRight: 20,
+        marginBottom: 20,
+        marginTop: 20,
     },
     checkbox: {
         width: 20,
@@ -109,13 +122,15 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     background: {
+        flex: 1,
+        zIndex: 1,
+        borderRadius: 16,
         backgroundColor: "#FFF",
         position: 'absolute',
-        top: 51,
-        right: 330,
-        width: '100%',
-        zIndex: 1,
-        borderRadius: 16
+        right: '-48%',
+        top: 50,
+        
+        
     },
     sectionButton: {
         flexDirection: 'row',

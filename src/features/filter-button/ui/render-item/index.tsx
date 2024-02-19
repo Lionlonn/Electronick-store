@@ -5,6 +5,7 @@ import CheckBox from '@react-native-community/checkbox';
 
 
 
+
 export const RenderItem = ({label, checked,  onChange}: 
     {label: string, checked: boolean, onChange:(label: string, checked: boolean) => void}) => {
     

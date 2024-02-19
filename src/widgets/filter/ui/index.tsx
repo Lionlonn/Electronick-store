@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
-import { useDispatch } from "react-redux";
-import { FilterData } from "src/features/filter-button";
 import { addChecked, fetchFilterData, removeChecked } from "src/features/filter-button/model";
 import { InputText } from "src/features/input/ui";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
-interface Item  {
-    item: FilterData
-}
 
 export const Filter = () => {
     const dispatch = useAppDispatch()
@@ -30,12 +25,10 @@ export const Filter = () => {
     
     
     return (
-        <View style={styles.contaiter}>  
-            
+        <View style={styles.contaiter}>
             <View style={styles.filterStyle}>
                 <InputText item={items}/>
             </View>
-            
             
         </View>
     )
