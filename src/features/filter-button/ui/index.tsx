@@ -5,7 +5,7 @@ import { IconButton } from "react-native-paper";
 import { RenderItem } from "./render-item/index"
 import { FilterData } from "../api";
 import { Button } from 'shared/ui/index'
-
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 interface Item {
     item: FilterData[]
@@ -17,7 +17,13 @@ const { width, height } = Dimensions.get('window')
 
 export const FilterButton = (props: Item) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    console.log(width, height)    
+    const [ values, setValue ] = useState<number[]>([0, 100]);
+
+    const multiSliderValuesChange = (values: number[]) => {
+        setValue(values)
+    }
+
+       
     const handleCheckboxChange = (label: string, checked: boolean) => {
         const newData = props.item.map((item) => {
             const updateProductData = item.data.map((dataItem) =>
@@ -63,7 +69,24 @@ export const FilterButton = (props: Item) => {
             <Animated.View style={[styles.background, {width: bodyWidth ,height:bodyHeight}]}>
                     
                     <Text style={styles.titleFilter}>Filter by</Text>
+                    <View style={styles.multisliderStyle}>
 
+                        <Text>{values[0]}</Text>
+                        <MultiSlider 
+                            values={values}
+                            sliderLength={300}
+                            onValuesChange={multiSliderValuesChange}
+                            min={0}
+                            max={100}
+                            step={1}
+                            allowOverlap = {false}
+                            snapped
+                            minMarkerOverlapDistance = {20}
+                        />
+                        <Text>{values[1]}</Text>
+
+                    </View>
+                    
                     <SectionList 
                         sections={props.item}
                         keyExtractor={(item) => item.label}
@@ -136,6 +159,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         margin: 30
+    },
+    multisliderStyle: {
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
-   
 })

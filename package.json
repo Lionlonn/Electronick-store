@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.15",
     "@mui/styled-engine-sc": "^6.0.0-alpha.3",
+    "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/checkbox": "^0.5.17",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
