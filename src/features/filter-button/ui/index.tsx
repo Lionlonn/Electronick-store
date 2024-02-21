@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import {Animated, Dimensions, Easing, FlatList, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Animated, Dimensions,  ScrollView,  SectionList, StyleSheet, Text, View} from 'react-native';
 import  Filter  from '../image/filter.svg'
 import { IconButton } from "react-native-paper";
 import { RenderItem } from "./render-item/index"
@@ -18,12 +18,11 @@ const { width, height } = Dimensions.get('window')
 export const FilterButton = (props: Item) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [ values, setValue ] = useState<number[]>([10, 2000]);
+    
 
     const multiSliderValuesChange = (values: number[]) => {
         setValue(values)
     }
-
-    console.log(values)
     const handleCheckboxChange = (label: string, checked: boolean) => {
         const newData = props.item.map((item) => {
             const updateProductData = item.data.map((dataItem) =>
@@ -40,7 +39,7 @@ export const FilterButton = (props: Item) => {
     const bodyWidth = width
     const bodyHeight = animatedController.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, 550],
+        outputRange: [0, height],
     });
     const toggleListItem = () => {
         if (isOpen) {
@@ -66,9 +65,11 @@ export const FilterButton = (props: Item) => {
                 size={20}
                 onPress={() => toggleListItem()}
             />
-            <Animated.View style={[styles.background, {width: bodyWidth ,height:bodyHeight}]}>
+            
+            <Animated.ScrollView style={[styles.background, {width: bodyWidth, height:bodyHeight}]}>
                     <Text style={styles.titleFilter}>Filter by</Text>
                     <Text style={styles.priceTitle}>Price</Text>
+                    
                     <View style={[styles.multisliderStyle, {display: isOpen ? 'flex' : 'none'}]}>
                         <MultiSlider 
                             values={values}
@@ -85,12 +86,10 @@ export const FilterButton = (props: Item) => {
                             selectedStyle={{backgroundColor: '#FF7F50'}}
                         />
                     </View>
-
                     <View style={styles.priceContainer}>
                         <Text style={styles.priceText}>${values[0]}</Text>
                         <Text style={styles.priceText}>${values[1]}</Text>
                     </View>
-
                     <SectionList 
                         sections={props.item}
                         keyExtractor={(item) => item.label}
@@ -108,7 +107,9 @@ export const FilterButton = (props: Item) => {
                         <Button buttonColor="white" onClick={toggleListItem} />
                         <Button buttonColor="yellow" onClick={toggleListItem} />
                     </View>
-            </Animated.View>
+                    
+                    
+            </Animated.ScrollView>
             
             
             
