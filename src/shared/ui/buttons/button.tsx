@@ -19,7 +19,7 @@ export const Button: FC<Props> = ({buttonColor, type, onClick}) => {
     return (
         <Pressable onPress={onClick} style={({pressed}) => [
             styles.button,
-            {backgroundColor: pressed ? 'grey' : buttonColor === 'white' ? "#f5f5f5": "#FFFF00"},
+            {backgroundColor: pressed ? 'grey' : buttonColor === 'white' ? "#f5f5f5": "#FFDB00"},
         ]}>
             <Text style={styles.title}>{type}</Text>
         </Pressable>

@@ -32,10 +32,6 @@ const styles = StyleSheet.create({
     listItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft: 22,
-        paddingRight: 20,
-        marginBottom: 20,
-        marginTop: 20,
     },
     itemLabel: {
         fontFamily: 'Avenir-Black',

@@ -17,13 +17,13 @@ const { width, height } = Dimensions.get('window')
 
 export const FilterButton = (props: Item) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [ values, setValue ] = useState<number[]>([0, 100]);
+    const [ values, setValue ] = useState<number[]>([10, 2000]);
 
     const multiSliderValuesChange = (values: number[]) => {
         setValue(values)
     }
 
-       
+    console.log(values)
     const handleCheckboxChange = (label: string, checked: boolean) => {
         const newData = props.item.map((item) => {
             const updateProductData = item.data.map((dataItem) =>
@@ -67,31 +67,36 @@ export const FilterButton = (props: Item) => {
                 onPress={() => toggleListItem()}
             />
             <Animated.View style={[styles.background, {width: bodyWidth ,height:bodyHeight}]}>
-                    
                     <Text style={styles.titleFilter}>Filter by</Text>
-                    <View style={styles.multisliderStyle}>
-
-                        <Text>{values[0]}</Text>
+                    <Text style={styles.priceTitle}>Price</Text>
+                    <View style={[styles.multisliderStyle, {display: isOpen ? 'flex' : 'none'}]}>
                         <MultiSlider 
                             values={values}
-                            sliderLength={300}
+                            sliderLength={360}
                             onValuesChange={multiSliderValuesChange}
-                            min={0}
-                            max={100}
+                            min={10}
+                            max={2000}
                             step={1}
                             allowOverlap = {false}
                             snapped
-                            minMarkerOverlapDistance = {20}
+                            minMarkerOverlapDistance = {30}
+                            trackStyle={{backgroundColor: '#F4F5FA', height: 6, borderRadius: 8}}
+                            markerStyle={{backgroundColor: '#FF7F50', height: 15, width: 15}}
+                            selectedStyle={{backgroundColor: '#FF7F50'}}
                         />
-                        <Text>{values[1]}</Text>
-
                     </View>
-                    
+
+                    <View style={styles.priceContainer}>
+                        <Text style={styles.priceText}>${values[0]}</Text>
+                        <Text style={styles.priceText}>${values[1]}</Text>
+                    </View>
+
                     <SectionList 
                         sections={props.item}
                         keyExtractor={(item) => item.label}
+                        scrollEnabled={false}
                         renderItem={({item}) => (
-                            <View>
+                            <View style={styles.item}>
                                 <RenderItem {...item} onChange={handleCheckboxChange}/>
                             </View>
                         )}
@@ -144,6 +149,12 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 20,
     },
+    item: {
+        paddingLeft: 22,
+        paddingRight: 20,
+        marginBottom: 20,
+        marginTop: 20, 
+    },
     background: {
         flex: 1,
         zIndex: 1,
@@ -162,6 +173,26 @@ const styles = StyleSheet.create({
     },
     multisliderStyle: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        position: 'relative',
+    },
+    priceTitle: {
+        color: '#8A8B7A',
+        paddingLeft: 22,
+    },
+    priceText: {
+        color: 'black',
+        fontFamily: 'Avenir-Black',
+        fontWeight: '400',
+        fontSize: 16,
+    },
+    priceContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        
+        paddingLeft: 22,
+        paddingRight: 20,
+        
+       
     }
 })
