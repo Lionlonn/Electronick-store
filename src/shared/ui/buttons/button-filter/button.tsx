@@ -5,7 +5,7 @@ import { Text, StyleSheet, Pressable, View } from 'react-native';
 
 type Props = {
     buttonColor: "white" | "yellow",
-    type?: "Button" | 'Cansel' | "Apply",
+    type?: "Button" | 'Cansel' | "Apply" | "Viev item",
     onClick: () => void
 }
 
@@ -14,12 +14,13 @@ type Props = {
 
 
 export const Button: FC<Props> = ({buttonColor, type, onClick}) => {
-
+    
 
     return (
         <Pressable onPress={onClick} style={({pressed}) => [
             styles.button,
             {backgroundColor: pressed ? 'grey' : buttonColor === 'white' ? "#f5f5f5": "#FFDB00"},
+            {width: type === 'Viev item' ? 111 : 150}
         ]}>
             <Text style={styles.title}>{type}</Text>
         </Pressable>
@@ -32,7 +33,7 @@ Button.defaultProps = {
 }
 const styles = StyleSheet.create({
     button: {
-        width: 150,
+        // width: type === "Viev item" ? 111 : 150,
         height: 42,
         borderRadius: 8,
         flexDirection: 'row',
