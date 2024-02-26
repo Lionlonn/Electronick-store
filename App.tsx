@@ -13,8 +13,7 @@ import {
 import { HomePage } from 'src/pages/home/ui/intex';
 import { WorkSpacesPage } from 'src/pages/workspaces/ui';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { Avatar } from 'src/entities/avatar'
-import { Appbar } from 'react-native-paper';
+import { Avatar, MenuButton } from 'src/features/header-bar'
 
 
 const Stack = createNativeStackNavigator();
@@ -23,14 +22,12 @@ const Stack = createNativeStackNavigator();
 
 
 export const App = () => {
-  const [ showAppBarComponent, setShowAppBarComponent ] = useState(false)
   
   
   return (
       <>
         
-        <Stack.Navigator 
-          >
+        <Stack.Navigator >
 
           <Stack.Screen 
             name='HomePage' 
@@ -38,7 +35,8 @@ export const App = () => {
             options={{
                 title: "",
                 headerLeft: () => <Avatar/>,
-                headerRight: () => <Text>menu</Text>
+                headerRight: () => <MenuButton/>,
+                headerTransparent: true
               }}
             />
 
