@@ -17,13 +17,14 @@ const Wrapper = () => {
 
     
     return (
-        <NavigationContainer>
-            <Provider store={store}>
-                <PaperProvider>
-                    <App/>
-                </PaperProvider>
-            </Provider>
+        <PaperProvider>
+            <NavigationContainer>
+                <Provider store={store}>
+                        <App/>
+                </Provider>
         </NavigationContainer>
+        </PaperProvider>
+        
         
     )
 }

@@ -8,11 +8,14 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import { HomePage } from 'src/pages/home/ui/intex';
 import { WorkSpacesPage } from 'src/pages/workspaces/ui';
-import  { ProductsList }  from 'widgets/products-list';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { Avatar } from 'src/entities/avatar'
+import { Appbar } from 'react-native-paper';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -20,15 +23,33 @@ const Stack = createNativeStackNavigator();
 
 
 export const App = () => {
-  
+  const [ showAppBarComponent, setShowAppBarComponent ] = useState(false)
   
   
   return (
       <>
         
-        <Stack.Navigator>
-          <Stack.Screen name='HomePage' component={HomePage}/>
-          <Stack.Screen name='WorkSpaces' component={WorkSpacesPage}/>
+        <Stack.Navigator 
+          >
+
+          <Stack.Screen 
+            name='HomePage' 
+            component={HomePage}
+            options={{
+                title: "",
+                headerLeft: () => <Avatar/>,
+                headerRight: () => <Text>menu</Text>
+              }}
+            />
+
+          <Stack.Screen 
+            name='WorkSpaces'
+            component={WorkSpacesPage}
+            options={{
+              title: "WorkSpaces",
+              headerTitleAlign: 'center'
+            }}
+            />
         </Stack.Navigator>
         
         {/* <HomePage/> */}
