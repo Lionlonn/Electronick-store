@@ -43,12 +43,7 @@ export const App = () => {
                 headerLeft: () => <Avatar/>,
                 headerRight: () => <MenuButton navigation={navigation}/>,
             })}
-              // {
-              //   title: "",
-              //   headerLeft: () => <Avatar/>,
-              //   headerRight: () => <MenuButton />,
-              // }}
-            />
+          />
 
           <Stack.Screen 
             name='WorkSpaces'
@@ -57,7 +52,7 @@ export const App = () => {
               title: "WorkSpaces",
               headerTitleAlign: 'center'
             }}
-            />
+          />
           <Stack.Screen 
             name='SearchPage'
             component={SearchPage}
@@ -65,7 +60,15 @@ export const App = () => {
               title: "Search",
               headerTitleAlign: 'center'
             }}
-            />
+          />
+          <Stack.Screen 
+            name='ShopingCartPage'
+            component={SearchPage}
+            options={{
+              title: "Shoping cart",
+              headerTitleAlign: 'center'
+            }}
+          />
         </Stack.Navigator>
       </>
   );

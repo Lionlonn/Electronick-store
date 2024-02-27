@@ -5,10 +5,10 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 
-export const SearchPage = () => {
+export const ShopingCart = () => {
     return (
         <View style={styles.container}>  
-            <Text>SEARCH PAGE</Text>
+            <Text>SHOPING CART PAGE</Text>
         </View>
     )
 }

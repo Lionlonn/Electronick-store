@@ -4,13 +4,13 @@ import SearchIcon from '../../image/search.svg'
 import BasketIcon from '../../image/basket-icon.svg'
 export const MenuButton = ({navigation}: any) => {
 
-    console.log(navigation)
+    
     return (
         <View style={styles.wrapper}>
             <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('SearchPage')}}>
                 <SearchIcon/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('ShopingCartPage')}}>
                 <BasketIcon/>
             </TouchableOpacity>
         </View>
