@@ -27,7 +27,12 @@ export const App = () => {
   return (
       <>
         
-        <Stack.Navigator >
+        <Stack.Navigator 
+          screenOptions={{
+            headerShadowVisible: false,
+            headerStyle: {backgroundColor: 'white'}
+          }}
+        >
 
           <Stack.Screen 
             name='HomePage' 
@@ -36,7 +41,8 @@ export const App = () => {
                 title: "",
                 headerLeft: () => <Avatar/>,
                 headerRight: () => <MenuButton/>,
-                headerTransparent: true
+                // headerTransparent: true
+                
               }}
             />
 

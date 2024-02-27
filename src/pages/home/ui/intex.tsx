@@ -11,7 +11,7 @@ export const HomePage = ({navigation}: any) => {
     return (
         <View style={styles.container}>  
             
-            <Filter/>
+            {/* <Filter/> */}
             <PopularCard/>
             <Categories navigation={navigation}/>
             
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: "white"
     },
 })
