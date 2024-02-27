@@ -14,6 +14,7 @@ import { HomePage } from 'src/pages/home/ui/intex';
 import { WorkSpacesPage } from 'src/pages/workspaces/ui';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Avatar, MenuButton } from 'src/features/header-bar'
+import { SearchPage } from 'src/pages/search/ui';
 
 
 const Stack = createNativeStackNavigator();
@@ -37,13 +38,16 @@ export const App = () => {
           <Stack.Screen 
             name='HomePage' 
             component={HomePage}
-            options={{
+            options={({navigation}) => ({
                 title: "",
                 headerLeft: () => <Avatar/>,
-                headerRight: () => <MenuButton/>,
-                // headerTransparent: true
-                
-              }}
+                headerRight: () => <MenuButton navigation={navigation}/>,
+            })}
+              // {
+              //   title: "",
+              //   headerLeft: () => <Avatar/>,
+              //   headerRight: () => <MenuButton />,
+              // }}
             />
 
           <Stack.Screen 
@@ -54,10 +58,15 @@ export const App = () => {
               headerTitleAlign: 'center'
             }}
             />
+          <Stack.Screen 
+            name='SearchPage'
+            component={SearchPage}
+            options={{
+              title: "Search",
+              headerTitleAlign: 'center'
+            }}
+            />
         </Stack.Navigator>
-        
-        {/* <HomePage/> */}
-        {/* <WorkSpacesPage/> */}
       </>
   );
 }

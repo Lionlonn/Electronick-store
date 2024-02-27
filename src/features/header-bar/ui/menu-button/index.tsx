@@ -2,13 +2,12 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import SearchIcon from '../../image/search.svg'
 import BasketIcon from '../../image/basket-icon.svg'
+export const MenuButton = ({navigation}: any) => {
 
-export const MenuButton = () => {
-
-
+    console.log(navigation)
     return (
         <View style={styles.wrapper}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('SearchPage')}}>
                 <SearchIcon/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
@@ -18,6 +17,8 @@ export const MenuButton = () => {
         
     )
 }
+
+
 
 const styles = StyleSheet.create({
     wrapper: {
