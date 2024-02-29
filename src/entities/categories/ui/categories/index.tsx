@@ -1,29 +1,14 @@
 import React from "react";
 import { View, Text, SafeAreaView, FlatList, TouchableOpacity } from "react-native";
 import { categoryStyle } from "./style";
+import { Item } from '../item/index'
+import { ItemProps } from '../item/index'
 import Arrow from '../../image/arrow.svg'
 import DATA from '../../api/index'
 
-type ItemProps = {
-    title: string,
-    image: any,
-    count: number,
-    navigation: any
-}
-
-const Item = ({ title, image, count, navigation }: ItemProps) => (
-    <TouchableOpacity onPress={() => { navigation.navigate('WorkSpaces', count) }}>
-        <View style={categoryStyle.item}>
-            <View>{image}</View>
-            <Text style={categoryStyle.itemTitle}>{title}</Text>
-            <Text style={categoryStyle.itemCount}>{count} suggested items</Text>
-        </View>
-    </TouchableOpacity>
-);
-
 export const CategoriesCarousel = ({ navigation }: any) => {
-    const renderItem = ({ item }: { item: any }) => (
-        <Item title={item.title} image={item.image} count={item.count} navigation={navigation} />
+    const renderItem = ({ item }: { item: ItemProps }) => (
+        <Item {...item} navigation={navigation} />
     );
 
     return (
@@ -39,7 +24,7 @@ export const CategoriesCarousel = ({ navigation }: any) => {
                 <FlatList
                     contentContainerStyle={{ paddingHorizontal: 10 }}
                     horizontal
-                    data={DATA}
+                    data={DATA.map(item => ({...item, navigation}))}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={renderItem}
                     showsHorizontalScrollIndicator={false}
