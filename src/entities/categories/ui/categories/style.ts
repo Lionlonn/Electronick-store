@@ -7,11 +7,20 @@ export const categoryStyle = StyleSheet.create({
       
     },
     sectionHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    seeMore: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        position: 'relative',
+        paddingRight: 20
+    },
+    HeaderTitle: {
         fontWeight: '800',
         fontSize: 18,
         color: '#040B14',
-        marginTop: 20,
-        marginBottom: 5,
     },
     item: {
         margin: 10,
@@ -40,7 +49,6 @@ export const categoryStyle = StyleSheet.create({
     image: {
         width: 0,
         height: 0,
-        
     }
 
 

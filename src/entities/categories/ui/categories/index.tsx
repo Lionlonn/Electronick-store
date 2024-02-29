@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, SafeAreaView, FlatList, TouchableOpacity } from "react-native";
 import { categoryStyle } from "./style";
 import { images } from '../../image/index';
+import Arrow from '../../image/arrow.svg'
 
 const { developer, marketer, blogger, photograther, creative } = images;
 
@@ -37,7 +38,13 @@ export const CategoriesCarousel = ({ navigation }: any) => {
 
     return (
         <SafeAreaView style={categoryStyle.container}>
-            <Text style={categoryStyle.sectionHeader}>Workspaces</Text>
+            <View style={categoryStyle.sectionHeader}>
+                <Text style={categoryStyle.HeaderTitle}>Workspaces</Text>
+                <TouchableOpacity style={categoryStyle.seeMore}>
+                    <Text>See more</Text>
+                    <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>
+                </TouchableOpacity>
+            </View>
             <View>
                 <FlatList
                     contentContainerStyle={{ paddingHorizontal: 10 }}

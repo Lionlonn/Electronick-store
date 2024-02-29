@@ -13,6 +13,6 @@ export const images = {
     marketer: <Marketer/>,
     blogger: <Blogger/>,
     photograther: <Photograther/>,
-    creative: <Creative/>
+    creative: <Creative/>,
 }
 
