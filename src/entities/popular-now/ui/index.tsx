@@ -44,8 +44,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#0A0B02",
         borderRadius: 32,
         flexDirection: 'row',
-        // alignItems: 'center',
-        // justifyContent: 'center',
         position: 'relative',
     },
     aboutPopular: {

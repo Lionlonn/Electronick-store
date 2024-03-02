@@ -23,7 +23,7 @@ export const categoryStyle = StyleSheet.create({
         color: '#040B14',
     },
     item: {
-        margin: 10,
+        marginTop: 10,
         backgroundColor: '#F4F5F7',
         width: 136,
         height: 178,

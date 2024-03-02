@@ -1,0 +1,1 @@
+export { NewArrialsProduct } from './ui/index'

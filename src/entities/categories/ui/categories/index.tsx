@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from "react-native";
 import { categoryStyle } from "./style";
 import { Item } from '../item/index'
 import { ItemProps } from '../item/index'
@@ -12,7 +12,7 @@ export const CategoriesCarousel = ({ navigation }: any) => {
     );
 
     return (
-        <SafeAreaView style={categoryStyle.container}>
+        <View style={categoryStyle.container}>
             <View style={categoryStyle.sectionHeader}>
                 <Text style={categoryStyle.HeaderTitle}>Workspaces</Text>
                 <TouchableOpacity style={categoryStyle.seeMore}>
@@ -20,17 +20,18 @@ export const CategoriesCarousel = ({ navigation }: any) => {
                     <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>
                 </TouchableOpacity>
             </View>
-            <View>
+            <ScrollView>
                 <FlatList
-                    contentContainerStyle={{ paddingHorizontal: 10 }}
+                    contentContainerStyle={{ gap: 10 }}
                     horizontal
                     data={DATA.map(item => ({...item, navigation}))}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={renderItem}
+                    decelerationRate={0.7}
                     showsHorizontalScrollIndicator={false}
                 />
-            </View>
-        </SafeAreaView>
+            </ScrollView>
+        </View>
     );
 };
 

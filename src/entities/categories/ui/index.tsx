@@ -6,9 +6,6 @@ import Developer from '../image/developer.svg'
 
 
 export const Categories = ({navigation}: any) => {
-   
-    
-
     return (
         <>
             <CategoriesCarousel navigation={navigation}/>

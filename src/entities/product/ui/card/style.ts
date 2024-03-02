@@ -2,8 +2,7 @@ import {StyleSheet, Platform } from "react-native";
 
 export const page = StyleSheet.create({
     container: {
-        alignItems: "center"
-        
+        // flex: 1
     },
     
     wrapper: {
