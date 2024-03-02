@@ -17,7 +17,7 @@ export const categoryStyle = StyleSheet.create({
         position: 'relative',
         paddingRight: 20
     },
-    HeaderTitle: {
+    headerTitle: {
         fontWeight: '800',
         fontSize: 18,
         color: '#040B14',

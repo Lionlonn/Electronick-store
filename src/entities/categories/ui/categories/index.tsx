@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from
 import { categoryStyle } from "./style";
 import { Item } from '../item/index'
 import { ItemProps } from '../item/index'
-import Arrow from '../../image/arrow.svg'
+import Arrow from 'src/assets/images/arrow.svg'
 import DATA from '../../api/index'
 
 export const CategoriesCarousel = ({ navigation }: any) => {
@@ -14,7 +14,7 @@ export const CategoriesCarousel = ({ navigation }: any) => {
     return (
         <View style={categoryStyle.container}>
             <View style={categoryStyle.sectionHeader}>
-                <Text style={categoryStyle.HeaderTitle}>Workspaces</Text>
+                <Text style={categoryStyle.headerTitle}>Workspaces</Text>
                 <TouchableOpacity style={categoryStyle.seeMore}>
                     <Text>See more</Text>
                     <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>

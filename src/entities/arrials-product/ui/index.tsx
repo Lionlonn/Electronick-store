@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { addToFavorite, removeFromFavorite } from "src/features/favorite";
 import { ProductItem } from "src/entities/product";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { ProductCard } from "src/entities/product/ui/card";
+import Arrow from 'src/assets/images/arrow.svg';
 
 
 export const NewArrialsProduct = () => {
@@ -28,7 +29,13 @@ export const NewArrialsProduct = () => {
 
     return (
         <View>
-            <Text>New arrivals</Text>
+            <View style={styles.sectionHeader}>
+                <Text style={styles.headerTitle}>New arrivals</Text>
+                <TouchableOpacity style={styles.seeMore}>
+                    <Text>See more</Text>
+                    <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>
+                </TouchableOpacity>
+            </View >
                 {status === 1 && product && (
                     <ProductCard 
                         item={product} 
@@ -39,3 +46,23 @@ export const NewArrialsProduct = () => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    sectionHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 10
+    },
+    headerTitle: {
+        fontWeight: '800',
+        fontSize: 18,
+        color: '#040B14',
+    }, 
+    seeMore: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        position: 'relative',
+        paddingRight: 20
+    },
+})
