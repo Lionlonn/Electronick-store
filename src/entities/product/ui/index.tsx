@@ -16,6 +16,8 @@ export const Product = (props:Props) => {
     const favoriteItems = useStateSelector(state => state.favorite.items)
     const isFavorite = favoriteItems.some(product => product.id === props.item.id)
     
+    
+
     const handleToggleFavorite = (product: ProductItem) => {
         isFavorite 
         ? dispatch(removeFromFavorite(product)) 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { addToFavorite, removeFromFavorite } from "src/features/favorite";
 import { ProductItem } from "src/entities/product";
@@ -7,20 +7,26 @@ import { ProductCard } from "src/entities/product/ui/card";
 import Arrow from 'src/assets/images/arrow.svg';
 
 
-export const NewArrialsProduct = () => {
+export const NewArrialsProduct = memo(() => {
     const { item, status } = useStateSelector(state => state.products);
+    const dispatch = useAppDispatch();
     const [product, setProduct] = useState<ProductItem | null>(null);
-
+    
+    
     useEffect(() => {
         if (status === 1 && item && item.length > 0) {
-            setProduct(item[0]);
+            let randorProduct = item[Math.floor(Math.random()*item.length)]
+            setProduct(randorProduct);
         }
     }, [status, item]);
 
-    const dispatch = useAppDispatch();
+    
+    
+    
     const favoriteItems = useStateSelector(state => state.favorite.items);
-    const isFavorite = favoriteItems.some(product => product.id === item?.[0]?.id);
-
+    const isFavorite = product ? favoriteItems.some(favoriteProduct => favoriteProduct.id === product.id) : false;
+    
+    
     const handleToggleFavorite = (product: ProductItem) => {
         isFavorite 
         ? dispatch(removeFromFavorite(product)) 
@@ -45,7 +51,7 @@ export const NewArrialsProduct = () => {
                 )}
         </View>
     )
-}
+})
 
 const styles = StyleSheet.create({
     sectionHeader: {

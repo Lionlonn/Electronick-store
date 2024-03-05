@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Alert, Image, Text, View} from "react-native";
 import { page } from '../card/style'
 import { ProductItem } from "entities/product";
@@ -13,12 +13,11 @@ interface Props {
 }
 
 
-export const ProductCard = (props:Props) => {
+export const ProductCard = memo((props:Props) => {
     const {name, category, id, price, rating, img} = props.item
     
     
-
-    
+   
     
     return (
         
@@ -67,5 +66,5 @@ export const ProductCard = (props:Props) => {
             
         </>
     ) 
-}
+})
 
