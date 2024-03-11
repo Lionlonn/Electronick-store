@@ -1,13 +1,10 @@
 import React, { useRef, useState } from "react";
 import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
-import { FilterData } from "src/features/filter-button";
-import { FilterButton } from "src/features/filter-button/ui";
-interface Props {
-    item: FilterData[]
-}
+import { FilterButtonContainer, FilterData } from "src/features/filter-button";
+
 
 const { width, height } = Dimensions.get('window')
-export const InputText = (props: Props) => {
+export const SearchInputField = () => {
     const [text, onChangeText] = React.useState('');
 
     return (
@@ -23,7 +20,7 @@ export const InputText = (props: Props) => {
                     autoCorrect={false}
                 />
                 <View style={styles.inputInnerContainer}>
-                    <FilterButton item={props.item}/>
+                    <FilterButtonContainer/>
                 </View>
              </View>
             
@@ -60,8 +57,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 24,
         right: 25
-        
-        
     },
    
 })

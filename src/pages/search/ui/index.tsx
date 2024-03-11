@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
-
-
+import { SearchInputField } from "src/features/input";
 
 
 export const SearchPage = () => {
+   
     return (
-        <View style={styles.container}>  
-            <Text>SEARCH PAGE</Text>
+        <View style={styles.container}>
+            <SearchInputField/>
         </View>
     )
 }

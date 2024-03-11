@@ -4,33 +4,37 @@ import Chair from '../image/chair.svg'
 import Cart from '../image/cart.svg'
 import RatingImage from "../../product/image/star.svg"
 import { Button } from "src/shared/ui";
+import LinearGradient from 'react-native-linear-gradient';
 
 export const PopularCard = () => {
-
-
     return (
         <View style={styles.cardContainer}>
-            <View style={styles.aboutPopular}>
+            <LinearGradient 
+                colors={['rgb(0, 2, 2)', 'rgb(35, 35, 35)', 'rgb(31, 31, 31)', 'rgb(35, 35, 35)']}
+                style={styles.linearGradient}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                >
+                <View style={styles.aboutPopular}>
+                    <Text style={styles.titleStyle}>Adjustable Office{"\n"}Chair</Text>
 
-                <Text style={styles.titleStyle}>Adjustable Office{"\n"}Chair</Text>
+                    <View style={styles.aboutPopularText}>
+                        <Text style={styles.text}>Hughlan Workspaces</Text>
+                        <View style={styles.icon}></View>
+                        <Text style={styles.textRating}>4.8</Text>
+                        <RatingImage/>
+                    </View>
 
-                <View style={styles.aboutPopularText}>
-                    <Text style={styles.text}>Hughlan Workspaces</Text>
-                    <View style={styles.icon}></View>
-                    <Text style={styles.textRating}>4.8</Text>
-                    <RatingImage/>
+                    <View style={styles.buttons}>
+                        <Button type="Viev item" buttonColor="yellow" onClick={() => console.log('ckick')}/>
+                        <Pressable onPress={() => console.log('cart')}>
+                            <Cart style={{width: 10, height: 10}}/>
+                        </Pressable>
+                    </View>
                 </View>
-
-                <View style={styles.buttons}>
-                    <Button type="Viev item" buttonColor="yellow" onClick={() => console.log('ckick')}/>
-                    <Pressable onPress={() => console.log('cart')}>
-                        <Cart style={{width: 10, height: 10}}/>
-                    </Pressable>
-                </View>
-
-            </View>
+                <Chair style={styles.imageStyle}/>
+            </LinearGradient>
             
-            <Chair style={styles.imageStyle}/>
             
             
         </View>
@@ -39,12 +43,19 @@ export const PopularCard = () => {
 
 const styles = StyleSheet.create({
     cardContainer: {
-        width: '90%',
-        height: 190,
-        backgroundColor: "#0A0B02",
         borderRadius: 32,
         flexDirection: 'row',
         position: 'relative',
+    },
+    linearGradient: {
+        
+        minWidth: '90%',
+        height: 180,
+        borderRadius: 32,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 20,
+        position: 'relative'
     },
     aboutPopular: {
         padding: 25,

@@ -1,12 +1,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { ProductsList } from "src/widgets/products-list";
+import { FeaturedWorkspace } from "src/entities/featured-workspace";
+import { SearchInputField } from "src/features/input";
 
 
 export const WorkSpacesPage = () => {
     return (
         <View style={styles.container}>
-            <ProductsList/>
+            {/* <SearchInputField/> */}
+            <FeaturedWorkspace/>
         </View>
     )
 }
@@ -14,6 +16,7 @@ export const WorkSpacesPage = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        alignItems: 'center',
     }
 })

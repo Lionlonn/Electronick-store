@@ -17,10 +17,11 @@ export const ProductsList = () => {
     if (status !== 1) {
         return <Text>...Loading</Text>
     }
+
+    
     
     return (
         <>
-           
             <FlatList 
                 data={item}
                 renderItem={({item}) => (

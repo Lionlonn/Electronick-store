@@ -1,0 +1,1 @@
+export { SearchInputField } from './ui/index'

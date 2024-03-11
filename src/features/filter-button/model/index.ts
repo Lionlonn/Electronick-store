@@ -19,13 +19,15 @@ export const fetchFilterData = createAsyncThunk(
     "filter/fetchFilterData",
     async () => {
         const response = await FilterApi.getFilterData();
-        return response
+        return response;
+        
     }
 )
 
 
+
 const filterSlice = createSlice({
-    name: "getFilter",
+    name: "filter",
     initialState,
     reducers: {
         addChecked(state, action: PayloadAction<{title: string, label:string}>) {
@@ -54,7 +56,6 @@ const filterSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        console.log(initialState)
         builder
         .addCase(fetchFilterData.pending, (state) => {
             state.status = StatusFlag.Pending

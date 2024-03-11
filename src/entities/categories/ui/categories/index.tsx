@@ -15,7 +15,7 @@ export const CategoriesCarousel = ({ navigation }: any) => {
         <View style={categoryStyle.container}>
             <View style={categoryStyle.sectionHeader}>
                 <Text style={categoryStyle.headerTitle}>Workspaces</Text>
-                <TouchableOpacity style={categoryStyle.seeMore}>
+                <TouchableOpacity style={categoryStyle.seeMore} onPress={() => { navigation.navigate('WorkSpaces') }}>
                     <Text>See more</Text>
                     <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>
                 </TouchableOpacity>

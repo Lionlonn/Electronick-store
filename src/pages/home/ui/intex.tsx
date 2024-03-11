@@ -13,8 +13,6 @@ export const HomePage = ({navigation}: any) => {
                 <Categories navigation={navigation}/>
                 <NewArrialsProduct/>
             </View>
-            
-            
         </ScrollView>
     );
 };

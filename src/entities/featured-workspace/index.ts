@@ -1,0 +1,1 @@
+export { FeaturedWorkspace } from './ui/index'
