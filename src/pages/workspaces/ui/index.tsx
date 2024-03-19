@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { FeaturedWorkspace } from "src/entities/featured-workspace";
+import { Product } from "src/entities/product";
 import { SearchInputField } from "src/features/input";
-import { CardProduct } from "src/shared/ui/card";
+import { ProductsList } from "src/widgets/products-list";
 
 
 export const WorkSpacesPage = () => {
@@ -10,7 +11,7 @@ export const WorkSpacesPage = () => {
         <View style={styles.container}>
             {/* <SearchInputField/> */}
             <FeaturedWorkspace/>
-            <CardProduct/>
+            <ProductsList/>
         </View>
     )
 }

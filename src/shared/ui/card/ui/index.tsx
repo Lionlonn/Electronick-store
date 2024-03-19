@@ -1,21 +1,45 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text, Image } from "react-native";
 import UsbImage from '../image/usb.svg'
+import { ProductItem } from "src/entities/product";
+import StarImage from '../image/star.svg'
+import { Favorite } from "src/features/favorite";
 
-export const CardProduct = () => {
+
+
+interface Props {
+    item: ProductItem,
+    handleToggleFavorite: (product: ProductItem) => void,
+    isFavorite: boolean
+}
+
+
+export const CardProduct = (props: Props) => {
+    const {name, category, id, price, rating, img} = props.item
     
 
     return (
         <TouchableOpacity>
             <View style={styles.wrapper}>
                 <View style={styles.cardImage}>
-                    <UsbImage/>
+                    <Image 
+                        style={styles.cardImage}
+                        source={{uri: img}}
+                        />
+                </View>
+                <View style={styles.addFaforites}>
+                    <Favorite 
+                        toggleFavorite={() => {
+                            props.handleToggleFavorite(props.item)
+                        }}
+                        isFavorite={props.isFavorite}/>
                 </View>
                 <View style={styles.aboutProduct}>
-                    <Text style={styles.titleCard}>USB 4port Hub</Text>
-                    <Text style={styles.priceText}>USD 33.00</Text>
+                    <Text style={styles.titleCard}>{name}</Text>
+                    <Text style={styles.priceText}>USD {price}</Text>
                     <View style={styles.blockRating}>
-                        <Text style={styles.textRating}>4.5</Text>
+                        <Text style={styles.textRating}>{rating}</Text>
+                        <StarImage/>
                     </View>
                 </View>
             </View>
@@ -32,10 +56,18 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         alignItems: 'center',
         flexDirection: 'column',
-        gap: -5
+        gap: -5,
+        position: 'relative'
     },
     cardImage: {   
-
+        width: 120,
+        height: 90,
+        borderRadius: 22
+    },
+    addFaforites: {
+        position: 'absolute',
+        right: 10,
+        top: 10
     },
     aboutProduct: {
         width: 142,
@@ -60,7 +92,10 @@ const styles = StyleSheet.create({
     },
     blockRating: {
         alignSelf: 'flex-end',
-        paddingTop: 5
+        paddingTop: 5,
+        flexDirection: 'row',
+        alignItems:'center',
+        gap: 5
     },
     textRating: {
         fontFamily: 'Avenir-Heavy',

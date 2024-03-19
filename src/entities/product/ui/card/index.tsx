@@ -39,8 +39,8 @@ export const ProductCard = memo((props:Props) => {
                                 <Favorite 
                                     toggleFavorite={() => {props.handleToggleFavorite(props.item)}}
                                     isFavorite={props.isFavorite}
-
-                            /></View>
+                            />
+                            </View>
                         </View>
                         
                         <View >

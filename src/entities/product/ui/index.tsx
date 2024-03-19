@@ -4,6 +4,7 @@ import { useAppDispatch, useStateSelector } from "shared/hooks";
 
 import { addToFavorite, removeFromFavorite } from "features/favorite";
 import { ProductItem } from "../api";
+import { CardProduct } from "src/shared/ui/card";
 
 
 interface Props {
@@ -26,12 +27,16 @@ export const Product = (props:Props) => {
     
     return (
         <>
-            
-            <ProductCard  
+            <CardProduct 
+                item={props.item}
+                handleToggleFavorite={handleToggleFavorite}
+                isFavorite={isFavorite}/>
+                
+            {/* <ProductCard  
                 item={props.item}
                 handleToggleFavorite={handleToggleFavorite}
                 isFavorite={isFavorite}
-            />
+            /> */}
             
         </>
     )
