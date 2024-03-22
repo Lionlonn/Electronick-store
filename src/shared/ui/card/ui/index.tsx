@@ -46,7 +46,7 @@ export const CardProduct = (props: Props) => {
                         }}
                         isFavorite={props.isFavorite}/>
                 </View>
-                <View style={styles.aboutProduct}>
+                <View style={[styles.aboutProduct, {width: (cardWidth - 20), }]}>
                     <Text style={styles.titleCard}>{name}</Text>
                     <Text style={styles.priceText}>USD {price}</Text>
                     <View style={styles.blockRating}>
@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         alignItems: 'center',
         // justifyContent: 'center',
-        // flexDirection: 'column',
+        flexDirection: 'column',
+        gap: 10,
         // gap: -5,
         position: 'relative',
         overflow: 'hidden',
