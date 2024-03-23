@@ -8,7 +8,8 @@ import { CardProduct } from "src/shared/ui/card";
 
 
 interface Props {
-    item: ProductItem,
+    item: ProductItem;
+    shapeView: 'box' | 'rect'
 }
 
 
@@ -30,14 +31,9 @@ export const Product = (props:Props) => {
             <CardProduct 
                 item={props.item}
                 handleToggleFavorite={handleToggleFavorite}
-                isFavorite={isFavorite}/>
-                
-            {/* <ProductCard  
-                item={props.item}
-                handleToggleFavorite={handleToggleFavorite}
                 isFavorite={isFavorite}
-            /> */}
-            
+                shape={props.shapeView}
+                />
         </>
     )
 }

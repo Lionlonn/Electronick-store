@@ -10,25 +10,26 @@ import { Favorite } from "src/features/favorite";
 interface Props {
     item: ProductItem,
     handleToggleFavorite: (product: ProductItem) => void,
-    isFavorite: boolean
+    isFavorite: boolean,
+    shape: 'box' | 'rect'
 }
 
 
 
-
-
+const test = Dimensions.get('window').width
 
 export const CardProduct = (props: Props) => {
-    const {name, category, id, price, rating, img} = props.item;
-    const { height, width } = useWindowDimensions();
+    const {name, price, rating, img} = props.item;
+    const width = useWindowDimensions().width;
 
     const cardWidth = (width - 23 * 3) / 2;
-    const cardHeight = width * 1.5;
     const cardImageWight = (width - 23 * 3) / 3
+
+    
 
     return (
         <TouchableOpacity style={styles.container}>
-            <View style={[styles.wrapper,
+            <View style={[props.shape === 'box' ? styles.wrapperBox : styles.wrapperRect,
                 {
                     width: cardWidth,
                 }
@@ -62,26 +63,30 @@ export const CardProduct = (props: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1
     },
-    wrapper: {
-        // width: 171,
-        // height: 188 ,
-        // width: 158,
-        // height: 190,
+    
+    wrapperBox: {
         backgroundColor: '#F4F5F7',
         borderRadius: 8,
         alignItems: 'center',
-        // justifyContent: 'center',
         flexDirection: 'column',
         gap: 10,
-        // gap: -5,
+        position: 'relative',
+        overflow: 'hidden',
+        padding: 10
+    },
+    wrapperRect: {
+        
+        backgroundColor: '#F4F5F7',
+        borderRadius: 8,
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: 10,
         position: 'relative',
         overflow: 'hidden',
         padding: 10
     },
     cardImage: {   
-        // width: 300,
         borderRadius: 22,
         aspectRatio: 1.5,
         resizeMode: 'contain'
