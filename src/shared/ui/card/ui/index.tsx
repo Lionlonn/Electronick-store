@@ -48,14 +48,16 @@ export const CardProduct = (props: Props) => {
                 </View>
                 
                 <View style={[props.shape === 'box' 
-                    ? [styles.aboutProduct, {width: (cardWidth - 20), }] 
+                    ? [styles.aboutBox, {width: (cardWidth - 20), }] 
                     : [styles.aboutRect]]
                     }>
                     
                     {props.shape === 'box' 
                     ? 
                         <View style={styles.infoCard}>
-                            <Text style={styles.titleCard}>{name.length > 15 ? `${name.slice(0, 15)}..` : name}</Text>
+                            <Text style={styles.titleCard}>
+                                {name.length > 15 ? `${name.slice(0, 15)}..` : name}
+                            </Text>
                             <Text style={styles.priceText}>USD {price}</Text>
                             <View style={styles.blockRating}>
                                 <Text style={styles.textRating}>{rating}</Text>
@@ -64,7 +66,12 @@ export const CardProduct = (props: Props) => {
                         </View> 
                     :
                         <View style={styles.infoCard}>
-                            <Text style={styles.titleCard}>{name.length > 15 ? `${name.slice(0, 20)}..` : name}</Text>
+                            <Text style={[styles.titleCard, {fontSize: (width > 420) ? 22: 16}]}>
+                                {(width > 420) 
+                                ? name.length < 30 ? name : `${name.slice(0, 40)}..`
+                                : name.length > 15 ? `${name.slice(0, 20)}..` : name
+                                }
+                            </Text>
                             <View style={styles.categoryRect}>
                                     <Text style={styles.categoryText}>{category}</Text>
                                     <View style={styles.point}></View>
@@ -109,9 +116,9 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0
     },
-    aboutProduct: {
-        width: 142,
-        height: 77,
+    aboutBox: {
+        width: '100%',
+        height: 'auto',
         backgroundColor: '#FFF',
         borderRadius: 8,
         padding: 10,
@@ -124,8 +131,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir-Heavy',
         fontSize: 16,
         fontWeight: '500',
-        lineHeight: 22,
-        color: 'black'
+        lineHeight: 24,
+        color: 'black',
+        
     },
     priceText: {
         fontFamily: 'Avenir-Heavy',
