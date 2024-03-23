@@ -55,6 +55,7 @@ export const ProductsList = (props: PropsProductList) => {
                         </TouchableOpacity>
                     )}
                     scrollEnabled={false}
+                    contentContainerStyle={{gap: 12}}
                 /> 
             }
             
@@ -66,6 +67,5 @@ const styles = StyleSheet.create({
     container: {
     },
     item: {
-        
     }
 })

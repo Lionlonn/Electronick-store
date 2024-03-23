@@ -16,10 +16,9 @@ interface Props {
 
 
 
-const test = Dimensions.get('window').width
 
 export const CardProduct = (props: Props) => {
-    const {name, price, rating, img} = props.item;
+    const {name, category, price, rating, img} = props.item;
     const width = useWindowDimensions().width;
 
     const cardWidth = (width - 23 * 3) / 2;
@@ -29,31 +28,56 @@ export const CardProduct = (props: Props) => {
 
     return (
         <TouchableOpacity style={styles.container}>
-            <View style={[props.shape === 'box' ? styles.wrapperBox : styles.wrapperRect,
-                {
-                    width: cardWidth,
-                }
+            <View style={[props.shape === 'box' 
+                ? [styles.wrapperBox, {width: cardWidth}]
+                : [styles.wrapperRect, {width: width}],
+                
             ]}>
                 <View style={styles.cardImage}>
                     <Image 
                         style={[styles.cardImage, {width: cardImageWight, alignSelf: 'center'}]}
                         source={{uri: img}}
                         />
-                </View>
-                <View style={styles.addFaforites}>
-                    <Favorite 
-                        toggleFavorite={() => {
-                            props.handleToggleFavorite(props.item)
-                        }}
-                        isFavorite={props.isFavorite}/>
-                </View>
-                <View style={[styles.aboutProduct, {width: (cardWidth - 20), }]}>
-                    <Text style={styles.titleCard}>{name}</Text>
-                    <Text style={styles.priceText}>USD {price}</Text>
-                    <View style={styles.blockRating}>
-                        <Text style={styles.textRating}>{rating}</Text>
-                        <StarImage/>
+                    <View style={styles.addFaforites}>
+                        <Favorite 
+                            toggleFavorite={() => {
+                                props.handleToggleFavorite(props.item)
+                            }}
+                            isFavorite={props.isFavorite}/>
                     </View>
+                </View>
+                
+                <View style={[props.shape === 'box' 
+                    ? [styles.aboutProduct, {width: (cardWidth - 20), }] 
+                    : [styles.aboutRect]]
+                    }>
+                    
+                    {props.shape === 'box' 
+                    ? 
+                        <View style={styles.infoCard}>
+                            <Text style={styles.titleCard}>{name.length > 15 ? `${name.slice(0, 15)}..` : name}</Text>
+                            <Text style={styles.priceText}>USD {price}</Text>
+                            <View style={styles.blockRating}>
+                                <Text style={styles.textRating}>{rating}</Text>
+                                <StarImage style={styles.starIcon}/>
+                            </View>
+                        </View> 
+                    :
+                        <View style={styles.infoCard}>
+                            <Text style={styles.titleCard}>{name.length > 15 ? `${name.slice(0, 20)}..` : name}</Text>
+                            <View style={styles.categoryRect}>
+                                    <Text style={styles.categoryText}>{category}</Text>
+                                    <View style={styles.point}></View>
+                                    <View style={styles.blockRatingRect}>
+                                        <Text style={styles.textRating}>{rating}</Text>
+                                        <StarImage style={styles.starIcon}/>
+                                    </View>
+                                    
+                            </View>
+                            <Text style={styles.priceText}>USD {price}</Text>
+                        </View>
+                    }
+                   
                 </View>
             </View>
         </TouchableOpacity>
@@ -75,17 +99,6 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         padding: 10
     },
-    wrapperRect: {
-        
-        backgroundColor: '#F4F5F7',
-        borderRadius: 8,
-        alignItems: 'center',
-        flexDirection: 'row',
-        gap: 10,
-        position: 'relative',
-        overflow: 'hidden',
-        padding: 10
-    },
     cardImage: {   
         borderRadius: 22,
         aspectRatio: 1.5,
@@ -93,8 +106,8 @@ const styles = StyleSheet.create({
     },
     addFaforites: {
         position: 'absolute',
-        right: 10,
-        top: 10
+        right: 0,
+        top: 0
     },
     aboutProduct: {
         width: 142,
@@ -103,6 +116,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 10,
         
+    },
+    infoCard: {
+        gap: 4
     },
     titleCard: {
         fontFamily: 'Avenir-Heavy',
@@ -132,4 +148,49 @@ const styles = StyleSheet.create({
         lineHeight: 16,
         color: 'rgb(138, 139, 122)'
     },
+    starIcon: {
+        top: -1.2
+    },
+
+    // RECT Style
+
+    wrapperRect: {
+        backgroundColor: '#F4F5F7',
+        borderRadius: 8,
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: 16,
+        position: 'relative',
+        overflow: 'hidden',
+        padding: 10
+    },
+    aboutRect: {
+        
+    },
+    categoryRect: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+        position: 'relative'
+    },
+    categoryText: {
+        fontFamily: 'Avenir-Heavy',
+        fontSize: 16,
+        fontWeight: '500',
+        lineHeight: 16,
+        color: 'rgb(166, 167, 152)',
+    },
+    point: {
+        width: 3,
+        height: 3,
+        backgroundColor: "#A6A798",
+        borderRadius: 22,
+        top: -1.5
+    },
+    blockRatingRect: {
+        flexDirection: 'row',
+        alignItems:'center',
+        gap: 5,
+        top: -1.5
+    }
 })

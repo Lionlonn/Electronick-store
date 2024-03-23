@@ -14,8 +14,9 @@ export const WorkSpacesPage = () => {
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
-                <ProductsList shapeView={'box'}/>
                 <ProductsList shapeView={'rect'}/>
+                <ProductsList shapeView={'box'}/>
+                
             </ScrollView>
             
         </View>
@@ -24,9 +25,9 @@ export const WorkSpacesPage = () => {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
+        flex: 1,
         backgroundColor: 'white',
-        // alignItems: 'center',
+        alignItems: 'center',
         paddingLeft: 20,
         paddingRight: 20
     }
