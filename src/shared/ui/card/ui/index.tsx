@@ -23,11 +23,18 @@ export const CardProduct = (props: Props) => {
     const cardWidth = (width - 23 * 3) / 2;
     const cardImageWight = (width - 23 * 3) / 3
 
-    
+    const sizeM = (width > 420)
+    const responseFontSize = sizeM ? 22: 16
+    const responseCategoryTextSize = sizeM ? 18: 16
+    const responseCategoryTextLineHeight = sizeM ? 18: 16
+    const responseRatingTextFontSize = sizeM ? 14: 12
+    const responsePriceTextFontSize = sizeM ? 16: 12
+    const responsePositionIconStar = sizeM ?  -2.5 : -1.2
 
     return (
         <TouchableOpacity style={styles.container}>
-            <View style={[props.shape === 'box' 
+            <View style={[
+                props.shape === 'box' 
                 ? [styles.wrapperBox, {width: cardWidth}]
                 : [styles.wrapperRect, {width: width}],
                 
@@ -42,7 +49,8 @@ export const CardProduct = (props: Props) => {
                     </View>
                 </View>
                 
-                <View style={[props.shape === 'box' 
+                <View style={[
+                    props.shape === 'box' 
                     ? [styles.aboutBox, {width: (cardWidth - 20), }] 
                     : [styles.aboutRect]]
                     }>
@@ -50,33 +58,67 @@ export const CardProduct = (props: Props) => {
                     {props.shape === 'box' 
                     ? 
                         <View style={styles.infoCard}>
-                            <Text style={styles.titleCard}>
+                            <Text style={[styles.titleCard, {fontSize: responseFontSize}]}>
                                 {name.length > 15 ? `${name.slice(0, 15)}..` : name}
                             </Text>
-                            <Text style={styles.priceText}>USD {price}</Text>
+                            <Text style={[
+                                styles.priceText,
+                                {
+                                    fontSize: responsePriceTextFontSize
+                                }
+                                ]}>
+                                    USD {price}
+                                </Text>
                             <View style={styles.blockRating}>
-                                <Text style={styles.textRating}>{rating}</Text>
-                                <StarImage style={styles.starIcon}/>
+                                <Text style={[
+                                    styles.textRating,
+                                    {
+                                        fontSize: responseRatingTextFontSize
+                                    }
+                                    ]}>
+                                        {rating}
+                                    </Text>
+                                <StarImage style={{top: responsePositionIconStar}}/>
                             </View>
                         </View> 
                     :
                         <View style={styles.infoCard}>
-                            <Text style={[styles.titleCard, {fontSize: (width > 420) ? 22: 16}]}>
+                            <Text style={[styles.titleCard, {fontSize: responseFontSize}]}>
                                 {(width > 420) 
                                 ? name.length < 30 ? name : `${name.slice(0, 40)}..`
                                 : name.length > 15 ? `${name.slice(0, 20)}..` : name
                                 }
                             </Text>
                             <View style={styles.categoryRect}>
-                                    <Text style={styles.categoryText}>{category}</Text>
+                                    <Text style={[
+                                        styles.categoryText,
+                                        {
+                                            fontSize: responseCategoryTextSize,
+                                            lineHeight: responseCategoryTextLineHeight
+                                        }
+                                        ]}>{category}</Text>
                                     <View style={styles.point}></View>
                                     <View style={styles.blockRatingRect}>
-                                        <Text style={styles.textRating}>{rating}</Text>
-                                        <StarImage style={styles.starIcon}/>
+                                        <Text style={[
+                                            styles.textRating,
+                                            {
+                                                fontSize: responseRatingTextFontSize
+                                            }
+                                            ]}>
+                                                {rating}
+                                        </Text>
+                                        <StarImage style={{top: responsePositionIconStar}}/>
                                     </View>
                                     
                             </View>
-                            <Text style={styles.priceText}>USD {price}</Text>
+                            <Text style={[
+                                styles.priceText, 
+                                {
+                                    fontSize: responsePriceTextFontSize
+                                }
+                                ]}>
+                                    USD {price}
+                                </Text>
                         </View>
                     }
                    
@@ -151,9 +193,7 @@ const styles = StyleSheet.create({
         lineHeight: 16,
         color: 'rgb(138, 139, 122)'
     },
-    starIcon: {
-        top: -1.2
-    },
+   
 
     // RECT Style
 
