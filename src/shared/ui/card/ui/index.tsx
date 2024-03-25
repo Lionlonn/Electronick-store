@@ -3,15 +3,14 @@ import { StyleSheet, TouchableOpacity, View, Text, Image, Dimensions, useWindowD
 import UsbImage from '../image/usb.svg'
 import { ProductItem } from "src/entities/product";
 import StarImage from '../image/star.svg'
-import { Favorite } from "src/features/favorite";
+import { FavoriteProps } from "src/features/favorite/ui";
 
 
 
 interface Props {
     item: ProductItem,
-    handleToggleFavorite: (product: ProductItem) => void,
-    isFavorite: boolean,
-    shape: 'box' | 'rect'
+    shape: 'box' | 'rect',
+    rightTopSlot: React.ReactNode
 }
 
 
@@ -39,11 +38,7 @@ export const CardProduct = (props: Props) => {
                         source={{uri: img}}
                         />
                     <View style={styles.addFaforites}>
-                        <Favorite 
-                            toggleFavorite={() => {
-                                props.handleToggleFavorite(props.item)
-                            }}
-                            isFavorite={props.isFavorite}/>
+                        {props.rightTopSlot}
                     </View>
                 </View>
                 

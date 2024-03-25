@@ -2,7 +2,7 @@ import React from "react";
 import { ProductCard } from "./card";
 import { useAppDispatch, useStateSelector } from "shared/hooks";
 
-import { addToFavorite, removeFromFavorite } from "features/favorite";
+import { Favorite, addToFavorite, removeFromFavorite } from "features/favorite";
 import { ProductItem } from "../api";
 import { CardProduct } from "src/shared/ui/card";
 
@@ -30,9 +30,12 @@ export const Product = (props:Props) => {
         <>
             <CardProduct 
                 item={props.item}
-                handleToggleFavorite={handleToggleFavorite}
-                isFavorite={isFavorite}
                 shape={props.shapeView}
+                rightTopSlot={
+                    <Favorite toggleFavorite={
+                        () => handleToggleFavorite(props.item)
+                    } isFavorite={isFavorite}/>
+                }
                 />
         </>
     )

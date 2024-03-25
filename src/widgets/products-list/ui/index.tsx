@@ -25,6 +25,8 @@ export const ProductsList = (props: PropsProductList) => {
     
     const numsColumns = 2
     const gap = 23
+
+    
     
     return (
         <View style={styles.container}>
@@ -51,7 +53,7 @@ export const ProductsList = (props: PropsProductList) => {
                     
                     renderItem={({item}) => (
                         <TouchableOpacity style={styles.item}>
-                            <Product key={item.id} item={item} shapeView={props.shapeView}/>
+                            <Product key={item.id} item={item} shapeView={props.shapeView} />
                         </TouchableOpacity>
                     )}
                     scrollEnabled={false}
