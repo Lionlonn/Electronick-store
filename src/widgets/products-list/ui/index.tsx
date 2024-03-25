@@ -5,6 +5,7 @@ import { Categories } from "src/entities/categories/ui";
 import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { productsAll } from "src/entities/product/model";
+import { Favorite } from "src/features/favorite";
 
 interface PropsProductList {
     shapeView: 'box' | 'rect';
@@ -12,8 +13,7 @@ interface PropsProductList {
 
 export const ProductsList = (props: PropsProductList) => {
     const { item, status } = useStateSelector(state => state.products)
-
-    
+    const favoriteItems = useStateSelector(state => state.favorite.items)
 
     useEffect(() => {
         productsAll();
@@ -28,6 +28,7 @@ export const ProductsList = (props: PropsProductList) => {
 
     
     
+    
     return (
         <View style={styles.container}>
             {props.shapeView === 'box' ? 
@@ -38,7 +39,17 @@ export const ProductsList = (props: PropsProductList) => {
                     
                     renderItem={({item}) => (
                         <TouchableOpacity style={styles.item}>
-                            <Product key={item.id} item={item} shapeView={props.shapeView}/>
+                            <Product 
+                                key={item.id} 
+                                item={item} 
+                                shapeView={props.shapeView} 
+                                favorite={
+                                    <Favorite 
+                                        product={item} 
+                                        isFavorite={favoriteItems.some(product => product.id === item.id)}
+                                    />
+                                }
+                                />
                         </TouchableOpacity>
                     )}
                     numColumns={numsColumns}
@@ -53,7 +64,17 @@ export const ProductsList = (props: PropsProductList) => {
                     
                     renderItem={({item}) => (
                         <TouchableOpacity style={styles.item}>
-                            <Product key={item.id} item={item} shapeView={props.shapeView} />
+                            <Product 
+                                key={item.id} 
+                                item={item} 
+                                shapeView={props.shapeView}
+                                favorite={
+                                    <Favorite 
+                                        product={item} 
+                                        isFavorite={favoriteItems.some(product => product.id === item.id)}
+                                        />
+                                }
+                                />
                         </TouchableOpacity>
                     )}
                     scrollEnabled={false}
