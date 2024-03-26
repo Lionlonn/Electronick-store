@@ -14,7 +14,7 @@ interface Props {
 }
 
 
-
+const baseFontSIze = 14
 
 export const CardProduct = (props: Props) => {
     const {name, category, price, rating, img} = props.item;
@@ -24,11 +24,6 @@ export const CardProduct = (props: Props) => {
     const cardImageWight = (width - 23 * 3) / 3
 
     const sizeM = (width > 420)
-    const responseFontSize = sizeM ? 22: 16
-    const responseCategoryTextSize = sizeM ? 18: 16
-    const responseCategoryTextLineHeight = sizeM ? 18: 16
-    const responseRatingTextFontSize = sizeM ? 14: 12
-    const responsePriceTextFontSize = sizeM ? 16: 12
     const responsePositionIconStar = sizeM ?  -2.5 : -1.2
 
     return (
@@ -58,13 +53,13 @@ export const CardProduct = (props: Props) => {
                     {props.shape === 'box' 
                     ? 
                         <View style={styles.infoCard}>
-                            <Text style={[styles.titleCard, {fontSize: responseFontSize}]}>
+                            <Text style={[styles.titleCard, {fontSize: sizeM ? baseFontSIze * 1.6 : baseFontSIze * 1.3}]}>
                                 {name.length > 15 ? `${name.slice(0, 15)}..` : name}
                             </Text>
                             <Text style={[
                                 styles.priceText,
                                 {
-                                    fontSize: responsePriceTextFontSize
+                                    fontSize: sizeM ? baseFontSIze * 1.15 : baseFontSIze * 0.9
                                 }
                                 ]}>
                                     USD {price}
@@ -73,7 +68,7 @@ export const CardProduct = (props: Props) => {
                                 <Text style={[
                                     styles.textRating,
                                     {
-                                        fontSize: responseRatingTextFontSize
+                                        fontSize: sizeM ? baseFontSIze : baseFontSIze * 0.9 
                                     }
                                     ]}>
                                         {rating}
@@ -83,7 +78,7 @@ export const CardProduct = (props: Props) => {
                         </View> 
                     :
                         <View style={styles.infoCard}>
-                            <Text style={[styles.titleCard, {fontSize: responseFontSize}]}>
+                            <Text style={[styles.titleCard, {fontSize: sizeM ? baseFontSIze * 1.6 : baseFontSIze * 1.3}]}>
                                 {(width > 420) 
                                 ? name.length < 30 ? name : `${name.slice(0, 40)}..`
                                 : name.length > 15 ? `${name.slice(0, 20)}..` : name
@@ -93,8 +88,8 @@ export const CardProduct = (props: Props) => {
                                     <Text style={[
                                         styles.categoryText,
                                         {
-                                            fontSize: responseCategoryTextSize,
-                                            lineHeight: responseCategoryTextLineHeight
+                                            fontSize: sizeM ? baseFontSIze * 1.5: baseFontSIze * 1.1,
+                                            lineHeight: sizeM ? baseFontSIze * 1.5: baseFontSIze * 1.1
                                         }
                                         ]}>{category}</Text>
                                     <View style={styles.point}></View>
@@ -102,7 +97,7 @@ export const CardProduct = (props: Props) => {
                                         <Text style={[
                                             styles.textRating,
                                             {
-                                                fontSize: responseRatingTextFontSize
+                                                fontSize:  sizeM ? baseFontSIze : baseFontSIze * 0.9 
                                             }
                                             ]}>
                                                 {rating}
@@ -114,7 +109,7 @@ export const CardProduct = (props: Props) => {
                             <Text style={[
                                 styles.priceText, 
                                 {
-                                    fontSize: responsePriceTextFontSize
+                                    fontSize: sizeM ? baseFontSIze * 1.15 : baseFontSIze * 0.9
                                 }
                                 ]}>
                                     USD {price}
