@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useStateSelector } from "shared/hooks";
 import { Product } from "entities/product";
-import { Categories } from "src/entities/categories/ui";
 import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { productsAll } from "src/entities/product/model";

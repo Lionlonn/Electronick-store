@@ -1,5 +1,4 @@
 import React from "react";
-import { ProductCard } from "./card";
 import { useAppDispatch, useStateSelector } from "shared/hooks";
 
 import { Favorite, addToFavorite, removeFromFavorite } from "features/favorite";

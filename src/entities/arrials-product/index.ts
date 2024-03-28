@@ -1,1 +1,1 @@
-export { NewArrialsProduct } from './ui/index'
+export { NewArrialsProduct } from './ui/item/index'

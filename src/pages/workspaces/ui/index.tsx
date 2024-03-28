@@ -14,7 +14,6 @@ export const WorkSpacesPage = () => {
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
-                <ProductsList shapeView={'rect'}/>
                 <ProductsList shapeView={'box'}/>
                 
             </ScrollView>
