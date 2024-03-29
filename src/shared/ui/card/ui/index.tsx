@@ -31,7 +31,7 @@ export const CardProduct = (props: Props) => {
             <View style={[
                 props.shape === 'box' 
                 ? [styles.wrapperBox, {width: cardWidth}]
-                : [styles.wrapperRect, {width: width}],
+                : [styles.wrapperRect, {minWidth: '90%'}],
                 
             ]}>
                 <View style={styles.cardImage}>
@@ -126,6 +126,7 @@ export const CardProduct = (props: Props) => {
 
 const styles = StyleSheet.create({
     container: {
+        
     },
     
     wrapperBox: {

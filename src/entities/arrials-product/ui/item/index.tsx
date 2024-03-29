@@ -19,13 +19,19 @@ export const NewArrialsProduct = (props: NewArrialsProductProps) => {
                     <Text>See more</Text>
                     <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>
                 </TouchableOpacity>
-            </View >
-                
-                <Product 
+            </View>
+                <View >
+                    <Product 
+                        item={props.item} 
+                        shapeView="rect"
+                        favorite={props.favorite}
+                    />  
+                </View>
+                {/* <Product 
                     item={props.item} 
                     shapeView="rect"
                     favorite={props.favorite}
-                />
+                /> */}
                 
         </View>
     )
@@ -33,7 +39,6 @@ export const NewArrialsProduct = (props: NewArrialsProductProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         
     },
     sectionHeader: {
