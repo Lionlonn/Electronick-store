@@ -2,6 +2,8 @@ import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { FeaturedWorkspace } from "src/entities/featured-workspace";
 import { Product } from "src/entities/product";
+import { CategoryButtons } from "src/features/category-buttons";
+import { ContainerCategoryButton } from "src/features/category-buttons/ui";
 import { SearchInputField } from "src/features/input";
 import { ProductsList } from "src/widgets/products-list";
 
@@ -14,6 +16,7 @@ export const WorkSpacesPage = () => {
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
+                <ContainerCategoryButton/>
                 <ProductsList shapeView={'box'}/>
                 
             </ScrollView>

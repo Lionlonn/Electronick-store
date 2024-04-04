@@ -1,23 +1,27 @@
-import React from "react";
-import { Button, View } from "react-native";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Text, View } from "react-native";
+import { CategoryButtons } from "./button";
+import { useAppDispatch, useStateSelector } from "src/shared/hooks";
+import { DeveloperProductsApi } from "../api";
+import { useDispatch } from "react-redux";
 
 
-// interface CategoryButtonProps {
-//     onSe
-// }
-
-// export const CategoryButtons = ({onSelectCategory}) => {
-//     const categories = ['Show all', 'Developer', 'Podcast creator', 'Filmaking', 'Photography'];
+export const ContainerCategoryButton = () => {
+    const { item, status } = useStateSelector(state => state.buttonPrudcts)
+    const categories = ['Show all', 'Developer'];
+    
 
 
-//     return (
-//         <View>
-//             {categories.map((category, index) => (
-//                 <Button 
-//                 key={index} 
-//                 title={category} 
-//                 onPress={onSelectCategory(category)}/>
-//             ))}
-//         </View>
-//     )
-// }
+    console.log(item)
+    return (
+        <View>
+            
+            
+            <CategoryButtons/>
+
+            {item?.map(it => (
+                <Text style={{marginTop: 40}}>{it.name}</Text>
+            ))}
+        </View>
+    )
+}
