@@ -12,7 +12,6 @@ export const ContainerCategoryButton = () => {
     
 
 
-    console.log(item)
     return (
         <View>
             
