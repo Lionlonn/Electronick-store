@@ -11,16 +11,16 @@ export const ContainerCategoryButton = () => {
     const categories = ['Show all', 'Developer'];
     
 
-
+    // console.log(item)
     return (
         <View>
             
             
             <CategoryButtons/>
 
-            {item?.map(it => (
+            {/* {item?.map(it => (
                 <Text style={{marginTop: 40}}>{it.name}</Text>
-            ))}
+            ))} */}
         </View>
     )
 }

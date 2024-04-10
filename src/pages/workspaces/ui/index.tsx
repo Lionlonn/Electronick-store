@@ -6,6 +6,7 @@ import { CategoryButtons } from "src/features/category-buttons";
 import { ContainerCategoryButton } from "src/features/category-buttons/ui";
 import { SearchInputField } from "src/features/input";
 import { ProductsList } from "src/widgets/products-list";
+import { SearchUsers } from "src/widgets/search-users";
 
 
 export const WorkSpacesPage = () => {
@@ -17,7 +18,8 @@ export const WorkSpacesPage = () => {
                     <FeaturedWorkspace />
                 </View>
                 <ContainerCategoryButton/>
-                <ProductsList shapeView={'box'}/>
+                <SearchUsers/>
+                {/* <ProductsList shapeView={'box'}/> */}
                 
             </ScrollView>
             

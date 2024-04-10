@@ -22,22 +22,23 @@ export const ProductsList = (props: PropsProductList) => {
         return <Text>...Loading</Text>
     }
     
-    const numsColumns = 2
+    
     const gap = 23
 
     
     
     
     return (
-        <View style={styles.container}>
+        <View>
+            
             {props.shapeView === 'box' ? 
                 <FlatList 
                     data={item}
                     keyExtractor={(item) => item.id.toString()}
-                    style={{alignSelf: 'center',}}
+                    style={{alignSelf: 'center',}} 
                     
                     renderItem={({item}) => (
-                        <TouchableOpacity style={styles.item}>
+                        <TouchableOpacity>
                             <Product 
                                 key={item.id} 
                                 item={item} 
@@ -51,18 +52,18 @@ export const ProductsList = (props: PropsProductList) => {
                                 />
                         </TouchableOpacity>
                     )}
-                    numColumns={numsColumns}
+                    numColumns={2}
                     contentContainerStyle={{gap}}
                     columnWrapperStyle={{gap}}
                     scrollEnabled={false}
+                
             /> 
                 :<FlatList 
                     data={item}
                     keyExtractor={(item) => item.id.toString()}
                     style={{alignSelf: 'center',}}
-                    
                     renderItem={({item}) => (
-                        <TouchableOpacity style={styles.item}>
+                        <TouchableOpacity>
                             <Product 
                                 key={item.id} 
                                 item={item} 
@@ -85,9 +86,3 @@ export const ProductsList = (props: PropsProductList) => {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-    },
-    item: {
-    }
-})
