@@ -5,6 +5,7 @@ import { Item } from '../item/index'
 import { ItemProps } from '../item/index'
 import Arrow from 'src/assets/images/arrow.svg'
 import DATA from '../../api/index'
+import { SeeMoreButton } from "src/shared/ui/see-more-button";
 
 export const CategoriesCarousel = ({ navigation }: any) => {
     const renderItem = ({ item }: { item: ItemProps }) => (
@@ -15,10 +16,7 @@ export const CategoriesCarousel = ({ navigation }: any) => {
         <View style={categoryStyle.container}>
             <View style={categoryStyle.sectionHeader}>
                 <Text style={categoryStyle.headerTitle}>Workspaces</Text>
-                <TouchableOpacity style={categoryStyle.seeMore} onPress={() => { navigation.navigate('WorkSpaces') }}>
-                    <Text>See more</Text>
-                    <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>
-                </TouchableOpacity>
+                <SeeMoreButton navigation={navigation} path="WorkSpaces"/> 
             </View>
             <ScrollView>
                 <FlatList

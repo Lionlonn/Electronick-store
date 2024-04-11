@@ -11,7 +11,7 @@ export const SeeMoreButton = (props: Props) => {
 
 
     return (
-       <View style={styles.sectionHeader}>
+       <View>
             <TouchableOpacity style={styles.seeMore} onPress={() => {props.navigation.navigate(props.path)}}>
                 <Text>See more</Text>
                 <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>
@@ -21,11 +21,6 @@ export const SeeMoreButton = (props: Props) => {
 }
 
 export const styles = StyleSheet.create({
-    sectionHeader: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
     seeMore: {
         flexDirection: 'row',
         alignItems: 'center',
