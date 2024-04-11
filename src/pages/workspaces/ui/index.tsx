@@ -13,13 +13,14 @@ export const WorkSpacesPage = ({navigation}: any) => {
     return (
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                {/* <SearchInputField/> */}
+                <SearchInputField/>
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
-                <ContainerCategoryButton/>
-                <SearchUsers navigation={navigation}/>
-                {/* <ProductsList shapeView={'box'}/> */}
+                <View style={{gap: 32}}>
+                    <ContainerCategoryButton/>
+                    <SearchUsers navigation={navigation}/>
+                </View>
                 
             </ScrollView>
             

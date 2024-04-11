@@ -6,6 +6,8 @@ import { RenderItem } from "../render-item/index"
 import { FilterData } from "../../api";
 import { Button } from 'shared/ui/index'
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import { fetchFilterData } from "../../model";
+import { useAppDispatch } from "src/shared/hooks";
 
 interface Item {
     item: FilterData[],
@@ -42,6 +44,7 @@ export const FilterButton = (props: Item) => {
         outputRange: [0, height],
     });
     const toggleListItem = () => {
+
         if (isOpen) {
           Animated.timing(animatedController, {
             duration: 300,

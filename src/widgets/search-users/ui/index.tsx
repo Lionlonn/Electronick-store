@@ -18,7 +18,7 @@ export const SearchUsers = (props: Props) => {
 
     const handleCategoryTitle = (category: string) => {
         return (
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+            <View style={styles.titleWrapper}>
                 <View style={{flexDirection: 'row'}}>
                     <Text style={styles.titleText}>What </Text>
                     <Text style={[styles.titleText, {color: 'rgb(186, 92, 61)'}]}>{category}</Text>
@@ -65,6 +65,12 @@ export const SearchUsers = (props: Props) => {
 
 
 export const styles = StyleSheet.create({
+    titleWrapper: {
+        flexDirection: 'row', 
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 12      
+    },
     titleText: {
         fontFamily: 'Avenir-Heavy',
         color: 'black',
