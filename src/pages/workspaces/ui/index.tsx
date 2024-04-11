@@ -9,7 +9,7 @@ import { ProductsList } from "src/widgets/products-list";
 import { SearchUsers } from "src/widgets/search-users";
 
 
-export const WorkSpacesPage = () => {
+export const WorkSpacesPage = ({navigation}: any) => {
     return (
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -18,7 +18,7 @@ export const WorkSpacesPage = () => {
                     <FeaturedWorkspace />
                 </View>
                 <ContainerCategoryButton/>
-                <SearchUsers/>
+                <SearchUsers navigation={navigation}/>
                 {/* <ProductsList shapeView={'box'}/> */}
                 
             </ScrollView>
