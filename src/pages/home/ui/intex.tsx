@@ -12,7 +12,7 @@ export const HomePage = ({navigation}: any) => {
             <View style={styles.container}>
                 <PopularCard/>
                 <Categories navigation={navigation}/>
-                <ContainerNewArrialProduct/>
+                <ContainerNewArrialProduct navigation={navigation}/>
             </View>
         </ScrollView>
     );

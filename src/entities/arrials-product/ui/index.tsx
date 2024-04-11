@@ -8,7 +8,7 @@ import { Favorite } from "src/features/favorite";
 
 
 
-export const ContainerNewArrialProduct = () => {
+export const ContainerNewArrialProduct = ({navigation}: any) => {
     const { item, status } = useStateSelector(state => state.products);
     const [product, setProduct] = useState<ProductItem | null>(null); 
     
@@ -31,7 +31,8 @@ export const ContainerNewArrialProduct = () => {
         <View>
             {status === 1 && product && (
                 <NewArrialsProduct 
-                    item={product} 
+                    item={product}
+                    navigation={navigation}
                     favorite={
                         <Favorite 
                             product={product}
