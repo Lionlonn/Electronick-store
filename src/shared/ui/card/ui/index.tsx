@@ -8,9 +8,10 @@ import { FavoriteProps } from "src/features/favorite/ui";
 
 
 interface Props {
-    item: ProductItem,
-    shape: 'box' | 'rect',
-    rightTopSlot: React.ReactNode
+    item: ProductItem;
+    shape: 'box' | 'rect';
+    rightTopSlot: React.ReactNode;
+    navigation: any
 }
 
 
@@ -26,8 +27,12 @@ export const CardProduct = (props: Props) => {
     const sizeM = (width > 420)
     const responsePositionIconStar = sizeM ?  -2.5 : -1.2
 
+    const openProduct = () => {
+        
+    }
+    
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => {props.navigation.navigate('ViewItem')}}>
             <View style={[
                 props.shape === 'box' 
                 ? [styles.wrapperBox, {width: cardWidth}]

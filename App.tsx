@@ -16,6 +16,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Avatar, MenuButton } from 'src/features/header-bar'
 import { SearchPage } from 'src/pages/search/ui';
 import { ProducstWorkSpace  } from 'src/pages/product-workspace/index'
+import { ViewItemPage } from 'src/pages/view-item';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +73,10 @@ export const App = () => {
           <Stack.Screen
             name='ProductsWorkspace'
             component={ProducstWorkSpace}
+          />
+          <Stack.Screen
+            name='ViewItem'
+            component={ViewItemPage}
           />
         </Stack.Navigator>
       </>

@@ -9,8 +9,9 @@ import { Polygon } from "react-native-svg";
 
 interface Props {
     item: ProductItem;
-    shapeView: 'box' | 'rect',
-    favorite: React.ReactNode
+    shapeView: 'box' | 'rect';
+    favorite: React.ReactNode;
+    navigation: any
 }
 
 
@@ -23,6 +24,7 @@ export const Product = (props:Props) => {
                 item={props.item}
                 shape={props.shapeView}
                 rightTopSlot={props.favorite}
+                navigation={props.navigation}
                 />
         </>
     )

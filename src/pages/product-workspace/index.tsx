@@ -5,7 +5,7 @@ import { useStateSelector } from "src/shared/hooks";
 import { ProductsList } from "src/widgets/products-list";
 
 
-export const ProducstWorkSpace = () => {
+export const ProducstWorkSpace = ({navigation}: any) => {
     const { item, status} = useStateSelector(state => state.buttonPrudcts)
     const categoryTitle = item?.find(obj => {return obj.category})
 
@@ -21,7 +21,7 @@ export const ProducstWorkSpace = () => {
                 {categoryTitle && handleCategoryTitle(categoryTitle.category)}
                 <SearchInputField/>
                 <Text style={styles.textSuggest}>Suggest items</Text>
-                <ProductsList shapeView="box" item={item}/>
+                <ProductsList shapeView="box" item={item} navigation={navigation}/>
             </View>
         </ScrollView>
     )

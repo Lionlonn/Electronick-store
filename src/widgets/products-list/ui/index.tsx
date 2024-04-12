@@ -8,7 +8,8 @@ import { Favorite } from "src/features/favorite";
 
 interface PropsProductList {
     shapeView: 'box' | 'rect';
-    item: ProductItem[] | undefined
+    item: ProductItem[] | undefined;
+    navigation: any
 }
 
 export const ProductsList = (props: PropsProductList) => {
@@ -25,7 +26,7 @@ export const ProductsList = (props: PropsProductList) => {
     
     
     const gap = 23
-
+    
     
     
     
@@ -43,7 +44,8 @@ export const ProductsList = (props: PropsProductList) => {
                             <Product 
                                 key={item.id} 
                                 item={item} 
-                                shapeView={props.shapeView} 
+                                shapeView={props.shapeView}
+                                navigation={props.navigation}
                                 favorite={
                                     <Favorite 
                                         product={item} 
@@ -69,6 +71,7 @@ export const ProductsList = (props: PropsProductList) => {
                                 key={item.id} 
                                 item={item} 
                                 shapeView={props.shapeView}
+                                navigation={props.navigation}
                                 favorite={
                                     <Favorite 
                                         product={item} 

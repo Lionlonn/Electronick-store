@@ -9,7 +9,7 @@ interface Props {
 
 export const SeeMoreButton = (props: Props) => {
 
-
+    
     return (
        <View>
             <TouchableOpacity style={styles.seeMore} onPress={() => {props.navigation.navigate(props.path)}}>

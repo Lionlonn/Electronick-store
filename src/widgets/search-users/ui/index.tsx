@@ -46,6 +46,7 @@ export const SearchUsers = (props: Props) => {
                             key={item.id} 
                             item={item} 
                             shapeView={'box'}
+                            navigation={props.navigation}
                             favorite={
                                 <Favorite 
                                     product={item} 
