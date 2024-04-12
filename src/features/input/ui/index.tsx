@@ -32,15 +32,15 @@ export const SearchInputField = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        width: width
+        // flex: 1,
+        // width: width
     },
     wrapper: {
         position: 'relative',
         
     },
     input: {
-        width: 360,
+        minWidth: 360,
         height: 50,
         borderWidth: 0.6,
         borderRadius: 6,

@@ -15,7 +15,7 @@ import { WorkSpacesPage } from 'src/pages/workspaces/ui';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Avatar, MenuButton } from 'src/features/header-bar'
 import { SearchPage } from 'src/pages/search/ui';
-
+import { ProducstWorkSpace  } from 'src/pages/product-workspace/index'
 
 const Stack = createNativeStackNavigator();
 
@@ -68,6 +68,10 @@ export const App = () => {
               title: "Shoping cart",
               headerTitleAlign: 'center'
             }}
+          />
+          <Stack.Screen
+            name='ProductsWorkspace'
+            component={ProducstWorkSpace}
           />
         </Stack.Navigator>
       </>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useStateSelector } from "shared/hooks";
-import { Product } from "entities/product";
+import { Product, ProductItem } from "entities/product";
 import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { productsAll } from "src/entities/product/model";
@@ -8,19 +8,20 @@ import { Favorite } from "src/features/favorite";
 
 interface PropsProductList {
     shapeView: 'box' | 'rect';
+    item: ProductItem[] | undefined
 }
 
 export const ProductsList = (props: PropsProductList) => {
-    const { item, status } = useStateSelector(state => state.products)
+    // const { item, status } = useStateSelector(state => state.products)
     const favoriteItems = useStateSelector(state => state.favorite.items)
 
     useEffect(() => {
         productsAll();
     }, [])
 
-    if (status !== 1) {
-        return <Text>...Loading</Text>
-    }
+    // if (status !== 1) {
+    //     return <Text>...Loading</Text>
+    // }
     
     
     const gap = 23
@@ -33,7 +34,7 @@ export const ProductsList = (props: PropsProductList) => {
             
             {props.shapeView === 'box' ? 
                 <FlatList 
-                    data={item}
+                    data={props.item}
                     keyExtractor={(item) => item.id.toString()}
                     style={{alignSelf: 'center',}} 
                     
@@ -59,7 +60,7 @@ export const ProductsList = (props: PropsProductList) => {
                 
             /> 
                 :<FlatList 
-                    data={item}
+                    data={props.item}
                     keyExtractor={(item) => item.id.toString()}
                     style={{alignSelf: 'center',}}
                     renderItem={({item}) => (

@@ -24,7 +24,7 @@ export const SearchUsers = (props: Props) => {
                     <Text style={[styles.titleText, {color: 'rgb(186, 92, 61)'}]}>{category}</Text>
                     <Text style={styles.titleText}> search for</Text>
                 </View>
-                <SeeMoreButton navigation={props.navigation} path="HomePage"/>
+                <SeeMoreButton navigation={props.navigation} path="ProductsWorkspace"/>
             </View>
         )
     }
