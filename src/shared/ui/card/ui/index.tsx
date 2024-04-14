@@ -18,7 +18,8 @@ interface Props {
 const baseFontSIze = 14
 
 export const CardProduct = (props: Props) => {
-    const {name, category, price, rating, img} = props.item;
+    const {name, category, price, rating} = props.item;
+    const img = props.item.img[0]
     const width = useWindowDimensions().width;
 
     const cardWidth = (width - 23 * 3) / 2;
@@ -28,11 +29,11 @@ export const CardProduct = (props: Props) => {
     const responsePositionIconStar = sizeM ?  -2.5 : -1.2
 
     const openProduct = () => {
-        
+       props.navigation.navigate('ViewItem', {item: props.item}) 
     }
     
     return (
-        <TouchableOpacity style={styles.container} onPress={() => {props.navigation.navigate('ViewItem')}}>
+        <TouchableOpacity style={styles.container} onPress={() => openProduct()}>
             <View style={[
                 props.shape === 'box' 
                 ? [styles.wrapperBox, {width: cardWidth}]

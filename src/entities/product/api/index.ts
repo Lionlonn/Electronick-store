@@ -7,7 +7,7 @@ export type ProductItem = {
     id: number,
     price:number,
     rating:number,
-    img: string,
+    img: string[],
     favorite: boolean
 }
 
