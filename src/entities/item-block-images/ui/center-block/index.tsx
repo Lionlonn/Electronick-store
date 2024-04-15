@@ -4,38 +4,34 @@ import Swiper from 'react-native-swiper'
 import {Dimensions} from 'react-native';
 
 interface Props {
-   images: string;
+   images: string[];
 }
 
 const windowHeight = Dimensions.get('window').height;
-const images = ["https://i.pinimg.com/564x/4b/0c/56/4b0c56db0c048f1a5d9382db5b82d535.jpg" , "https://i.pinimg.com/564x/4b/0c/56/4b0c56db0c048f1a5d9382db5b82d535.jpg" ]
 
-export const ItemImagesBlock = (props: Props) => {
-   let img
-   for (const str of props.images) {
-      img = str
-   }
-   
+export const ImagesSwiper = (props: Props) => {
    
    return (
         <Swiper 
             style={styles.wrapper}
             showsButtons={false}
             showsPagination={true}
-            dot={<View style={{width:10, height:10, backgroundColor:'green'}}></View>}
-            activeDot={<View style={{width: 20, height: 20, backgroundColor: 'red'}}></View>}
-            // containerStyle={{height: '50%', width: '100%', backgroundColor: 'orange'}}
+            dot={<View style={{width: 8, height: 8, backgroundColor:'rgb(193, 194, 184)', borderRadius: 8}}></View>}
+            activeDot={<View style={{width: 8, height: 8, backgroundColor: 'rgb(206, 213, 91)', borderRadius: 8}}></View>}
+            paginationStyle={{gap: 7}}
          >
 
-            
-             <View style={styles.slide1}> 
+            {props.images.map(img => (
+               <View style={styles.slide1}> 
                  <Image 
                      style={{width: 200, height: 200}}
                      source={{
                         uri: img
                      }}
                   /> 
-            </View>
+               </View>      
+            ))}
+             
                
             
       </Swiper>
@@ -50,7 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     
-    backgroundColor: '#9DD6EB',
+    backgroundColor: 'rgb(244, 245, 247)',
     flex: 1
   },
   

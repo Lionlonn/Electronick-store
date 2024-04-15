@@ -1,0 +1,1 @@
+export {ViewItemImagesBlock} from './ui/index'
