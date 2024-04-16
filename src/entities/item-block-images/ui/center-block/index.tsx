@@ -6,6 +6,7 @@ import {Dimensions} from 'react-native';
 interface Props {
    images: string[];
    selectedImageIndex: number;
+   onImageIndex: (index: number) => void; 
 }
 
 const windowHeight = Dimensions.get('window').height;
@@ -21,6 +22,7 @@ export const ImagesSwiper = (props: Props) => {
             activeDot={<View style={{width: 8, height: 8, backgroundColor: 'rgb(206, 213, 91)', borderRadius: 8}}></View>}
             paginationStyle={{gap: 7}}
             index={props.selectedImageIndex}
+            onIndexChanged={props.onImageIndex} 
          >
 
             {props.images.map((img, index) => (
