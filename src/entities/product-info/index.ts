@@ -1,0 +1,1 @@
+export { ProductInfoContainer } from './ui/index'

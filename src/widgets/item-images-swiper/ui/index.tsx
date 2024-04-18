@@ -16,8 +16,6 @@ export const ViewItemImagesBlock = (props: Props) => {
         setSelectedImageIndex(index)
     }
 
-    console.log(selectedImageIndex)
-
     return (
         <View style={styles.container}>
             <View style={styles.centerImage}>
