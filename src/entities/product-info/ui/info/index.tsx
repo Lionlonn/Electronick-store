@@ -16,7 +16,7 @@ export const ProductInfo = (props: Props) => {
     
     return (
         <View style={styles.container}> 
-            <View style={styles.wrapper}>
+            <View style={styles.wrapperHeader}>
                 <View>
                     <Text style={styles.titleProduct}>{props.name}</Text>
                     <View style={styles.subTitleInfo}>
@@ -33,6 +33,8 @@ export const ProductInfo = (props: Props) => {
                     <Text style={styles.textPrice}>${props.price}</Text>
                 </View>
             </View>
+            
+            <Text style={styles.textInfo}>{props.info}</Text>
         </View>
     )
 }
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 20,
     },
-    wrapper: {
+    wrapperHeader: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -101,6 +103,12 @@ const styles = StyleSheet.create({
         fontSize: 21,
         fontWeight: '900',
         lineHeight: 29,
+    },
+    textInfo: {
+        color: 'black',
+        fontFamily: 'Avenir-Black',
+        fontSize: 16,
+        lineHeight: 22,
+        fontWeight: '400'
     }
-
 })

@@ -2,13 +2,14 @@
 import { instance } from 'shared/api'
 
 export type ProductItem = {
-    name: string,
-    category: string,
-    id: number,
-    price:number,
-    rating:number,
-    img: string[],
-    favorite: boolean
+    name: string;
+    category: string;
+    id: number;
+    price:number;
+    rating:number;
+    img: string[];
+    favorite: boolean;
+    info: string;
 }
 
 
