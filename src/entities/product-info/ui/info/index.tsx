@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View} from "react-native";
+import { Dimensions, StyleSheet, Text, View, useWindowDimensions} from "react-native";
 import { RatingStar } from "src/features/rating-star";
 
 interface Props {
@@ -11,11 +11,11 @@ interface Props {
 }
 
 
-
 export const ProductInfo = (props: Props) => {
+    const width = useWindowDimensions().width
     
     return (
-        <View style={styles.container}> 
+        <View style={[styles.container, {width: width}]}> 
             <View style={styles.wrapperHeader}>
                 <View>
                     <Text style={styles.titleProduct}>{props.name}</Text>
@@ -34,15 +34,15 @@ export const ProductInfo = (props: Props) => {
                 </View>
             </View>
             
-            <Text style={styles.textInfo}>{props.info}</Text>
+            <Text style={styles.textInfo}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam consectetur sed ex veritatis, architecto autem ipsum commodi provident aliquid praesentium quasi perferendis est! Alias asperiores doloribus rerum inventore facere atque.</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        margin: 20,
+        paddingHorizontal: 20,
+        minHeight: 200
     },
     wrapperHeader: {
         flexDirection: 'row',

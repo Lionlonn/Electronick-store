@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-import { FlatList, TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import { Product } from "src/entities/product";
+import { FlatList, View, Text, StyleSheet } from "react-native";
 import { getButtonProductsAll } from "src/features/category-buttons/model";
-import { Favorite } from "src/features/favorite";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { SeeMoreButton } from "src/shared/ui/see-more-button";
 import { ProductsList } from "src/widgets/products-list";
@@ -13,7 +11,6 @@ interface Props {
 
 export const SearchUsers = (props: Props) => {
     const { item, status } = useStateSelector(state => state.buttonPrudcts)
-    const favoriteItems = useStateSelector(state => state.favorite.items)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
