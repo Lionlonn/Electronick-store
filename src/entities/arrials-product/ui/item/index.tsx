@@ -24,6 +24,7 @@ export const NewArrialsProduct = (props: NewArrialsProductProps) => {
                         item={props.item} 
                         shapeView="rect"
                         favorite={props.favorite}
+                        navigation={props.navigation}
                     />  
                 </View>
                 

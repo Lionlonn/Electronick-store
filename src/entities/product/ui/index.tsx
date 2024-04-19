@@ -9,7 +9,7 @@ import { Polygon } from "react-native-svg";
 
 interface Props {
     item: ProductItem;
-    shapeView: 'box' | 'rect';
+    shapeView: 'box' | 'rect' | 'boxHorizontal';
     favorite: React.ReactNode;
     navigation: any
 }

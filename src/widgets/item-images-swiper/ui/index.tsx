@@ -45,9 +45,10 @@ const styles = StyleSheet.create({
       position: 'relative',
       alignItems: 'flex-end',
       justifyContent:"center",
-      marginRight: 24
+    //   marginRight: 24
     },
     rightImage: {
-      position: 'absolute'
+      position: 'absolute',
+      paddingRight: 14
     }
 })

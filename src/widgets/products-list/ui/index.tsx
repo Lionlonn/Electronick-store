@@ -7,13 +7,12 @@ import { productsAll } from "src/entities/product/model";
 import { Favorite } from "src/features/favorite";
 
 interface PropsProductList {
-    shapeView: 'box' | 'rect';
+    shapeView: 'box' | 'rect' | 'boxHorizontal';
     item: ProductItem[] | undefined;
     navigation: any
 }
 
 export const ProductsList = (props: PropsProductList) => {
-    // const { item, status } = useStateSelector(state => state.products)
     const favoriteItems = useStateSelector(state => state.favorite.items)
 
     useEffect(() => {
@@ -33,12 +32,11 @@ export const ProductsList = (props: PropsProductList) => {
     return (
         <View>
             
-            {props.shapeView === 'box' ? 
+            {props.shapeView === 'box' ? (
                 <FlatList 
                     data={props.item}
                     keyExtractor={(item) => item.id.toString()}
                     style={{alignSelf: 'center',}} 
-                    
                     renderItem={({item}) => (
                         <TouchableOpacity>
                             <Product 
@@ -61,29 +59,57 @@ export const ProductsList = (props: PropsProductList) => {
                     scrollEnabled={false}
                 
             /> 
-                :<FlatList 
-                    data={props.item}
-                    keyExtractor={(item) => item.id.toString()}
-                    style={{alignSelf: 'center',}}
-                    renderItem={({item}) => (
-                        <TouchableOpacity>
-                            <Product 
-                                key={item.id} 
-                                item={item} 
-                                shapeView={props.shapeView}
-                                navigation={props.navigation}
-                                favorite={
-                                    <Favorite 
-                                        product={item} 
-                                        isFavorite={favoriteItems.some(product => product.id === item.id)}
-                                        />
-                                }
-                                />
-                        </TouchableOpacity>
-                    )}
-                    scrollEnabled={false}
-                    contentContainerStyle={{gap: 12}}
+            ) 
+                : props.shapeView === 'rect' ? (
+                    <FlatList 
+                        data={props.item}
+                        keyExtractor={(item) => item.id.toString()}
+                        style={{alignSelf: 'center',}}
+                        renderItem={({item}) => (
+                            <TouchableOpacity>
+                                <Product 
+                                    key={item.id} 
+                                    item={item} 
+                                    shapeView={props.shapeView}
+                                    navigation={props.navigation}
+                                    favorite={
+                                        <Favorite 
+                                            product={item} 
+                                            isFavorite={favoriteItems.some(product => product.id === item.id)}
+                                            />
+                                    }
+                                    />
+                            </TouchableOpacity>
+                        )}
+                        scrollEnabled={false}
+                        contentContainerStyle={{gap: 12}}
                 /> 
+                ) : (
+                    <FlatList 
+                        data={props.item}
+                        keyExtractor={(item) => item.id.toString()}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{gap: 17}}
+                        renderItem={({item}) => (
+                        <TouchableOpacity>
+                                <Product 
+                                    key={item.id} 
+                                    item={item}
+                                    shapeView={props.shapeView}
+                                    navigation={props.navigation}
+                                    favorite={
+                                        <Favorite 
+                                            product={item} 
+                                            isFavorite={favoriteItems.some(product => product.id === item.id)}
+                                        />
+                                    }
+                                    />
+                            </TouchableOpacity> 
+                        )}
+                    />
+        
+                )
             }
             
         </View>

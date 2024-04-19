@@ -9,7 +9,7 @@ import { FavoriteProps } from "src/features/favorite/ui";
 
 interface Props {
     item: ProductItem;
-    shape: 'box' | 'rect';
+    shape: 'box' | 'rect' | 'boxHorizontal';
     rightTopSlot: React.ReactNode;
     navigation: any
 }
@@ -35,7 +35,7 @@ export const CardProduct = (props: Props) => {
     return (
         <TouchableOpacity style={styles.container} onPress={() => openProduct()}>
             <View style={[
-                props.shape === 'box' 
+                props.shape == 'box' || props.shape === 'boxHorizontal'
                 ? [styles.wrapperBox, {width: cardWidth}]
                 : [styles.wrapperRect, {minWidth: '90%'}],
                 
@@ -51,12 +51,12 @@ export const CardProduct = (props: Props) => {
                 </View>
                 
                 <View style={[
-                    props.shape === 'box' 
+                    props.shape == 'box' || props.shape === 'boxHorizontal'
                     ? [styles.aboutBox, {width: (cardWidth - 20), }] 
                     : [styles.aboutRect]]
                     }>
                     
-                    {props.shape === 'box' 
+                    {props.shape == 'box' || props.shape === 'boxHorizontal'
                     ? 
                         <View style={styles.infoCard}>
                             <Text style={[styles.titleCard, {fontSize: sizeM ? baseFontSIze * 1.6 : baseFontSIze * 1.3}]}>

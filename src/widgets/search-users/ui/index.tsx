@@ -5,6 +5,7 @@ import { getButtonProductsAll } from "src/features/category-buttons/model";
 import { Favorite } from "src/features/favorite";
 import { useStateSelector } from "src/shared/hooks";
 import { SeeMoreButton } from "src/shared/ui/see-more-button";
+import { ProductsList } from "src/widgets/products-list";
 
 interface Props {
     navigation: any
@@ -34,29 +35,10 @@ export const SearchUsers = (props: Props) => {
     return (
         <View>
             {categoryTitle && handleCategoryTitle(categoryTitle.category)}
-            <FlatList 
-                data={item}
-                keyExtractor={(item) => item.id.toString()}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{gap: 17}}
-                renderItem={({item}) => (
-                <TouchableOpacity>
-                        <Product 
-                            key={item.id} 
-                            item={item} 
-                            shapeView={'box'}
-                            navigation={props.navigation}
-                            favorite={
-                                <Favorite 
-                                    product={item} 
-                                    isFavorite={favoriteItems.some(product => product.id === item.id)}
-                                />
-                            }
-                            />
-                    </TouchableOpacity> 
-                )}
-            />
+            <ProductsList 
+                shapeView='boxHorizontal' 
+                item={item} 
+                navigation={props.navigation}/> 
         </View>
 
         
