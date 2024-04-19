@@ -3,7 +3,7 @@ import { FlatList, TouchableOpacity, View, Text, StyleSheet } from "react-native
 import { Product } from "src/entities/product";
 import { getButtonProductsAll } from "src/features/category-buttons/model";
 import { Favorite } from "src/features/favorite";
-import { useStateSelector } from "src/shared/hooks";
+import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { SeeMoreButton } from "src/shared/ui/see-more-button";
 import { ProductsList } from "src/widgets/products-list";
 
@@ -13,9 +13,12 @@ interface Props {
 
 export const SearchUsers = (props: Props) => {
     const { item, status } = useStateSelector(state => state.buttonPrudcts)
-    const favoriteItems = useStateSelector(state => state.favorite.items) 
+    const favoriteItems = useStateSelector(state => state.favorite.items)
+    const dispatch = useAppDispatch()
 
-    
+    useEffect(() => {
+        dispatch(getButtonProductsAll())
+    }, [])
 
     const handleCategoryTitle = (category: string) => {
         return (
@@ -30,7 +33,7 @@ export const SearchUsers = (props: Props) => {
         )
     }
     const categoryTitle = item?.find(obj => {return obj.category})
-
+    console.log(categoryTitle?.category)
 
     return (
         <View>

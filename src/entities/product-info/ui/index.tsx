@@ -5,7 +5,6 @@ import { ProductInfo } from "./info";
 
 export const ProductInfoContainer = ({route}: any) => {
     const { name, category, price, rating, info} = route.params.item
-    console.log(route.params.item)
 
     return (
         <View> 
