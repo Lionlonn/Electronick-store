@@ -17,6 +17,7 @@ import { Avatar, MenuButton } from 'src/features/header-bar'
 import { SearchPage } from 'src/pages/search/ui';
 import { ProducstWorkSpace  } from 'src/pages/product-workspace/index'
 import { ViewItemPage } from 'src/pages/view-item';
+import { BasketPage } from 'src/pages/basket/ui';
 
 const Stack = createNativeStackNavigator();
 
@@ -77,6 +78,14 @@ export const App = () => {
           <Stack.Screen
             name='ViewItem'
             component={ViewItemPage}
+          />
+          <Stack.Screen
+            name='BasketPage'
+            component={BasketPage}
+            options={{
+              title: "Basket cart",
+              headerTitleAlign: 'center'
+            }}
           />
         </Stack.Navigator>
       </>

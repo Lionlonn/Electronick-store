@@ -10,7 +10,7 @@ export const MenuButton = ({navigation}: any) => {
             <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('SearchPage')}}>
                 <SearchIcon/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('ShopingCartPage')}}>
+            <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('BasketPage')}}>
                 <BasketIcon/>
             </TouchableOpacity>
         </View>

@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions, StyleSheet, Text, TouchableOpacity, useWindowDimensions } from "react-native";
 
 
+
 interface Props {
     title: string;
     typeButton: 'add card' | 'continue to pay' | 'to pay';
@@ -11,22 +12,21 @@ interface Props {
 
 
 export const ActionButtons = (props: Props) => {
+
     const width = useWindowDimensions().width;
     const fontSize = width > 420 ? 22 : 16
 
-    const handleAction = (type: string) => {
-        
-    }
+    
 
-    return(
-        <TouchableOpacity 
-            activeOpacity={0.7} 
-            style={styles.wrapper}
-            onPress={props.action}
-            >
-            <Text style={[styles.title, {fontSize: fontSize}]}>{props.title}</Text>
-        </TouchableOpacity>
-    )
+        return(
+            <TouchableOpacity 
+                activeOpacity={0.7} 
+                style={styles.wrapper}
+                onPress={props.action}
+                >
+                <Text style={[styles.title, {fontSize: fontSize}]}>{props.title}</Text>
+            </TouchableOpacity>
+        )
 }
 
 const styles = StyleSheet.create({

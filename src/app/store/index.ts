@@ -3,13 +3,17 @@ import productsReducer from 'entities/product/model/index'
 import favoriteReducer from 'features/favorite/model/index'
 import filterReducer from 'features/filter-button/model/index'
 import buttonProductsReducer from 'features/category-buttons/model/index'
+import  cartReducer  from "src/entities/product/model/action-creators";
+// import actionButtonSlice from 'features/action-button/model/index'
 
 export const store = configureStore({
     reducer: {
         products: productsReducer,
         favorite: favoriteReducer,
         filter: filterReducer,
-        buttonPrudcts: buttonProductsReducer
+        buttonPrudcts: buttonProductsReducer,
+        cartSlice: cartReducer
+
     }
 })
 

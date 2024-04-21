@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { useStateSelector } from "src/shared/hooks";
-import { ProductItem } from "src/entities/product";
 import { NewArrialsProduct } from "./item";
 import { Favorite } from "src/features/favorite";
+import { ProductItem } from "src/entities/product/api";
 
 
 
