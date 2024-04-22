@@ -81,13 +81,5 @@ const styles = StyleSheet.create({
         height: 90,
         borderRadius: 8
     },
-    buttonsHandleQuantity: {
-        width: 20,
-        height: 20,
-        borderRadius: 22,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: 'rgb(166, 167, 152)'
-    }
+    
 })
