@@ -11,7 +11,7 @@ interface Props {
 
 
 
-export const ActionButtons = (props: Props) => {
+export const ActionButtonsProduct = (props: Props) => {
 
     const width = useWindowDimensions().width;
     const fontSize = width > 420 ? 22 : 16

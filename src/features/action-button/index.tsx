@@ -1,1 +1,1 @@
-export { ActionButtons } from './ui/index'
+export { ActionButtonsProduct } from './ui/buttons-product/index'

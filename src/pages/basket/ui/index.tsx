@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { Cart } from "src/entities/product/ui/cart-view";
 import { useStateSelector } from "src/shared/hooks";
 
 
@@ -11,14 +12,21 @@ export const BasketPage = () => {
     
     return (
         <ScrollView style={styles.bacground}>
-            <View style={styles.container}>
-                {cart.map(item => (
-                    <View>
-                        <Text>ID: {item.id}</Text>
-                        <Text>QUANTITY: {item.quantity}</Text>
-                    </View>
-                ))}
-            </View>
+                <View style={styles.container}>
+                    {cart.map((item) => (
+                        <View style={{marginBottom: 20}}>
+                            <Cart 
+                                name={item.name}
+                                image={item.img[0]}
+                                price={item.price}
+                                id={item.id}
+                                quantity={item.quantity}
+                            />
+                        </View>
+                        
+                    ))}
+                </View>
+            
         </ScrollView>
     )
 }
