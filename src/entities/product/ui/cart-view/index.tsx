@@ -3,6 +3,7 @@ import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "reac
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { removeFromCart, updateQuantity } from "../../model/action-creators";
 import { Button } from "react-native-paper";
+import { ActionButtonsCart } from "src/features/action-button";
 
 
 interface Props {
@@ -37,35 +38,31 @@ export const Cart = (props: Props) => {
                 <View>
                     <Text>{name}</Text>
                     <Text>USD {price}</Text>
+
+                    <View style={{flexDirection: 'row', gap: 20}}>
+                        <ActionButtonsCart 
+                            typeButton="decrement" 
+                            action={() => handleQuantityChange(id, quantity -1)}
+                            quantity={quantity}
+                            />
+
+                        <Text>{quantity}</Text>
+
+                        <ActionButtonsCart 
+                            typeButton="increment" 
+                            action={() => handleQuantityChange(id, quantity + 1)}
+                            quantity={quantity}
+                            />
+
+                        <ActionButtonsCart 
+                            typeButton="remove" 
+                            action={() => handleRemoveFromCart(id)}
+                            />
+                        
+                    </View>
                 </View>
                 
-                <View style={{flexDirection: 'row', gap: 20}}>
-                    <TouchableOpacity 
-                        style={styles.buttonsHandleQuantity}
-                        onPress={() => handleQuantityChange(id, quantity - 1)}
-                        disabled={quantity <= 1}
-                    >
-                        <Text>-</Text>
-                    </TouchableOpacity>
-                    
-                        
-
-                    
-                    <Text>{quantity}</Text>
-                    <TouchableOpacity 
-                        style={styles.buttonsHandleQuantity}
-                        onPress={() => handleQuantityChange(id, quantity + 1)}
-                        disabled={quantity >= 10}
-                        
-                        >
-                        <Text>+</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => handleRemoveFromCart(id)}
-                    >
-                        <Text>Remove</Text>
-                    </TouchableOpacity>
-                </View>
+                
             </View>
     )
 }
