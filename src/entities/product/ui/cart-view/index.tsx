@@ -4,6 +4,7 @@ import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { removeFromCart, updateQuantity } from "../../model/action-creators";
 import { Button } from "react-native-paper";
 import { ActionButtonsCart } from "src/features/action-button";
+import { useWindowDimensions } from "react-native";
 
 
 interface Props {
@@ -15,9 +16,10 @@ interface Props {
 }
 
 export const Cart = (props: Props) => {
-    const cart = useStateSelector(state => state.cartSlice)
     const { name, image, price, id, quantity } = props
     const dispatch = useAppDispatch()
+    const width = useWindowDimensions().width;
+    const fontSizeDefault = 14
 
     const handleRemoveFromCart = (id: number) => {
         dispatch(removeFromCart(id))
@@ -28,31 +30,60 @@ export const Cart = (props: Props) => {
     }
     
     return (
-            <View style={styles.wrapper} key={id}>
+            <View style={[styles.wrapper, {height: width > 420 ? 160 : 120}]} key={id}>
                 <Image 
                     style={styles.image}
                     source={{
                         uri: image
                     }}
                 />
-                <View>
-                    <Text>{name}</Text>
-                    <Text>USD {price}</Text>
+                
+                <View style={styles.rightBlock}>
+                    <View style={styles.info}>
+                        <Text 
+                            style={[
+                                styles.nameText,
+                                {
+                                    fontSize: width > 420 ? fontSizeDefault * 1.5 : fontSizeDefault * 1.2,
+                                    lineHeight: width > 420 ? fontSizeDefault * 1.6 : fontSizeDefault * 1.3
+                                }
+                            ]}
+                        >{name}</Text>
+                        <Text
+                            style={[
+                                styles.priceText,
+                                {
+                                    fontSize: width > 420 ? fontSizeDefault * 1.2 : fontSizeDefault * 0.9,
+                                    lineHeight: width > 420 ? fontSizeDefault * 1.2 : fontSizeDefault 
+                                }
+                            ]}
+                        >USD {price}</Text>
+                    </View>
+                    
 
-                    <View style={{flexDirection: 'row', gap: 20}}>
-                        <ActionButtonsCart 
-                            typeButton="decrement" 
-                            action={() => handleQuantityChange(id, quantity -1)}
-                            quantity={quantity}
+                    <View style={styles.actionBlock}>
+                        <View style={styles.actionBlockChange}>
+                            <ActionButtonsCart 
+                                typeButton="decrement" 
+                                action={() => handleQuantityChange(id, quantity -1)}
+                                quantity={quantity}
                             />
 
-                        <Text>{quantity}</Text>
+                            <Text style={[
+                                    styles.quantityText,
+                                    {
+                                        fontSize: width > 420 ? fontSizeDefault * 1.5 : fontSizeDefault,
+                                        lineHeight: width> 420 ? fontSizeDefault * 1.6 : fontSizeDefault * 1.2
+                                    }
+                                ]}>{quantity}</Text>
 
-                        <ActionButtonsCart 
-                            typeButton="increment" 
-                            action={() => handleQuantityChange(id, quantity + 1)}
-                            quantity={quantity}
+                            <ActionButtonsCart 
+                                typeButton="increment" 
+                                action={() => handleQuantityChange(id, quantity + 1)}
+                                quantity={quantity}
                             />
+                        </View>
+                        
 
                         <ActionButtonsCart 
                             typeButton="remove" 
@@ -70,16 +101,51 @@ export const Cart = (props: Props) => {
 const styles = StyleSheet.create({
     wrapper: {
         backgroundColor: 'rgb(244, 245, 247)',
-        width: 366,
-        height: 108,
+        width: '100%',
         padding: 7,
         flexDirection: 'row',
-        gap: 15
-    },
-    image: {
-        width: 100,
-        height: 90,
+        gap: 15,
         borderRadius: 8
     },
-    
+    image: {
+        flex: 0.4,
+        borderRadius: 8
+    },
+    rightBlock: {
+        flex: 1,
+        justifyContent: 'space-between',
+        paddingVertical: 4,
+        paddingRight: 10,
+        
+    },
+    info: {
+        marginBottom: 15
+    },
+    nameText: {
+        fontFamily: 'Avenir-Heavy',
+        color: 'black',
+        fontWeight: '500',
+        marginBottom: 4
+    },
+    priceText: {
+        color: 'rgb(186, 92, 61)',
+        fontFamily: 'Avenir-Heavy',
+        fontWeight: '800'
+    },
+    actionBlock: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        
+    },
+    actionBlockChange: {
+        flexDirection: 'row',
+        gap: 12,
+        alignItems: 'center'
+    },
+    quantityText: {
+        color: 'rgb(166, 167, 152)',
+        fontFamily: 'Avenir-Heavy',
+        fontWeight: '500',
+        top: 2
+    }
 })

@@ -15,13 +15,15 @@ interface Props {
 export const ActionButtonsCart = (props: Props) => {
 
     const width = useWindowDimensions().width;
-    const fontSize = width > 420 ? 22 : 16
+    const fontSizeDefault = 14
 
    
     const color = {
         disabled:'rgb(210, 210, 210)',
         default: 'rgb(166, 167, 152)' 
     }
+
+    const wrapperSize = width > 420 ? 44 : 24
      
 
     return(
@@ -30,7 +32,11 @@ export const ActionButtonsCart = (props: Props) => {
                 <TouchableOpacity
                     style={[
                         styles.buttonsHandleQuantity,
-                        {borderColor: props.quantity <= 1 ? color.disabled : color.default}
+                        {
+                            borderColor: props.quantity <= 1 ? color.disabled : color.default,
+                            width: wrapperSize,
+                            height: wrapperSize
+                        }
                     ]}
                     activeOpacity={0.7}
                     onPress={props.action}
@@ -48,7 +54,11 @@ export const ActionButtonsCart = (props: Props) => {
                <TouchableOpacity
                     style={[
                         styles.buttonsHandleQuantity,
-                        {borderColor: props.quantity >= 10 ? color.disabled : color.default}
+                        {
+                            borderColor: props.quantity >= 10 ? color.disabled : color.default,
+                            width: wrapperSize,
+                            height: wrapperSize
+                        }
                     ]}
                     activeOpacity={0.7}
                     onPress={props.action}
@@ -68,7 +78,13 @@ export const ActionButtonsCart = (props: Props) => {
                     activeOpacity={0.7}
                     onPress={props.action}
                 >
-                    <Text style={[styles.text, {fontSize: width > 420 ? 20 : 14, lineHeight: width > 420 ? 20 : 14}]}>Remove</Text>
+                    <Text style={[
+                        styles.text, 
+                        {
+                            fontSize: width > 420 ? fontSizeDefault * 1.3 : fontSizeDefault,
+                            lineHeight: width > 420 ? fontSizeDefault * 2 : fontSizeDefault * 1.2
+                        }
+                        ]}>Remove</Text>
                 </TouchableOpacity>
             )}
         </>
@@ -78,8 +94,6 @@ export const ActionButtonsCart = (props: Props) => {
 
 const styles = StyleSheet.create({
     buttonsHandleQuantity: {
-        width: 24,
-        height: 24,
         borderRadius: 22,
         alignItems: 'center',
         justifyContent: 'center',
@@ -91,11 +105,14 @@ const styles = StyleSheet.create({
         width: 'auto',
         height: 'auto',
         paddingHorizontal: 10,
-        paddingVertical: 4
+        paddingVertical: 4,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     text: {
+        fontFamily: 'Avenir-Heavy',
         color: 'black',
         fontWeight: '500',
-        textAlign: 'center'
+        
     }
 })
