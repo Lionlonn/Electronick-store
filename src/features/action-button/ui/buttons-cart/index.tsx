@@ -64,10 +64,11 @@ export const ActionButtonsCart = (props: Props) => {
                 </TouchableOpacity> 
             ) : (
                 <TouchableOpacity
+                    style={styles.removeButton}
                     activeOpacity={0.7}
                     onPress={props.action}
                 >
-                    <Text>Remove</Text>
+                    <Text style={[styles.text, {fontSize: width > 420 ? 20 : 14, lineHeight: width > 420 ? 20 : 14}]}>Remove</Text>
                 </TouchableOpacity>
             )}
         </>
@@ -84,9 +85,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderWidth: 1,
     },
-    buttonSymbol: {
-        // minWidth: '50%',
-        // height: 2,
-        // borderRadius: 8,
+    removeButton: {
+        backgroundColor: 'rgb(254, 254, 254)',
+        borderRadius: 100,
+        width: 'auto',
+        height: 'auto',
+        paddingHorizontal: 10,
+        paddingVertical: 4
+    },
+    text: {
+        color: 'black',
+        fontWeight: '500',
+        textAlign: 'center'
     }
 })
