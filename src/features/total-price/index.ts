@@ -1,0 +1,1 @@
+export { CounterTotalPrice } from './ui/index'
