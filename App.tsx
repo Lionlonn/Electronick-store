@@ -18,6 +18,7 @@ import { SearchPage } from 'src/pages/search/ui';
 import { ProducstWorkSpace  } from 'src/pages/product-workspace/index'
 import { ViewItemPage } from 'src/pages/view-item';
 import { BasketPage } from 'src/pages/basket/ui';
+import { WelcomePage } from 'src/pages/welcome/ui';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,10 +34,14 @@ export const App = () => {
         <Stack.Navigator 
           screenOptions={{
             headerShadowVisible: false,
-            headerStyle: {backgroundColor: 'white'}
+            headerStyle: {backgroundColor: 'white'},
           }}
         >
-
+          <Stack.Screen
+            name="WelcomePage"
+            component={WelcomePage}
+            options={{headerShown: false}}   
+          />
           <Stack.Screen 
             name='HomePage' 
             component={HomePage}
