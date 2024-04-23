@@ -11,32 +11,31 @@ export const BasketPage = () => {
     const cart = useStateSelector(state => state.cartSlice);
     
     return (
-        <ScrollView style={styles.bacground}>
-                <View style={styles.container}>
-                    {cart.map((item) => (
-                        <View style={{marginBottom: 20}}>
-                            <Cart 
-                                name={item.name}
-                                image={item.img[0]}
-                                price={item.price}
-                                id={item.id}
-                                quantity={item.quantity}
-                            />
-                        </View>
-                        
-                    ))}
-                   <CounterTotalPrice/> 
+        <ScrollView 
+            contentContainerStyle={styles.container} 
+            showsVerticalScrollIndicator={false} 
+            >
+                
+            <View style={styles.contentContainer}>
+                {cart.map((item) => (
+                    <Cart 
+                        name={item.name}
+                        image={item.img[0]}
+                        price={item.price}
+                        id={item.id}
+                        quantity={item.quantity}
+                    />
+            ))} 
+            </View>
 
-                    <View style={{width: '100%' }}>
-                        <ActionButtonsProduct 
-                            title="Proceed to Checkout" 
-                            typeButton="continue to pay"
-                            action={() => ""}
-                        />
-                    </View>
-                    
-                </View>
-
+            <View style={styles.footer}>
+                <CounterTotalPrice/>
+                <ActionButtonsProduct 
+                    title="Proceed to Checkout" 
+                    typeButton="continue to pay"
+                    action={() => ""}
+                />
+            </View>
             
         </ScrollView>
     )
@@ -44,15 +43,21 @@ export const BasketPage = () => {
 
 
 const styles = StyleSheet.create({
-    bacground: {
-        backgroundColor: '#FFF',
-    },
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20
+        backgroundColor: '#FFF',
+        flexGrow: 1,
+        padding: 20,
+        justifyContent: 'space-between'
     },
-    
+    contentContainer: {
+        gap: 20
+          
+    },
+    footer: {
+        width: '100%',
+        paddingVertical: 20,
+        alignSelf: 'center',
+        gap: 20
+    }
     
 })
