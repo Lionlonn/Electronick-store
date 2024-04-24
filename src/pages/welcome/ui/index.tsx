@@ -1,8 +1,12 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { AuthButton } from "src/features/auth-button";
+import { NavigationButton } from "src/features/navigation-button";
 
 
-export const WelcomePage = () => {
+export const WelcomePage = ({navigation}: any) => {
+    
+
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -10,10 +14,22 @@ export const WelcomePage = () => {
                 style={styles.image}
                 source={require('../image/fon.png')}
             >
-                <View>
-                    <Text>Welcome</Text>
-                    <Text>Electronic.IO</Text>
-                    <Text>We serve you with the best gadgets for your home workspace</Text>
+                <View style={styles.contentContainer}>
+                    <Text style={styles.textWelcome}>Welcome</Text>
+                    <Text style={styles.textTitle}>Electronic.IO</Text>
+                    <Text style={styles.textSubTitle}>We serve you with the best gadgets for your home workspace</Text>
+                    <View style={styles.blockButtons}>
+                        <NavigationButton
+                            title="Browse Show"
+                        />
+                        <AuthButton
+                            title="Log in"
+                            typeButton="log in"
+                            action={() => ''}
+                            backgroundColor={false}
+                        />
+                    </View>
+                    
                 </View>
             </ImageBackground>
                 
@@ -28,10 +44,36 @@ export const WelcomePage = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        // flexGrow: 1,
     },
     image: {
         flex: 1
+    },
+    contentContainer: {
+        flex: 1,
+        
+        justifyContent: 'flex-end',
+        padding: 20   
+    },
+    textWelcome: {
+        fontFamily: 'Avenir-Heavy',
+        fontWeight: '900',
+        color: 'rgb(206, 213, 91)'
+    },
+    textTitle: {
+        fontFamily: 'Avenir-Heavy',
+        fontWeight: '900',
+        color: 'rgb(255, 255, 255)',
+    },
+    textSubTitle: {
+        fontFamily: 'Avenir-Black',
+        fontWeight: '600',
+        color: 'rgb(221, 221, 219)'
+    },
+    blockButtons: {
+        minHeight: 130,
+        gap: 10
     }
     
 })
