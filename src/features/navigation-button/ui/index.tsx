@@ -5,6 +5,8 @@ import { Dimensions, StyleSheet, Text, TouchableOpacity, useWindowDimensions } f
 
 interface Props {
     title: string;
+    navigation: any;
+    path: string;
 }
 
 
@@ -22,6 +24,7 @@ export const NavigationButton = (props: Props) => {
                 style={[
                     styles.wrapper,
                 ]}
+                onPress={() => props.navigation.navigate(props.path)}
                 >
                 <Text style={[
                     styles.title, 

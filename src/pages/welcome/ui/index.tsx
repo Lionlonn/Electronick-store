@@ -21,6 +21,8 @@ export const WelcomePage = ({navigation}: any) => {
                     <View style={styles.blockButtons}>
                         <NavigationButton
                             title="Browse Show"
+                            navigation={navigation}
+                            path="HomePage"
                         />
                         <AuthButton
                             title="Log in"
