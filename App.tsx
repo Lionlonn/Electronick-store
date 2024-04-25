@@ -1,8 +1,9 @@
 
 
 import * as React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -19,15 +20,42 @@ import { ProducstWorkSpace  } from 'src/pages/product-workspace/index'
 import { ViewItemPage } from 'src/pages/view-item';
 import { BasketPage } from 'src/pages/basket/ui';
 import { WelcomePage } from 'src/pages/welcome/ui';
+import { LoginPage } from 'src/pages/auth/ui';
+import { RegistationPage } from 'src/pages/registration/ui';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from './FirebaseConfig';
 
 const Stack = createNativeStackNavigator();
 
+const InsideStack = createNativeStackNavigator();
 
-
+function InsideLayout() {
+  return (
+    <InsideStack.Navigator>
+      <InsideStack.Screen 
+            name='HomePage' 
+            component={HomePage}
+            options={({navigation}) => ({
+                title: "",
+                headerLeft: () => <Avatar/>,
+                headerRight: () => <MenuButton navigation={navigation}/>,
+            })}
+          />
+    </InsideStack.Navigator>
+  )
+}
 
 export const App = () => {
+  const [ user, setUser ] = useState<User | null>(null);
   
-  
+  useEffect(() => {
+    onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      console.log('user', user);
+      Alert.alert('АВТОРИЗОВАН')
+      setUser(user);
+    });
+  }, [])
+
   return (
       <>
         
@@ -42,7 +70,24 @@ export const App = () => {
             component={WelcomePage}
             options={{headerShown: false}}   
           />
-          <Stack.Screen 
+          {user ? (
+            <Stack.Screen 
+              name='HomePage' 
+              component={HomePage}
+              options={({navigation}) => ({
+                  title: "",
+                  headerLeft: () => <Avatar/>,
+                  headerRight: () => <MenuButton navigation={navigation}/>,
+              })}
+            />
+          ) : (
+            <Stack.Screen
+              name='LoginPage'
+              component={LoginPage}
+              options={{headerShown: false}}
+          />  
+          )}
+          {/* <Stack.Screen 
             name='HomePage' 
             component={HomePage}
             options={({navigation}) => ({
@@ -50,7 +95,7 @@ export const App = () => {
                 headerLeft: () => <Avatar/>,
                 headerRight: () => <MenuButton navigation={navigation}/>,
             })}
-          />
+          /> */}
 
           <Stack.Screen 
             name='WorkSpaces'
@@ -91,6 +136,16 @@ export const App = () => {
               title: "Basket cart",
               headerTitleAlign: 'center'
             }}
+          />
+          {/* <Stack.Screen
+            name='LoginPage'
+            component={LoginPage}
+            options={{headerShown: false}}
+          /> */}
+          <Stack.Screen
+            name='RegistationPage'
+            component={RegistationPage}
+            options={{headerShown: false}}
           />
         </Stack.Navigator>
       </>

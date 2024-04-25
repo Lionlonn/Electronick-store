@@ -7,13 +7,15 @@ interface Props {
     title: string;
     typeButton: 'log in' | 'login' | 'sign up';
     action: () => void;
-    backgroundColor: boolean
+    backgroundColor: boolean;
+    navigation: any;
+    path: 'LoginPage' | 'RegistrationPage'
 }
 
 
 
 export const AuthButton = (props: Props) => {
-
+    const { title, typeButton, action, backgroundColor, navigation, path } = props
     const width = useWindowDimensions().width;
     const fontSize = width > 420 ? 22 : 16
 
@@ -25,10 +27,10 @@ export const AuthButton = (props: Props) => {
                 style={[
                     styles.wrapper,
                     {
-                        backgroundColor: props.backgroundColor ? 'rgb(206, 213, 91)' :  '',
+                        backgroundColor: backgroundColor ? 'rgb(206, 213, 91)' :  '',
                     }
                 ]}
-                onPress={props.action}
+                onPress={() => navigation.navigate(props.path)}
                 >
                 <Text style={[
                     styles.title, 
@@ -36,7 +38,7 @@ export const AuthButton = (props: Props) => {
                         fontSize: fontSize,
                         color: props.backgroundColor ? 'rgb(4, 11, 20)' : '#FFF'
                     }
-                    ]}>{props.title}</Text>
+                    ]}>{title}</Text>
             </TouchableOpacity>
         )
 }

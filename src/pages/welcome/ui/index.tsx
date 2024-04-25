@@ -29,6 +29,8 @@ export const WelcomePage = ({navigation}: any) => {
                             typeButton="log in"
                             action={() => ''}
                             backgroundColor={false}
+                            navigation={navigation}
+                            path="LoginPage"
                         />
                     </View>
                     
