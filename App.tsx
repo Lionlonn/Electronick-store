@@ -23,7 +23,8 @@ import { WelcomePage } from 'src/pages/welcome/ui';
 import { LoginPage } from 'src/pages/auth/ui';
 import { RegistationPage } from 'src/pages/registration/ui';
 import { User, onAuthStateChanged } from 'firebase/auth';
-import { FIREBASE_AUTH } from './FirebaseConfig';
+// import { FIREBASE_AUTH } from './FirebaseConfig';
+import './FirebaseConfig'
 
 const Stack = createNativeStackNavigator();
 
@@ -48,13 +49,15 @@ function InsideLayout() {
 export const App = () => {
   const [ user, setUser ] = useState<User | null>(null);
   
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log('user', user);
-      Alert.alert('АВТОРИЗОВАН')
-      setUser(user);
-    });
-  }, [])
+  // useEffect(() => {
+  //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
+  //     console.log('user', user);
+  //     if (user !== null) {
+  //       Alert.alert('Авторизован')
+  //     }
+  //     setUser(user);
+  //   });
+  // }, [])
 
   return (
       <>
@@ -70,24 +73,8 @@ export const App = () => {
             component={WelcomePage}
             options={{headerShown: false}}   
           />
-          {user ? (
-            <Stack.Screen 
-              name='HomePage' 
-              component={HomePage}
-              options={({navigation}) => ({
-                  title: "",
-                  headerLeft: () => <Avatar/>,
-                  headerRight: () => <MenuButton navigation={navigation}/>,
-              })}
-            />
-          ) : (
-            <Stack.Screen
-              name='LoginPage'
-              component={LoginPage}
-              options={{headerShown: false}}
-          />  
-          )}
-          {/* <Stack.Screen 
+          
+          <Stack.Screen 
             name='HomePage' 
             component={HomePage}
             options={({navigation}) => ({
@@ -95,7 +82,8 @@ export const App = () => {
                 headerLeft: () => <Avatar/>,
                 headerRight: () => <MenuButton navigation={navigation}/>,
             })}
-          /> */}
+          />
+          
 
           <Stack.Screen 
             name='WorkSpaces'
@@ -137,11 +125,11 @@ export const App = () => {
               headerTitleAlign: 'center'
             }}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name='LoginPage'
             component={LoginPage}
             options={{headerShown: false}}
-          /> */}
+          />
           <Stack.Screen
             name='RegistationPage'
             component={RegistationPage}

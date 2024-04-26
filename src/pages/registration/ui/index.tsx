@@ -7,7 +7,7 @@ export const RegistationPage = ({navigation}: any) => {
 
     return (
         <View style={styles.container}>
-             
+           <Text>Registration</Text> 
         </View>
     )
 }

@@ -4,7 +4,8 @@ import favoriteReducer from 'features/favorite/model/index'
 import filterReducer from 'features/filter-button/model/index'
 import buttonProductsReducer from 'features/category-buttons/model/index'
 import  cartReducer  from "src/entities/product/model/action-creators";
-// import actionButtonSlice from 'features/action-button/model/index'
+import userReducer from 'features/auth/model/index'
+
 
 export const store = configureStore({
     reducer: {
@@ -12,8 +13,8 @@ export const store = configureStore({
         favorite: favoriteReducer,
         filter: filterReducer,
         buttonPrudcts: buttonProductsReducer,
-        cartSlice: cartReducer
-
+        cartSlice: cartReducer,
+        user: userReducer
     }
 })
 
