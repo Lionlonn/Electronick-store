@@ -1,16 +1,31 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-// import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
+// import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
 import React, { useState } from "react";
 import {  Alert, Button, Image, ImageBackground, StyleSheet, Text, TextInput, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-
+import { useAppDispatch } from "src/shared/hooks";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
 
 export const LoginPage = ({navigation}: any) => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ loading, setLoading ] = useState(false);    
 
-    // const auth = FIREBASE_AUTH;
+    const dispatch = useAppDispatch()
+    const auth = FIREBASE_AUTH
+    const handleLogin = (email: string, password: string) => {
+        
+        signInWithEmailAndPassword(auth, email, password)
+            .then(console.log)
+            .catch(console.error)
+    }
+    const handleRegister = (email: string, password: string) => {
+        
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(console.log)
+            .catch(console.error)
+    }
 
     // const signIn = async () => {
     //     setLoading(true);
@@ -59,8 +74,14 @@ export const LoginPage = ({navigation}: any) => {
                 secureTextEntry={true}
                 >
             </TextInput> 
-            
-
+            <Button
+                title="login"
+                onPress={() => handleLogin(email, password)}
+            />  
+             <Button
+                title="register"
+                onPress={() => handleRegister(email, password)}
+            /> 
         </View>
     )
 }

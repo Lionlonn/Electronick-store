@@ -48,7 +48,7 @@ function InsideLayout() {
 
 export const App = () => {
   const [ user, setUser ] = useState<User | null>(null);
-  
+  console.log(process.env.REACT_APP_FIREBASE_API_KEY)  
   // useEffect(() => {
   //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
   //     console.log('user', user);
