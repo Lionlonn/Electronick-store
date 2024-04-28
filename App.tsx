@@ -25,6 +25,8 @@ import { RegistationPage } from 'src/pages/registration/ui';
 import { User, onAuthStateChanged } from 'firebase/auth';
 // import { FIREBASE_AUTH } from './FirebaseConfig';
 import './FirebaseConfig'
+ 
+
 
 const Stack = createNativeStackNavigator();
 
@@ -48,7 +50,9 @@ function InsideLayout() {
 
 export const App = () => {
   const [ user, setUser ] = useState<User | null>(null);
-  console.log(process.env.REACT_APP_FIREBASE_API_KEY)  
+  
+  
+ 
   // useEffect(() => {
   //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
   //     console.log('user', user);
