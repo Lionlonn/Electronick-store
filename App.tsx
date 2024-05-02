@@ -83,7 +83,7 @@ export const App = () => {
             component={HomePage}
             options={({navigation}) => ({
                 title: "",
-                headerLeft: () => <Avatar/>,
+                headerLeft: () => <Avatar navigation={navigation}/>,
                 headerRight: () => <MenuButton navigation={navigation}/>,
             })}
           />

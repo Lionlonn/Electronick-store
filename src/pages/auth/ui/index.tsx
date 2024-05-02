@@ -6,6 +6,7 @@ import { ActivityIndicator } from "react-native-paper";
 import { useAppDispatch } from "src/shared/hooks";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
+import { setUser } from "src/features/auth/model";
 
 export const LoginPage = ({navigation}: any) => {
     const [ email, setEmail ] = useState('');
@@ -17,7 +18,15 @@ export const LoginPage = ({navigation}: any) => {
     const handleLogin = (email: string, password: string) => {
         
         signInWithEmailAndPassword(auth, email, password)
-            .then(console.log)
+            .then(({user}) => {
+                console.log(user);
+                dispatch(setUser({
+                    email: user.email,
+                    id: user.uid,
+                    token: user.refreshToken,
+                }))
+                navigation.navigate('HomePage')
+            })
             .catch(console.error)
     }
     const handleRegister = (email: string, password: string) => {
@@ -26,34 +35,6 @@ export const LoginPage = ({navigation}: any) => {
             .then(console.log)
             .catch(console.error)
     }
-
-    // const signIn = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const response = await signInWithEmailAndPassword(auth, email, password);
-    //         console.log(response);
-    //         navigation.navigate('HomePage')
-    //     } catch (error: any) {
-    //         console.log(error);
-    //         Alert.alert('Sign in failed: ' + error.message)
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }
-
-    // const signUp = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const response = await createUserWithEmailAndPassword(auth, email, password);
-    //         console.log(response);
-    //         Alert.alert('Check your emails!')
-    //     } catch (error: any) {
-    //         console.log(error);
-    //         Alert.alert('Sign in failed: ' + error.message)
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // } 
 
     return (
         <View style={styles.container}>
