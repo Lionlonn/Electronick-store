@@ -1,12 +1,13 @@
 // import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 import React, { useState } from "react";
-import {  Alert, Button, Image, ImageBackground, StyleSheet, Text, TextInput, View } from "react-native";
+import {  Alert, Button, Image, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { useAppDispatch } from "src/shared/hooks";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
 import { setUser } from "src/features/auth/model";
+import { FieldsAuth } from "src/shared/ui/auth-field";
 
 export const LoginPage = ({navigation}: any) => {
     const [ email, setEmail ] = useState('');
@@ -38,31 +39,21 @@ export const LoginPage = ({navigation}: any) => {
 
     return (
         <View style={styles.container}>
-            <TextInput 
-                style={styles.input}
-                placeholder="Email"
-                autoCapitalize="none"
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-                >
-            </TextInput>
-            <TextInput 
-                style={styles.input}
-                placeholder="Password"
-                autoCapitalize="none"
-                onChangeText={(text) => setPassword(text)}
-                value={password}
-                secureTextEntry={true}
-                >
-            </TextInput> 
-            <Button
-                title="login"
-                onPress={() => handleLogin(email, password)}
-            />  
-             <Button
+            
+            <View style={styles.fields}>
+                <FieldsAuth type="registration"/>
+            </View>
+            
+            <View>
+                <Button
+                    title="login"
+                    onPress={() => handleLogin(email, password)}
+                />
+            </View>          
+             {/* <Button
                 title="register"
                 onPress={() => handleRegister(email, password)}
-            /> 
+            />  */}
         </View>
     )
 }
@@ -73,16 +64,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20
+        padding: 20,
+        backgroundColor: '#FFF'
     },
-    input: {
-        marginVertical: 4,
+    contentContainer: {
+        
+    },
+    fields: {
         width: '100%',
-        height: 50,
-        borderWidth: 1,
-        borderRadius: 4,
-        padding: 10,
-        backgroundColor: '#fff'
-    }
-    
+        
+    },
 })
