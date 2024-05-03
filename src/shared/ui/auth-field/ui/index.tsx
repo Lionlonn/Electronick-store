@@ -5,6 +5,7 @@ import { useAppDispatch } from "src/shared/hooks";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from "../../../../../FirebaseConfig";
 import { setUser } from "src/features/auth/model";
+import { PhoneNumberInput } from "../../number-field";
 
 interface Props {
     type: 'login' | 'registration';
@@ -83,15 +84,10 @@ export const FieldsAuth: React.FC<Props> = ({type}) => {
                     </View>
                     <View>
                         <Text style={styles.title}>Phone number</Text>
-                        <TextInput 
-                            style={styles.input}
-                            placeholder="Number"
-                            autoCapitalize="none"
-                            onChangeText={(text) => setNumber(text)}
-                            value={number}
-                            keyboardType="number-pad"
-                            >
-                        </TextInput>
+                        <PhoneNumberInput/>
+                        
+                        
+                        
                     </View>
                     <View>
                         <Text style={styles.title}>Password</Text>

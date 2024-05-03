@@ -1,5 +1,3 @@
-// import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-
 import React, { useState } from "react";
 import {  Alert, Button, Image, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
