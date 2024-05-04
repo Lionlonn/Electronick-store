@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
-import { AuthButton } from "src/features/auth-button";
+import { Button } from "react-native-paper";
+
 import { NavigationButton } from "src/features/navigation-button";
 
 
@@ -24,14 +25,9 @@ export const WelcomePage = ({navigation}: any) => {
                             navigation={navigation}
                             path="HomePage"
                         />
-                        <AuthButton
-                            title="Log in"
-                            typeButton="log in"
-                            action={() => ''}
-                            backgroundColor={false}
-                            navigation={navigation}
-                            path="LoginPage"
-                        />
+                        <Button onPress={() => navigation.navigate('LoginPage')}>
+                            <Text>log in</Text>
+                        </Button>
                     </View>
                     
                 </View>

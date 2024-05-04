@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import {  Alert, Button, Image, ImageBackground, StyleSheet, Text, TextInput, View} from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import { StyleSheet, Text, TextInput, View} from "react-native";
+
 import { useAppDispatch } from "src/shared/hooks";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from "../../../../../FirebaseConfig";
@@ -9,14 +9,19 @@ import { PhoneNumberInput } from "../../number-field";
 
 interface Props {
     type: 'login' | 'registration';
-
+    email: string;
+    password: string;
+    number?: string;
+    setEmail: (text: string) => void;
+    setPassword: (text: string) => void;
 }
 
-export const FieldsAuth: React.FC<Props> = ({type}) => {
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
-    const [ number, setNumber ] = useState('')
-    const [ loading, setLoading ] = useState(false);    
+export const FieldsAuth: React.FC<Props> = (props) => {
+    // const [ email, setEmail ] = useState('');
+    // const [ password, setPassword ] = useState('');
+    // const [ number, setNumber ] = useState('')
+    // const [ loading, setLoading ] = useState(false);
+    const { type, email, password, number, setEmail, setPassword } = props
 
     const dispatch = useAppDispatch()
     const auth = FIREBASE_AUTH
@@ -52,6 +57,7 @@ export const FieldsAuth: React.FC<Props> = ({type}) => {
                             autoCapitalize="none"
                             onChangeText={(text) => setEmail(text)}
                             value={email}
+                            placeholderTextColor={'rgb(138, 139, 122)'}
                             >
                         </TextInput>
                     </View> 
@@ -64,6 +70,7 @@ export const FieldsAuth: React.FC<Props> = ({type}) => {
                             onChangeText={(text) => setPassword(text)}
                             value={password}
                             secureTextEntry={true}
+                            placeholderTextColor={'rgb(138, 139, 122)'}
                             >
                         </TextInput> 
                     </View>
@@ -79,6 +86,7 @@ export const FieldsAuth: React.FC<Props> = ({type}) => {
                             autoCapitalize="none"
                             onChangeText={(text) => setEmail(text)}
                             value={email}
+                            placeholderTextColor={'rgb(138, 139, 122)'}
                             >
                         </TextInput>
                     </View>
@@ -98,6 +106,7 @@ export const FieldsAuth: React.FC<Props> = ({type}) => {
                             onChangeText={(text) => setPassword(text)}
                             value={password}
                             secureTextEntry={true}
+                            placeholderTextColor={'rgb(138, 139, 122)'}
                             >
                         </TextInput>
                     </View> 
@@ -122,10 +131,10 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 10,
         backgroundColor: 'rgb(246, 246, 245)',
-        fontSize: 14,
-        fontFamily: 'Avenir-Black',
-        fontWeight: '500',
-        color: 'rgb(166, 167, 152)'
+        fontSize: 16,
+        fontFamily: 'Avenir-Heavy',
+        fontWeight: '400',
+        color: 'rgb(138, 139, 122)'
     },
     title: {
         fontSize: 14,

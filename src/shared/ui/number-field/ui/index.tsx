@@ -17,6 +17,7 @@ export const PhoneNumberInput = () => {
           keyboardType="phone-pad"
           value={phoneNumber}
           onChangeText={setPhoneNumber}
+          placeholderTextColor={'rgb(138, 139, 122)'}
         />
       </View>
     </View>
@@ -39,6 +40,9 @@ const styles = StyleSheet.create({
   },
   countryCodeText: {
     fontSize: 16,
+    fontFamily: 'Avenir-Heavy',
+    fontWeight: '400',
+    color: 'rgb(138, 139, 122)'
   },
   phoneNumberContainer: {
     flex: 1,
@@ -48,8 +52,11 @@ const styles = StyleSheet.create({
   },
   phoneNumberInput: {
     fontSize: 16,
-    paddingVertical: 8,
-    paddingLeft: 8
+    paddingLeft: 8,
+    verticalAlign: 'middle',
+    fontFamily: 'Avenir-Heavy',
+    fontWeight: '400',
+    color: 'rgb(138, 139, 122)'
   },
 });
 

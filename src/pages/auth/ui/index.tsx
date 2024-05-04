@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } f
 import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
 import { setUser } from "src/features/auth/model";
 import { FieldsAuth } from "src/shared/ui/auth-field";
+import { AuthButton } from "src/features/auth/ui/auth-button/index";
 
 export const LoginPage = ({navigation}: any) => {
     const [ email, setEmail ] = useState('');
@@ -15,7 +16,6 @@ export const LoginPage = ({navigation}: any) => {
     const dispatch = useAppDispatch()
     const auth = FIREBASE_AUTH
     const handleLogin = (email: string, password: string) => {
-        
         signInWithEmailAndPassword(auth, email, password)
             .then(({user}) => {
                 console.log(user);
@@ -28,6 +28,8 @@ export const LoginPage = ({navigation}: any) => {
             })
             .catch(console.error)
     }
+
+
     const handleRegister = (email: string, password: string) => {
         
         createUserWithEmailAndPassword(auth, email, password)
@@ -39,19 +41,29 @@ export const LoginPage = ({navigation}: any) => {
         <View style={styles.container}>
             
             <View style={styles.fields}>
-                <FieldsAuth type="registration"/>
+                <FieldsAuth 
+                    type="login"
+                    email={email}
+                    password={password}
+                    setEmail={setEmail}
+                    setPassword={setPassword}
+                    />
             </View>
             
-            <View>
-                <Button
+            <View style={{height: 50, width: '100%'}}>
+                <AuthButton
+                    title="Login"
+                    typeButton="login"
+                    navigation={navigation}
+                    email={email}
+                    password={password}
+                />
+                {/* <Button
                     title="login"
                     onPress={() => handleLogin(email, password)}
-                />
+                /> */}
             </View>          
-             {/* <Button
-                title="register"
-                onPress={() => handleRegister(email, password)}
-            />  */}
+             
         </View>
     )
 }
