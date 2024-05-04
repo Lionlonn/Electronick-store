@@ -135,7 +135,7 @@ export const App = () => {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name='RegistationPage'
+            name='RegistrationPage'
             component={RegistationPage}
             options={{headerShown: false}}
           />
