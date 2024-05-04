@@ -13,29 +13,6 @@ export const LoginPage = ({navigation}: any) => {
     const [ password, setPassword ] = useState('');
     const [ loading, setLoading ] = useState(false);    
 
-    const dispatch = useAppDispatch()
-    const auth = FIREBASE_AUTH
-    const handleLogin = (email: string, password: string) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(({user}) => {
-                console.log(user);
-                dispatch(setUser({
-                    email: user.email,
-                    id: user.uid,
-                    token: user.refreshToken,
-                }))
-                navigation.navigate('HomePage')
-            })
-            .catch(console.error)
-    }
-
-
-    const handleRegister = (email: string, password: string) => {
-        
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(console.log)
-            .catch(console.error)
-    }
 
     return (
         <View style={styles.container}>
@@ -58,10 +35,6 @@ export const LoginPage = ({navigation}: any) => {
                     email={email}
                     password={password}
                 />
-                {/* <Button
-                    title="login"
-                    onPress={() => handleLogin(email, password)}
-                /> */}
             </View>          
              
         </View>

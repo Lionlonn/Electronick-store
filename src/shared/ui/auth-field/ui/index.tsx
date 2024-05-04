@@ -7,7 +7,7 @@ import { FIREBASE_AUTH } from "../../../../../FirebaseConfig";
 import { setUser } from "src/features/auth/model";
 import { PhoneNumberInput } from "../../number-field";
 
-interface Props {
+interface AuthFieldsProps {
     type: 'login' | 'registration';
     email: string;
     password: string;
@@ -16,35 +16,8 @@ interface Props {
     setPassword: (text: string) => void;
 }
 
-export const FieldsAuth: React.FC<Props> = (props) => {
-    // const [ email, setEmail ] = useState('');
-    // const [ password, setPassword ] = useState('');
-    // const [ number, setNumber ] = useState('')
-    // const [ loading, setLoading ] = useState(false);
-    const { type, email, password, number, setEmail, setPassword } = props
-
-    const dispatch = useAppDispatch()
-    const auth = FIREBASE_AUTH
-    const handleLogin = (email: string, password: string) => {
-        
-        signInWithEmailAndPassword(auth, email, password)
-            .then(({user}) => {
-                console.log(user);
-                dispatch(setUser({
-                    email: user.email,
-                    id: user.uid,
-                    token: user.refreshToken,
-                }))
-            })
-            .catch(console.error)
-    }
-    const handleRegister = (email: string, password: string) => {
-        
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(console.log)
-            .catch(console.error)
-    }
-
+export const FieldsAuth: React.FC<AuthFieldsProps> = ({type, email, password, number, setEmail, setPassword}) => {
+    
     return (
         <View >
             {type === 'login' ? (
