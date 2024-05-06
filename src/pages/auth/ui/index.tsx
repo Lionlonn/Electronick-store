@@ -7,6 +7,7 @@ import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
 import { setUser } from "src/features/auth/model";
 import { FieldsAuth } from "src/shared/ui/auth-field";
 import { AuthButton } from "src/features/auth/ui/auth-button/index";
+import { SocialAuthButton } from "src/features/auth";
 
 export const LoginPage = ({navigation}: any) => {
     const [ email, setEmail ] = useState('');
@@ -29,8 +30,11 @@ export const LoginPage = ({navigation}: any) => {
                     <Text style={[styles.sybGreetingText, {fontSize: fontSize * 1.3}]}>WELCOME BACK</Text>
                 </View>
                 
-                <View style={{height: 140, backgroundColor: 'red', width: '100%', marginBottom: 77}}></View>
-
+                
+                <View style={styles.socialAuthBlock}>
+                    <SocialAuthButton typeButton="gmail"/>
+                    <SocialAuthButton typeButton="facebook"/>
+                </View>
                 <View style={styles.fields}>
                     <FieldsAuth 
                         type="login"
@@ -69,7 +73,7 @@ export const LoginPage = ({navigation}: any) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: 'space-between',
         padding: 20,
         backgroundColor: '#FFF'
@@ -103,6 +107,11 @@ const styles = StyleSheet.create({
     contentContainer: {
         
     },
+    socialAuthBlock: {
+        width: '100%',
+        gap: 20,
+        marginBottom: 28
+    },
     fields: {
         width: '100%',
         marginBottom: 40
@@ -110,10 +119,6 @@ const styles = StyleSheet.create({
     footerButtons: {
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        
-        
-        
-        
+        justifyContent: 'space-between',   
     }
 })
