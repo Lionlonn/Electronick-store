@@ -19,6 +19,8 @@ export const LoginPage = ({navigation}: any) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
+                
+                
                 <View style={styles.containerContent}>
                 <View style={styles.titleBlock}>
                         <View style={styles.greetingBlock}>
@@ -49,6 +51,13 @@ export const LoginPage = ({navigation}: any) => {
                     <AuthButton
                         title="Login"
                         typeButton="login"
+                        navigation={navigation}
+                        email={email}
+                        password={password}
+                    />
+                    <AuthButton
+                        title="reg"
+                        typeButton="signup"
                         navigation={navigation}
                         email={email}
                         password={password}

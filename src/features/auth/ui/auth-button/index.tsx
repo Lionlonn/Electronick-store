@@ -6,6 +6,7 @@ import { useAuth } from "src/shared/hooks/use-auth";
 import { useAppDispatch } from "src/shared/hooks";
 import { setUser } from "src/features/auth/model";
 
+
 interface AuthButtonProps {
     title: string;
     typeButton: 'login' | 'signup';
@@ -18,13 +19,14 @@ interface AuthButtonProps {
 
 
 export const AuthButton: React.FC<AuthButtonProps> = ({title, typeButton, navigation, email, password}) => {
-    
+      
    
     const width = useWindowDimensions().width;
     const fontSize = width > 420 ? 22 : 16
 
     const dispatch = useAppDispatch()
     const auth = FIREBASE_AUTH
+    
 
     const handleLogin = () => {
         signInWithEmailAndPassword(auth, email, password)

@@ -1,4 +1,4 @@
-import React, { useEffect }  from "react";
+import React, { useEffect, useState }  from "react";
 import {  StyleSheet,  useWindowDimensions, TouchableOpacity, Text, Image } from "react-native";
 import {  signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
 
@@ -6,6 +6,7 @@ import { useAppDispatch } from "src/shared/hooks";
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import  auth  from "@react-native-firebase/auth";
 import database from "@react-native-firebase/database"
+import { _signInWithGoogle } from "../../firebase";
 
 interface AuthButtonProps {
     typeButton: 'gmail' | 'facebook';
@@ -13,22 +14,21 @@ interface AuthButtonProps {
 
 }
 
-GoogleSignin.configure({
-  webClientId: '710212738569-vaentlso46obld5b3231is62fvd1s50e.apps.googleusercontent.com',
-});
+// GoogleSignin.configure({
+//   webClientId: '710212738569-vaentlso46obld5b3231is62fvd1s50e.apps.googleusercontent.com',
+// });
 
 export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation}) => {
-    
+    const [authenticated, setAutheticated] = useState(false);
    
     const width = useWindowDimensions().width;
     const fontSize = width > 420 ? 20 : 16
 
     const dispatch = useAppDispatch()
     // const auth = FIREBASE_AUTH
-
+    
     function onAuthStateChanged(user:any) {
         console.log(user)
-        navigation.navigate('HomePage')
     }
 
     useEffect(() => {
@@ -36,26 +36,15 @@ export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigat
         return subscriber; // unsubscribe on unmount
     }, []);
 
-    const handleGoogleLogin = async () => {
-        // Check if your device supports Google Play
-        await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-        // Get the users ID token
-        const { idToken } = await GoogleSignin.signIn();
-
-        // Create a Google credential with the token
-        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-        // Sign-in the user with the credential
-        return auth().signInWithCredential(googleCredential);
+    async function onGoogleButtonPress() {
+        _signInWithGoogle()
     }
-
-    // const handleGoogleAuth = async () => {
-    //     const provider = await new GoogleAuthProvider();
-    //     return signInWithPopup(auth, provider)
-        
-  
-    // }
-
+    auth().onAuthStateChanged((user) => {
+        if(user) {
+            setAutheticated(true);
+        }
+        console.log(user)
+    })
     // const onPressHandler = typeButton === 'login' ? handleLogin : handleRegister
 
     const socialButton = {
@@ -74,7 +63,7 @@ export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigat
         <TouchableOpacity 
             activeOpacity={0.7} 
             style={styles.wrapper}
-            onPress={handleGoogleLogin}
+            onPress={() => onGoogleButtonPress()}
             >
             
             <Image source={icon} style={styles.icon}/>

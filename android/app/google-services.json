@@ -1,42 +1,33 @@
 {
   "project_info": {
-    "project_number": "710212738569",
-    "firebase_url": "https://electronick-api-default-rtdb.firebaseio.com",
-    "project_id": "electronick-api",
-    "storage_bucket": "electronick-api.appspot.com"
+    "project_number": "145011756893",
+    "project_id": "awesomeproject-906d2",
+    "storage_bucket": "awesomeproject-906d2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:710212738569:android:203d8099ed80f10c1f22d8",
+        "mobilesdk_app_id": "1:145011756893:android:aa685792339f23de6fe2b4",
         "android_client_info": {
           "package_name": "com.awesomeproject"
         }
       },
       "oauth_client": [
         {
-          "client_id": "710212738569-l6ks7b8a8psa1dq0v7jjhjte68i7705t.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.awesomeproject",
-            "certificate_hash": "fbf7beacb45218c330d64123395666b7eef4f0f5"
-          }
-        },
-        {
-          "client_id": "710212738569-vaentlso46obld5b3231is62fvd1s50e.apps.googleusercontent.com",
+          "client_id": "145011756893-nj085502vupmg04kdg5vu318m9efgpis.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-t2kTWKYVYvMvqfQTHzyXUGTAkAIGTbI"
+          "current_key": "AIzaSyDp8TI1nVPRj65epnsHj18CRLD9ZniAZU0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "710212738569-vaentlso46obld5b3231is62fvd1s50e.apps.googleusercontent.com",
+              "client_id": "145011756893-nj085502vupmg04kdg5vu318m9efgpis.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
