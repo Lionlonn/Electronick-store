@@ -19,7 +19,7 @@ export const LoginPage = ({navigation}: any) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-                
+                    
                 
                 <View style={styles.containerContent}>
                 <View style={styles.titleBlock}>

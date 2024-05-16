@@ -1,9 +1,9 @@
 import React, { useEffect, useState }  from "react";
-import {  StyleSheet,  useWindowDimensions, TouchableOpacity, Text, Image } from "react-native";
+import {  StyleSheet,  useWindowDimensions, TouchableOpacity, Text, Image, Alert } from "react-native";
 import {  signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
 
 import { useAppDispatch } from "src/shared/hooks";
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import  auth  from "@react-native-firebase/auth";
 import database from "@react-native-firebase/database"
 import { _signInWithGoogle } from "../../firebase";
@@ -26,26 +26,35 @@ export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigat
 
     const dispatch = useAppDispatch()
     // const auth = FIREBASE_AUTH
-    
-    function onAuthStateChanged(user:any) {
-        console.log(user)
-    }
+    React.useEffect(() => {
+        GoogleSignin.configure({
+        webClientId: "261753105416-6e3atrb1jm1b9gei6o45a3g2ug0rupjt.apps.googleusercontent.com", 
+        offlineAccess: true
+        });
+    }, [])
+   
 
-    useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-        return subscriber; // unsubscribe on unmount
-    }, []);
-
-    async function onGoogleButtonPress() {
-        _signInWithGoogle()
-    }
-    auth().onAuthStateChanged((user) => {
-        if(user) {
-            setAutheticated(true);
+    const GoogleSingUp = async () => {
+        try {
+        await GoogleSignin.hasPlayServices();
+        await GoogleSignin.signIn().then(result => { console.log(result) });
+        } catch (error: any) {
+        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+            // user cancelled the login flow
+        
+            Alert.alert('User cancelled the login flow !');
+        } else if (error.code === statusCodes.IN_PROGRESS) {
+            Alert.alert('Signin in progress');
+            // operation (f.e. sign in) is in progress already
+        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+            Alert.alert('Google play services not available or outdated !');
+            // play services not available or outdated
+        } else {
+            console.log(error)
         }
-        console.log(user)
-    })
-    // const onPressHandler = typeButton === 'login' ? handleLogin : handleRegister
+        }
+    };
+
 
     const socialButton = {
         gmail: {
@@ -63,7 +72,7 @@ export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigat
         <TouchableOpacity 
             activeOpacity={0.7} 
             style={styles.wrapper}
-            onPress={() => onGoogleButtonPress()}
+            onPress={() => GoogleSingUp()}
             >
             
             <Image source={icon} style={styles.icon}/>
