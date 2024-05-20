@@ -1,26 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {  Alert, Button, Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
-import { useAppDispatch } from "src/shared/hooks";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
-import { setUser } from "src/features/auth/model";
 import { FieldsAuth } from "src/shared/ui/auth-field";
 import { AuthButton } from "src/features/auth/ui/auth-button/index";
 import { SocialAuthButton } from "src/features/auth";
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+import { HomePage } from "src/pages/home/ui/intex";
+
 
 export const LoginPage = ({navigation}: any) => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const width = useWindowDimensions().width
     const fontSize = width > 420 ? 22 : 16
+    const [initializing, setInitializing] = useState(true);
+    const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+    const [ loading, setLoading ] = useState<Boolean>(false)
     
+    function onAuthStateChanged(user: FirebaseAuthTypes.User | null) {
+        setUser(user);
+        if (initializing) {
+            setInitializing(false)
+        };
+    }
+    useEffect(() => {
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber; // отписка от слушателя при размонтировании
+    }, []);
+    
+    useEffect(() => {
+        auth().onAuthStateChanged(userState => {
+        setUser(userState);
 
+        if (loading) {
+            setLoading(false);
+            
+           
+        }
+        });
+    }, []);
+    
+    if (user) {
+        navigation.navigate('HomePage')
+    }
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-                    
                 
+                <Button onPress={() => console.log(user)} title="user&"></Button>
+
+
                 <View style={styles.containerContent}>
                 <View style={styles.titleBlock}>
                         <View style={styles.greetingBlock}>
@@ -46,6 +74,8 @@ export const LoginPage = ({navigation}: any) => {
                         setPassword={setPassword}
                         />
                 </View>
+
+                
                 
                 <View style={{height: 50, width: '100%'}}>
                     <AuthButton

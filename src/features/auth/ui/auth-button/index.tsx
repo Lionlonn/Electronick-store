@@ -5,6 +5,7 @@ import { FIREBASE_AUTH } from "../../../../../FirebaseConfig";
 import { useAuth } from "src/shared/hooks/use-auth";
 import { useAppDispatch } from "src/shared/hooks";
 import { setUser } from "src/features/auth/model";
+import { _signInEmailAndPassword, _signUpEmailAndPassword } from "../../firebase";
 
 
 interface AuthButtonProps {
@@ -27,24 +28,17 @@ export const AuthButton: React.FC<AuthButtonProps> = ({title, typeButton, naviga
     const dispatch = useAppDispatch()
     const auth = FIREBASE_AUTH
     
-
+    
     const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(({user}) => {
-                console.log(user);
-                dispatch(setUser({
-                    email: user.email,
-                    id: user.uid,
-                    token: user.refreshToken
-                }))
-                navigation.navigate('HomePage')
-            })
-            .catch(console.error)
+        if (email && password !== null) _signInEmailAndPassword(email, password)
+            
+        
+        
+        
     }
     const handleRegister = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(console.log)
-            .catch(console.error)
+        if (email && password !== null) _signUpEmailAndPassword(email, password)
+        
     }
 
     const onPressHandler = typeButton === 'login' ? handleLogin : handleRegister

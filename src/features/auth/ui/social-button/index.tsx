@@ -7,16 +7,13 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 import  auth  from "@react-native-firebase/auth";
 import database from "@react-native-firebase/database"
 import { _signInWithGoogle } from "../../firebase";
-
 interface AuthButtonProps {
     typeButton: 'gmail' | 'facebook';
     navigation?: any;
 
 }
 
-// GoogleSignin.configure({
-//   webClientId: '710212738569-vaentlso46obld5b3231is62fvd1s50e.apps.googleusercontent.com',
-// });
+
 
 export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation}) => {
     const [authenticated, setAutheticated] = useState(false);
@@ -25,36 +22,11 @@ export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigat
     const fontSize = width > 420 ? 20 : 16
 
     const dispatch = useAppDispatch()
-    // const auth = FIREBASE_AUTH
-    React.useEffect(() => {
-        GoogleSignin.configure({
-        webClientId: "261753105416-6e3atrb1jm1b9gei6o45a3g2ug0rupjt.apps.googleusercontent.com", 
-        offlineAccess: true
-        });
-    }, [])
-   
 
-    const GoogleSingUp = async () => {
-        try {
-        await GoogleSignin.hasPlayServices();
-        await GoogleSignin.signIn().then(result => { console.log(result) });
-        } catch (error: any) {
-        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-            // user cancelled the login flow
-        
-            Alert.alert('User cancelled the login flow !');
-        } else if (error.code === statusCodes.IN_PROGRESS) {
-            Alert.alert('Signin in progress');
-            // operation (f.e. sign in) is in progress already
-        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-            Alert.alert('Google play services not available or outdated !');
-            // play services not available or outdated
-        } else {
-            console.log(error)
-        }
-        }
-    };
-
+    const GoogleSingUp =  () => {
+        _signInWithGoogle()
+    }
+    
 
     const socialButton = {
         gmail: {
