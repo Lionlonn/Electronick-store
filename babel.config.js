@@ -49,7 +49,7 @@ module.exports = function (api) {
           path: '.env',
         },
       ],
-      'react-native-paper/babel'
+      'react-native-paper/babel',
     ],
   };
 };
