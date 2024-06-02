@@ -9,7 +9,6 @@ import { _signInEmailAndPassword, _signUpEmailAndPassword } from "../../firebase
 
 
 interface AuthButtonProps {
-    title: string;
     typeButton: 'login' | 'signup';
     navigation?: any;
     email: string;
@@ -19,7 +18,7 @@ interface AuthButtonProps {
 
 
 
-export const AuthButton: React.FC<AuthButtonProps> = ({title, typeButton, navigation, email, password}) => {
+export const AuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation, email, password}) => {
       
    
     const width = useWindowDimensions().width;
@@ -42,6 +41,7 @@ export const AuthButton: React.FC<AuthButtonProps> = ({title, typeButton, naviga
     }
 
     const onPressHandler = typeButton === 'login' ? handleLogin : handleRegister
+    const titleButton = typeButton === 'login' ? "Login" : 'Sign Up'
 
     return(
         <TouchableOpacity 
@@ -49,7 +49,7 @@ export const AuthButton: React.FC<AuthButtonProps> = ({title, typeButton, naviga
             style={styles.wrapper}
             onPress={onPressHandler}
             >
-            <Text style={[ styles.title, {fontSize: fontSize}]}>{title}</Text>
+            <Text style={[ styles.title, {fontSize: fontSize}]}>{titleButton}</Text>
         </TouchableOpacity>
     )
 }

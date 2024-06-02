@@ -45,19 +45,15 @@ export const LoginPage = ({navigation}: any) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-                
-                <Button onPress={() => console.log(user)} title="user&"></Button>
-
-
                 <View style={styles.containerContent}>
-                <View style={styles.titleBlock}>
-                        <View style={styles.greetingBlock}>
-                            <Text style={[styles.greetingText, {fontSize: fontSize}]}>HI FELLA</Text>
-                            <Image
-                                source={require('../image/hello_image.png')}
-                            />
-                        </View>
-                    <Text style={[styles.sybGreetingText, {fontSize: fontSize * 1.3}]}>WELCOME BACK</Text>
+                    <View style={styles.titleBlock}>
+                            <View style={styles.greetingBlock}>
+                                <Text style={[styles.greetingText, {fontSize: fontSize}]}>HI FELLA</Text>
+                                <Image
+                                    source={require('../image/hello_image.png')}
+                                />
+                            </View>
+                        <Text style={[styles.sybGreetingText, {fontSize: fontSize * 1.3}]}>WELCOME BACK</Text>
                 </View>
                 
                 
@@ -77,17 +73,9 @@ export const LoginPage = ({navigation}: any) => {
 
                 
                 
-                <View style={{height: 50, width: '100%'}}>
+                <View style={styles.button}>
                     <AuthButton
-                        title="Login"
                         typeButton="login"
-                        navigation={navigation}
-                        email={email}
-                        password={password}
-                    />
-                    <AuthButton
-                        title="reg"
-                        typeButton="signup"
                         navigation={navigation}
                         email={email}
                         password={password}
@@ -95,12 +83,12 @@ export const LoginPage = ({navigation}: any) => {
                 </View>
             </View>
                       
-            <View style={styles.footerButtons}>
+            <View style={[styles.footerButtons, {marginTop: width > 420 ? 40 : 0}]}>
                 <TouchableOpacity>
-                    <Text>Forgot password</Text> 
+                    <Text style={[styles.footerTextLeft, {fontSize: fontSize}]}>Forgot password</Text> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('RegistrationPage')}>
-                    <Text>Login</Text> 
+                    <Text style={[styles.footerTextRight, {fontSize: fontSize}]}>Sign Up</Text> 
                 </TouchableOpacity>
             </View>
             
@@ -121,7 +109,8 @@ const styles = StyleSheet.create({
     containerContent: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        
     },
     titleBlock: {
         alignSelf: 'flex-start',
@@ -143,9 +132,6 @@ const styles = StyleSheet.create({
         color: 'black',
         fontWeight: '900'
     },
-    contentContainer: {
-        
-    },
     socialAuthBlock: {
         width: '100%',
         gap: 20,
@@ -155,9 +141,20 @@ const styles = StyleSheet.create({
         width: '100%',
         marginBottom: 40
     },
+    button: {
+        width: '100%',
+        height: 50,
+        
+    },
     footerButtons: {
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',   
+        justifyContent: 'space-between',
+    },
+    footerTextLeft: {
+        color: 'rgb(138, 139, 122)'
+    },
+    footerTextRight: {
+        color: 'rgb(186, 92, 61)'
     }
 })

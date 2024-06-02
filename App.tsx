@@ -21,7 +21,7 @@ import { ViewItemPage } from 'src/pages/view-item';
 import { BasketPage } from 'src/pages/basket/ui';
 import { WelcomePage } from 'src/pages/welcome/ui';
 import { LoginPage } from 'src/pages/auth/ui';
-import { RegistationPage } from 'src/pages/registration/ui';
+import { RegistrationPage } from 'src/pages/registration/ui';
 import { User, onAuthStateChanged } from 'firebase/auth';
 // import { FIREBASE_AUTH } from './FirebaseConfig';
 import './FirebaseConfig'
@@ -136,7 +136,7 @@ export const App = () => {
           />
           <Stack.Screen
             name='RegistrationPage'
-            component={RegistationPage}
+            component={RegistrationPage}
             options={{headerShown: false}}
           />
         </Stack.Navigator>
