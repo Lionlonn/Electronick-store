@@ -5,11 +5,18 @@ import { Cart } from "src/entities/product/ui/cart-view";
 import { ActionButtonsProduct } from "src/features/action-button";
 import { CounterTotalPrice } from "src/features/total-price";
 import { useStateSelector } from "src/shared/hooks";
+import { useStateUserAuth } from "features/auth/firebase/state-user";
 
 
 export const BasketPage = () => {
     const cart = useStateSelector(state => state.cartSlice);
-    
+    const { initializing, user } = useStateUserAuth();
+
+    if (initializing) return <Text>Loading...</Text>
+
+    if (!user) return <Text>Please auth user</Text>
+
+
     return (
         <ScrollView 
             contentContainerStyle={styles.container} 
@@ -19,6 +26,7 @@ export const BasketPage = () => {
             <View style={styles.contentContainer}>
                 {cart.map((item) => (
                     <Cart 
+                        key={item.id}
                         name={item.name}
                         image={item.img[0]}
                         price={item.price}

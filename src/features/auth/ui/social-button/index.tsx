@@ -1,12 +1,8 @@
 import React, { useEffect, useState }  from "react";
-import {  StyleSheet,  useWindowDimensions, TouchableOpacity, Text, Image, Alert } from "react-native";
-import {  signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
+import {  StyleSheet,  useWindowDimensions, TouchableOpacity, Text, Image } from "react-native";
 
 import { useAppDispatch } from "src/shared/hooks";
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-import  auth  from "@react-native-firebase/auth";
-import database from "@react-native-firebase/database"
-import { _signInWithGoogle } from "../../firebase";
+import { _signInWithGoogle } from "features/auth/firebase/social-user";
 interface AuthButtonProps {
     typeButton: 'gmail' | 'facebook';
     navigation?: any;

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Dimensions, StyleSheet, Text, TouchableOpacity, useWindowDimensions } from "react-native";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, User } from "firebase/auth";
+import {  StyleSheet, Text, TouchableOpacity, useWindowDimensions } from "react-native";
 import { FIREBASE_AUTH } from "../../../../../FirebaseConfig";
-import { useAuth } from "src/shared/hooks/use-auth";
 import { useAppDispatch } from "src/shared/hooks";
-import { setUser } from "src/features/auth/model";
-import { _signInEmailAndPassword, _signUpEmailAndPassword } from "../../firebase";
-
+import { _signInEmailAndPassword } from "features/auth/firebase/login-user";
+import { _signUpEmailAndPassword } from "features/auth/firebase/registration-user";
 
 interface AuthButtonProps {
     typeButton: 'login' | 'signup';
@@ -23,8 +20,7 @@ export const AuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation, e
    
     const width = useWindowDimensions().width;
     const fontSize = width > 420 ? 22 : 16
-
-    const dispatch = useAppDispatch()
+    
     const auth = FIREBASE_AUTH
     
     
