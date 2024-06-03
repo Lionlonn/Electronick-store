@@ -33,7 +33,7 @@ export const ViewItemPage: React.FC<PropsParam> = ({route}) => {
                         typeButton="add card"
                         action={() => handleAddToCart(item)}
                     />
-                    <View style={{width: 60, height: 60}}>
+                    <View >
                         <Favorite 
                             type="cartIcon"
                             product={item}
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     actionsContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems:'center',
         paddingHorizontal: 20,
         gap: 10,
         marginBottom: 20
