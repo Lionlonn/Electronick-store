@@ -3,15 +3,19 @@ import { ScrollView, StyleSheet, View, useWindowDimensions } from "react-native"
 import { ProductInfoContainer } from "src/entities/product-info";
 import { CartItem, addToCart } from "src/entities/product/model/action-creators";
 import { ActionButtonsProduct } from "src/features/action-button";
-import { useAppDispatch } from "src/shared/hooks";
+import { Favorite } from "src/features/favorite";
+import { useAppDispatch, useStateSelector } from "src/shared/hooks";
+import { PropsParam } from "src/shared/types/stack-param";
 import { ViewItemImagesBlock } from "src/widgets/item-images-swiper";
 
 
-export const ViewItemPage = ({route}: any) => {
+
+export const ViewItemPage: React.FC<PropsParam> = ({route}) => {
     const dispatch = useAppDispatch()
     const width = useWindowDimensions().width
     const item = route.params.item
-    
+    const favoriteItems = useStateSelector(state => state.favorite.items)
+
     const handleAddToCart = (product: CartItem) => {
         dispatch(addToCart(product))
     }
@@ -29,7 +33,13 @@ export const ViewItemPage = ({route}: any) => {
                         typeButton="add card"
                         action={() => handleAddToCart(item)}
                     />
-                    <View style={{width: 60, height: 60, borderRadius: 22, backgroundColor: 'red'}}></View>
+                    <View style={{width: 60, height: 60}}>
+                        <Favorite 
+                            type="cartIcon"
+                            product={item}
+                            isFavorite={favoriteItems.some(product => product.id === item.id)}
+                        />
+                    </View>
                 </View>
             </View>
         </ScrollView>

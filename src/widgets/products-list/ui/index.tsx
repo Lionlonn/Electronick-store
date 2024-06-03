@@ -45,7 +45,8 @@ export const ProductsList = (props: PropsProductList) => {
                                 shapeView={props.shapeView}
                                 navigation={props.navigation}
                                 favorite={
-                                    <Favorite 
+                                    <Favorite
+                                        type='mainIcon' 
                                         product={item} 
                                         isFavorite={favoriteItems.some(product => product.id === item.id)}
                                     />
@@ -73,7 +74,8 @@ export const ProductsList = (props: PropsProductList) => {
                                     shapeView={props.shapeView}
                                     navigation={props.navigation}
                                     favorite={
-                                        <Favorite 
+                                        <Favorite
+                                            type='mainIcon'
                                             product={item} 
                                             isFavorite={favoriteItems.some(product => product.id === item.id)}
                                             />
@@ -100,6 +102,7 @@ export const ProductsList = (props: PropsProductList) => {
                                     navigation={props.navigation}
                                     favorite={
                                         <Favorite 
+                                            type='mainIcon'
                                             product={item} 
                                             isFavorite={favoriteItems.some(product => product.id === item.id)}
                                         />

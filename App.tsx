@@ -25,43 +25,21 @@ import { RegistrationPage } from 'src/pages/registration/ui';
 import { User, onAuthStateChanged } from 'firebase/auth';
 // import { FIREBASE_AUTH } from './FirebaseConfig';
 import './FirebaseConfig'
+import { StackParamList } from 'src/shared/types/stack-param';
+import { ProductItem } from 'src/entities/product';
+import { CartItem } from 'src/entities/product/model/action-creators';
  
 
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
-const InsideStack = createNativeStackNavigator();
 
-function InsideLayout() {
-  return (
-    <InsideStack.Navigator>
-      <InsideStack.Screen 
-            name='HomePage' 
-            component={HomePage}
-            options={({navigation}) => ({
-                title: "",
-                headerLeft: () => <Avatar/>,
-                headerRight: () => <MenuButton navigation={navigation}/>,
-            })}
-          />
-    </InsideStack.Navigator>
-  )
-}
 
 export const App = () => {
   const [ user, setUser ] = useState<User | null>(null);
   
   
  
-  // useEffect(() => {
-  //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
-  //     console.log('user', user);
-  //     if (user !== null) {
-  //       Alert.alert('Авторизован')
-  //     }
-  //     setUser(user);
-  //   });
-  // }, [])
 
   return (
       <>
@@ -120,6 +98,7 @@ export const App = () => {
           <Stack.Screen
             name='ViewItem'
             component={ViewItemPage}
+            initialParams= {{item: {} as CartItem}}
           />
           <Stack.Screen
             name='BasketPage'
