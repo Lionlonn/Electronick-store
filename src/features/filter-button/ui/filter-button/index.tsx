@@ -1,32 +1,30 @@
 import React, { useEffect, useRef, useState } from "react";
-import {Animated, Dimensions,  ScrollView,  SectionList, StyleSheet, Text, View} from 'react-native';
+import {Animated, Dimensions,  ScrollView,  SectionList, StyleSheet, Text, View, useWindowDimensions} from 'react-native';
 import  Filter  from '../../image/filter.svg'
 import { IconButton } from "react-native-paper";
 import { RenderItem } from "../render-item/index"
 import { FilterData } from "../../api";
 import { Button } from 'shared/ui/index'
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import { fetchFilterData } from "../../model";
-import { useAppDispatch } from "src/shared/hooks";
 
-interface Item {
-    item: FilterData[],
+
+interface ItemProps {
+    item: FilterData[];
 }
 
-const { width, height } = Dimensions.get('window')
 
 
-
-export const FilterButton = (props: Item) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [ values, setValue ] = useState<number[]>([10, 2000]);
+export const FilterButton: React.FC<ItemProps> = ({item}) => {
+    // const [isOpen, setIsOpen] = useState<boolean>(false)
+    // const [ values, setValue ] = useState<number[]>([10, 2000]);
+    const { width, height} = useWindowDimensions()
     
 
-    const multiSliderValuesChange = (values: number[]) => {
-        setValue(values)
-    }
+    // const multiSliderValuesChange = (values: number[]) => {
+    //     setValue(values)
+    // }
     const handleCheckboxChange = (label: string, checked: boolean) => {
-        const newData = props.item.map((item) => {
+        const newData = item.map((item) => {
             const updateProductData = item.data.map((dataItem) =>
                 dataItem.label == label ? {...dataItem, checked} : dataItem
                 
@@ -37,39 +35,45 @@ export const FilterButton = (props: Item) => {
         
     }
 
-    const animatedController = useRef(new Animated.Value(0)).current;
-    const bodyWidth = width
-    const bodyHeight = animatedController.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, height],
-    });
-    const toggleListItem = () => {
+    // const animatedController = useRef(new Animated.Value(0)).current;
+    // const bodyWidth = width
+    // const bodyHeight = animatedController.interpolate({
+    //     inputRange: [0, 1],
+    //     outputRange: [0, height * 0.87],
+    // });
+    // const toggleListItem = () => {
 
-        if (isOpen) {
-          Animated.timing(animatedController, {
-            duration: 300,
-            toValue: 0,
-            useNativeDriver: false
-          }).start();
-        } else {
-          Animated.timing(animatedController, {
-            duration: 300,
-            toValue: 1,
-            useNativeDriver: false
-          }).start();
-        }
-        setIsOpen(!isOpen);
-    };
+    //     if (isOpen) {
+    //       Animated.timing(animatedController, {
+    //         duration: 300,
+    //         toValue: 0,
+    //         useNativeDriver: false
+    //       }).start();
+    //     } else {
+    //       Animated.timing(animatedController, {
+    //         duration: 300,
+    //         toValue: 1,
+    //         useNativeDriver: false
+    //       }).start();
+    //     }
+    //     setIsOpen(!isOpen);
+    // };
+
+    
     return (
         <View style={styles.container}>
-            <IconButton 
+            {/* <IconButton 
                 style={styles.button}
                 icon={() => <Filter/>}
                 size={20}
                 onPress={() => toggleListItem()}
-            />
-            
-            <Animated.ScrollView style={[styles.background, {width: bodyWidth, height:bodyHeight}]}>
+            /> */}
+             <Animated.ScrollView style={[styles.background, {
+                    width: bodyWidth, 
+                    height:bodyHeight,
+                }
+                ]}>
+                
                     <Text style={styles.titleFilter}>Filter by</Text>
                     <Text style={styles.priceTitle}>Price</Text>
                     
@@ -89,12 +93,14 @@ export const FilterButton = (props: Item) => {
                             selectedStyle={{backgroundColor: '#FF7F50'}}
                         />
                     </View>
+
                     <View style={styles.priceContainer}>
                         <Text style={styles.priceText}>${values[0]}</Text>
                         <Text style={styles.priceText}>${values[1]}</Text>
                     </View>
+
                     <SectionList 
-                        sections={props.item}
+                        sections={item}
                         keyExtractor={(item) => item.label}
                         scrollEnabled={false}
                         renderItem={({item}) => (
@@ -106,14 +112,16 @@ export const FilterButton = (props: Item) => {
                             <Text style={styles.headerItem}>{title}</Text>
                         )}
                     />
-                    <View style={[styles.sectionButton,{display: isOpen ? 'flex' : 'none'}]}>
+
+                    <View style={[
+                        styles.sectionButton, {display: isOpen ? 'flex' : 'none',}]}>
                         <Button buttonColor="white" onClick={toggleListItem} />
                         <Button buttonColor="yellow" onClick={toggleListItem} />
                     </View>
                     
                     
-            </Animated.ScrollView>
-            
+            </Animated.ScrollView> 
+             
             
             
         </View>
@@ -123,6 +131,7 @@ export const FilterButton = (props: Item) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'red'
     },
     button: {
         width: 40,
@@ -160,13 +169,13 @@ const styles = StyleSheet.create({
         marginTop: 20, 
     },
     background: {
-        flex: 1,
-        zIndex: 1,
+        // flex: 1,
+        // zIndex: 1,
         borderRadius: 16,
         backgroundColor: "orange",
-        position: 'absolute',
-        right: '-48%',
-        top: 50,
+        // position: 'absolute',
+        // right: '-48%',
+        // top: 50,
         
         
     },
