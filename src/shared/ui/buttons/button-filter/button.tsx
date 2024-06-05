@@ -34,6 +34,7 @@ Button.defaultProps = {
 const styles = StyleSheet.create({
     button: {
         // width: type === "Viev item" ? 111 : 150,
+        flex: 1,
         height: 42,
         borderRadius: 8,
         flexDirection: 'row',

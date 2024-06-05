@@ -9,7 +9,7 @@ import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { Button } from "src/shared/ui";
 
 
-const { width, height } = Dimensions.get('window')
+
 export const SearchInputField = () => {
     const { items, status } = useStateSelector(item => item.filter);
     const [text, onChangeText] = React.useState('');
@@ -21,7 +21,7 @@ export const SearchInputField = () => {
     const bodyWidth = width
     const bodyHeight = animatedController.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, height],
+        outputRange: [0, height - 100],
     });
 
     const handleCheckboxChange = (label: string, checked: boolean) => {
@@ -91,7 +91,7 @@ export const SearchInputField = () => {
                     height:bodyHeight,
                 }
                 ]}>
-                    <ScrollView>
+                    <ScrollView >
                         <Text style={styles.titleFilter}>Filter by</Text>
                         <Text style={styles.priceTitle}>Price</Text>
                         
@@ -133,8 +133,8 @@ export const SearchInputField = () => {
 
                         <View style={[
                             styles.sectionButton, {display: isOpen ? 'flex' : 'none',}]}>
-                            <Button buttonColor="white" onClick={toggleListItem} />
-                            <Button buttonColor="yellow" onClick={toggleListItem} />
+                            <Button buttonColor="white" onClick={toggleListItem} type='Cansel'/>
+                            <Button buttonColor="yellow" onClick={toggleListItem} type='Apply'/>
                         </View>
 
                     </ScrollView>
@@ -224,8 +224,10 @@ const styles = StyleSheet.create({
     sectionButton: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginHorizontal: 20,
+        marginBottom: 30,
+        gap: 40
         
-        margin: 30
     },
     multisliderStyle: {
         flexDirection: 'row',
@@ -250,6 +252,6 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         
        
-    }
-   
+    },
+    
 })
