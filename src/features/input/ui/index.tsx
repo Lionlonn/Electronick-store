@@ -85,8 +85,8 @@ export const SearchInputField = () => {
                 </View>
                 
              </View>
-            <View style={{flex: 1, display: isOpen ? 'flex' : 'none', }}>
-                <Animated.View style={[styles.background, {
+            <View style={{flex: 1, display: isOpen ? 'flex' : 'none'}}>
+                <Animated.View style={[styles.contentContainer, {
                     width: bodyWidth, 
                     height:bodyHeight,
                 }
@@ -152,17 +152,13 @@ export const SearchInputField = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        // width: width
+        minWidth: '100%',
     },
     wrapper: {
-        // position: 'relative',
-        justifyContent:'center',
-        marginHorizontal: 20
-        
+        alignSelf: 'center'
     },
     input: {
-        width: '100%',
+        minWidth: '100%',
         height: 50,
         borderWidth: 0.6,
         borderRadius: 6,
@@ -179,9 +175,6 @@ const styles = StyleSheet.create({
     inputInnerContainer: {
         position: 'absolute',
         alignSelf: 'flex-end',
-        
-        // top: 24,
-        // right: 25
     },
     titleFilter: {
         fontFamily: 'Avenir-Black',
@@ -214,12 +207,10 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 20, 
     },
-    background: {
-        // flex: 1,
-        // zIndex: 1,
+    contentContainer: {
+        zIndex: 1,
         borderRadius: 16,
-        backgroundColor: 'rgb(229, 229, 229)'
-        
+        backgroundColor: 'rgb(229, 229, 229)',
     },
     sectionButton: {
         flexDirection: 'row',

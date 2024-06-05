@@ -15,9 +15,10 @@ export const SearchPage = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingHorizontal: 20,
-        // alignItems: 'center',
+        paddingHorizontal: 20,
+        alignItems: 'center',
         // justifyContent: 'center',
+     
         backgroundColor: "white"
     },
 })
