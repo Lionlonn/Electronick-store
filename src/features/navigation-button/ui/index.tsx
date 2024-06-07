@@ -14,7 +14,7 @@ interface Props {
 export const NavigationButton = (props: Props) => {
 
     const width = useWindowDimensions().width;
-    const fontSize = width > 420 ? 22 : 16
+    const fontSize = width > 420 ? 24 : 16
 
     
 
@@ -36,8 +36,8 @@ export const NavigationButton = (props: Props) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        flex: 1,
-        height: 60,
+        width: '100%',
+        height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Avenir-Heavy',
         fontWeight: '500',
-        lineHeight: 22,
         color: 'black'
 
     }

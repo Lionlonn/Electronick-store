@@ -40,20 +40,13 @@ export const SearchInputField = () => {
     }
 
     const toggleListItem = () => {
-
-        if (isOpen) {
-          Animated.timing(animatedController, {
-            duration: 400,
-            toValue: 0,
+        const targetHeight = isOpen ? 0 : height - 100
+        Animated.timing(animatedController, {
+            duration: isOpen ? 400 : 500,
+            toValue: isOpen ? 0 : 1,
             useNativeDriver: false
           }).start();
-        } else {
-          Animated.timing(animatedController, {
-            duration: 500,
-            toValue: 1,
-            useNativeDriver: false
-          }).start();
-        }
+         
         setIsOpen(!isOpen);
     };
 
@@ -153,6 +146,7 @@ export const SearchInputField = () => {
 const styles = StyleSheet.create({
     container: {
         minWidth: '100%',
+        
     },
     wrapper: {
         alignSelf: 'center'

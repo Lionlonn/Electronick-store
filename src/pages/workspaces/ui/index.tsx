@@ -12,13 +12,11 @@ import { SearchUsers } from "src/widgets/search-users";
 export const WorkSpacesPage = ({navigation}: any) => {
     return (
         <View style={styles.container}>
-            
             <SearchInputField/>
-            
-            
-            
-            
             <ScrollView showsVerticalScrollIndicator={false}>
+                    
+                
+                
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
