@@ -10,7 +10,7 @@ import { useStateUserAuth } from "features/auth/firebase/state-user";
 
 
 
-export const BasketPage = ({navigation}: any) => {
+export const CheckOutPage = ({navigation}: any) => {
     const width = useWindowDimensions().width
     const cart = useStateSelector(state => state.cartSlice);
     const { initializing, user } = useStateUserAuth();
@@ -19,50 +19,26 @@ export const BasketPage = ({navigation}: any) => {
 
     if (initializing) return <Text>Loading...</Text>;
 
-    if (!user) {
-        return (
-            <View style={styles.stateUser}>
-                <Text style={[styles.stateUserText, {fontSize: fontSize}]}>Please login user</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>    
-                    <Text style={[styles.stateUserLogin, {fontSize: fontSize}]}>Login</Text>
-                </TouchableOpacity>
-            </View>
-            
-        );
-    }
-
+   
 
    
 
     return (
-        <ScrollView 
-            contentContainerStyle={styles.container} 
-            showsVerticalScrollIndicator={false} 
-            >
+        <View style={styles.container}>
                 
-            <View style={styles.contentContainer}>
-                {cart.map((item) => (
-                    <Cart 
-                        key={item.id}
-                        name={item.name}
-                        image={item.img[0]}
-                        price={item.price}
-                        id={item.id}
-                        quantity={item.quantity}
-                    />
-            ))} 
-            </View>
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+            </ScrollView>
 
             <View style={styles.footer}>
                 <CounterTotalPrice/>
                 <ActionButtonsProduct 
                     title="Proceed to Checkout" 
                     typeButton="continue to pay"
-                    action={() => navigation.navigate('CheckOutPage')}
+                    action={() => ""}
                 />
             </View>
             
-        </ScrollView>
+        </View>
     )
 }
 

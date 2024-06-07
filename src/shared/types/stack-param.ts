@@ -11,6 +11,7 @@ export type StackParamList = {
     ProductsWorkspace: undefined;
     ViewItem: {item: CartItem};
     BasketPage: undefined;
+    CheckOutPage: undefined;
     LoginPage: undefined;
     RegistrationPage: undefined;
 }

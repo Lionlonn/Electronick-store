@@ -28,6 +28,7 @@ import './FirebaseConfig'
 import { StackParamList } from 'src/shared/types/stack-param';
 import { ProductItem } from 'src/entities/product';
 import { CartItem } from 'src/entities/product/model/action-creators';
+import { CheckOutPage } from 'src/pages/checkout/ui';
  
 
 
@@ -109,6 +110,14 @@ export const App = () => {
             }}
           />
           <Stack.Screen
+            name='CheckOutPage'
+            component={CheckOutPage}
+            options={{
+              title: "Checkout",
+              headerTitleAlign: 'center'
+            }}
+          />
+          <Stack.Screen
             name='LoginPage'
             component={LoginPage}
             options={{headerShown: false}}
@@ -118,6 +127,7 @@ export const App = () => {
             component={RegistrationPage}
             options={{headerShown: false}}
           />
+
         </Stack.Navigator>
       </>
   );
