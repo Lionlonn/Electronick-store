@@ -6,6 +6,8 @@ import { ActionButtonsProduct } from "src/features/action-button";
 import { CounterTotalPrice } from "src/features/total-price";
 import { useStateSelector } from "src/shared/hooks";
 import { useStateUserAuth } from "features/auth/firebase/state-user";
+import { StripeProvider } from "@stripe/stripe-react-native";
+import PaymentScreen from "src/features/payment-screen/ui";
 
 
 
@@ -20,14 +22,17 @@ export const CheckOutPage = ({navigation}: any) => {
     if (initializing) return <Text>Loading...</Text>;
 
    
-
+    
    
 
     return (
         <View style={styles.container}>
                 
-            <ScrollView contentContainerStyle={styles.contentContainer}>
-            </ScrollView>
+            <View style={styles.contentContainer}>
+                <StripeProvider publishableKey="pk_test_51PP4jDRsFOYd7qAnv0i0kQVkZ09j2bTXM5FDoOzScn9Jo7BW2WtK6V0bselXmpOqwxVJKrBoUH92RdF7DwkovkoS00MkfhplSy">
+                    <PaymentScreen/>
+                </StripeProvider>
+            </View>
 
             <View style={styles.footer}>
                 <CounterTotalPrice/>

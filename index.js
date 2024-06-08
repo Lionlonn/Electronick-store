@@ -22,7 +22,7 @@ const Wrapper = () => {
                 <Provider store={store}>
                         <App/>
                 </Provider>
-        </NavigationContainer>
+            </NavigationContainer>
         </PaperProvider>
         
         

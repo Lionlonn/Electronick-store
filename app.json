@@ -1,4 +1,14 @@
 {
   "name": "AwesomeProject",
-  "displayName": "AwesomeProject"
+  "displayName": "AwesomeProject",
+  "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "your.merchant.identifier",
+          "enableGooglePay": true
+        }
+      ]
+    ]
+
 }
