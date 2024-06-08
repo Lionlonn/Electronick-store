@@ -21,7 +21,9 @@ export const CheckOutPage = ({navigation}: any) => {
 
     if (initializing) return <Text>Loading...</Text>;
 
-   
+    if (!process.env.REACT_APP_PUBLISH_KEY) {
+        throw Error("not publish key")
+    }
     
    
 
@@ -29,7 +31,7 @@ export const CheckOutPage = ({navigation}: any) => {
         <View style={styles.container}>
                 
             <View style={styles.contentContainer}>
-                <StripeProvider publishableKey="pk_test_51PP4jDRsFOYd7qAnv0i0kQVkZ09j2bTXM5FDoOzScn9Jo7BW2WtK6V0bselXmpOqwxVJKrBoUH92RdF7DwkovkoS00MkfhplSy">
+                <StripeProvider publishableKey={process.env.REACT_APP_PUBLISH_KEY}>
                     <PaymentScreen/>
                 </StripeProvider>
             </View>
