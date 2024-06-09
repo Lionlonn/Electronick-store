@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, TouchableOpacity, useWindowDimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Text, TouchableOpacity, useWindowDimensions } from "react-native";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Cart } from "src/entities/product/ui/cart-view";
 import { ActionButtonsProduct } from "src/features/action-button";
@@ -17,13 +17,11 @@ export const CheckOutPage = ({navigation}: any) => {
     const cart = useStateSelector(state => state.cartSlice);
     const { initializing, user } = useStateUserAuth();
 
+  
     const fontSize = width > 420 ? 22 : 16
 
     if (initializing) return <Text>Loading...</Text>;
 
-    if (!process.env.REACT_APP_PUBLISH_KEY) {
-        throw Error("not publish key")
-    }
     
    
 
@@ -31,7 +29,7 @@ export const CheckOutPage = ({navigation}: any) => {
         <View style={styles.container}>
                 
             <View style={styles.contentContainer}>
-                <StripeProvider publishableKey={process.env.REACT_APP_PUBLISH_KEY}>
+                <StripeProvider publishableKey="key" >
                     <PaymentScreen/>
                 </StripeProvider>
             </View>
