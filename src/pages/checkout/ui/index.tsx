@@ -22,14 +22,14 @@ export const CheckOutPage = ({navigation}: any) => {
 
     if (initializing) return <Text>Loading...</Text>;
 
-    
+    const publishKey = process.env.REACT_APP_PUBLISH_KEY
+    if (!publishKey) return    
    
-
     return (
         <View style={styles.container}>
                 
             <View style={styles.contentContainer}>
-                <StripeProvider publishableKey="key" >
+                <StripeProvider publishableKey={publishKey} >
                     <PaymentScreen/>
                 </StripeProvider>
             </View>
