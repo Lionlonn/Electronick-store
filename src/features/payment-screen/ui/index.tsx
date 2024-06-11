@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Button } from 'react-native';
 import { Screen } from 'react-native-screens';
+import { ActionButtonsProduct } from 'src/features/action-button';
+import { useStateSelector } from 'src/shared/hooks';
 
 // http://10.0.2.2:3002
 export default function PaymentScreen() {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
 
+  const cart = useStateSelector(state => state.cartSlice);
+  const totalPrice = (cart.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2);
 
   const API_URL = "http://10.0.2.2:3002" 
   const [ amount, setAmount ] = useState("");
@@ -19,7 +23,7 @@ export default function PaymentScreen() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({cost: amount.replace(".", "")})
+      body: JSON.stringify({cost: totalPrice.replace(".", "")})
     });
     const { paymentIntent, ephemeralKey, customer} = await response.json();
 
@@ -29,7 +33,7 @@ export default function PaymentScreen() {
       customer,
     };
   };
-
+  console.log(totalPrice)
   const initializePaymentSheet = async () => {
     setLoading(true)
     const {
@@ -59,7 +63,7 @@ export default function PaymentScreen() {
 
   const openPaymentSheet = async () => {
     const { error } = await presentPaymentSheet();
-
+12
     if (error) {
       Alert.alert(`Error code: ${error.code}`, error.message);
     } else {
@@ -69,13 +73,11 @@ export default function PaymentScreen() {
 
   
   return (
-    <Screen style={{padding: 20}}>
-      <TextInput onChangeText={(v) => {
-        setAmount(v);
-      }} style={{borderWidth: 1, borderColor: 'black'}}/>
-      <Button
-        title="Checkout"
-        onPress={initializePaymentSheet}
+    <Screen>
+      <ActionButtonsProduct 
+        title={"checkout $" + totalPrice}
+        typeButton='to pay'
+        action={initializePaymentSheet}
       />
       {
         (loading)&&
@@ -88,13 +90,5 @@ export default function PaymentScreen() {
 
 
 const styles = StyleSheet.create({
-  wrapper: {
-    width: '100%',
-    height: 50,
-    marginVertical: 30
-  },
-  cardStyle: {
-    backgroundColor: '#FFFFFF',
-    color: '#000000',
-  }
+   
 })

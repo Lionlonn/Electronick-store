@@ -26,24 +26,22 @@ export const CheckOutPage = ({navigation}: any) => {
     if (!publishKey) return    
    
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
                 
             <View style={styles.contentContainer}>
-                <StripeProvider publishableKey={publishKey} >
-                    <PaymentScreen/>
-                </StripeProvider>
+               <Text>SHIPPING INFORMATION</Text>
             </View>
 
             <View style={styles.footer}>
                 <CounterTotalPrice/>
-                <ActionButtonsProduct 
-                    title="Proceed to Checkout" 
-                    typeButton="continue to pay"
-                    action={() => ""}
-                />
+                <View>
+                    <StripeProvider publishableKey={publishKey} >
+                        <PaymentScreen/>
+                    </StripeProvider>
+                </View>
             </View>
             
-        </View>
+        </ScrollView>
     )
 }
 
@@ -74,6 +72,7 @@ const styles = StyleSheet.create({
         gap: 20
           
     },
+    
     footer: {
         width: '100%',
         paddingVertical: 20,
