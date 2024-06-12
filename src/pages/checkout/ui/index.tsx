@@ -8,6 +8,7 @@ import { useStateSelector } from "src/shared/hooks";
 import { useStateUserAuth } from "features/auth/firebase/state-user";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import PaymentScreen from "src/features/payment-screen/ui";
+import { DeliveryMap } from "src/features/delivery-map";
 
 
 
@@ -30,6 +31,7 @@ export const CheckOutPage = ({navigation}: any) => {
                 
             <View style={styles.contentContainer}>
                <Text>SHIPPING INFORMATION</Text>
+               <DeliveryMap/>
             </View>
 
             <View style={styles.footer}>
