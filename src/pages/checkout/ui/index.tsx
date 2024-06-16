@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     contentContainer: {
-        gap: 20
+        gap: 20,
+        flex: 1
           
     },
     

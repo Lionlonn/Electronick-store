@@ -1,95 +1,26 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Button, Alert } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import axios from 'axios';
 
-const API_KEY = "aa21e946f82e433ab2a519f75932f4f4";
+import YaMap from 'react-native-yamap';
 
-type Location = {
-    latitude: number;
-    longitude: number;
-} | null;
+YaMap.init('c330a73d-3750-4bc6-a048-5cb17e539dd0');
 
 export const DeliveryMap = () => {
-    const [city, setCity] = useState<string>('');
-    const [street, setStreet] = useState<string>('');
-    const [house, setHouse] = useState<string>('');
-    const [location, setLocation] = useState<Location>(null);
-
-    const geocode = async (address: string) => {
-        try {
-            const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${address}&key=${API_KEY}`);
-            if (response.data.results.length > 0) {
-                const location = response.data.results[0].geometry;
-                setLocation({
-                    latitude: location.lat,
-                    longitude: location.lng
-                });
-            } else {
-                Alert.alert('Адрес не найден', 'Попробуйте ввести другой адрес.');
-            }
-        } catch (error) {
-            console.error(error);
-            Alert.alert('Ошибка', 'Произошла ошибка при поиске адреса.');
-        }
-    };
-
-    const handleAddressSubmit = () => {
-        const address = `${house} ${street}, ${city}`;
-        geocode(address);
-    };
+    
 
     return (
         <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder="Город"
-                value={city}
-                onChangeText={setCity}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Улица"
-                value={street}
-                onChangeText={setStreet}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Дом"
-                value={house}
-                onChangeText={setHouse}
-            />
-            <Button title="Найти адрес" onPress={handleAddressSubmit} />
-            <MapView
-                style={styles.map}
-                provider={PROVIDER_GOOGLE}
+            <YaMap
+                userLocationIcon={{ uri: 'https://www.clipartmax.com/png/middle/180-1801760_pin-png.png' }}
                 initialRegion={{
-                    latitude: 55.5940336,
-                    longitude: 72.3742793,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
+                    lat: 50,
+                    lon: 50,
+                    zoom: 10,
+                    azimuth: 80,
+                    tilt: 100
                 }}
-                region={
-                    location
-                        ? {
-                            latitude: location.latitude,
-                            longitude: location.longitude,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,
-                        }
-                        : undefined
-                }
-            >
-                {location && (
-                    <Marker
-                        coordinate={{
-                            latitude: location.latitude,
-                            longitude: location.longitude
-                        }}
-                        title="Выбранный адрес"
-                    />
-                )}
-            </MapView>
+                style={{ flex: 1, backgroundColor: 'red' }}
+            />
         </View>
     );
 };
@@ -97,20 +28,6 @@ export const DeliveryMap = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        
-    },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
-        width: '80%',
-    },
-    map: {
-        width: '100%',
-        height: 400,
+        backgroundColor: 'red'
     },
 });
