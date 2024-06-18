@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, useWindowDimensions } from "react-native";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Cart } from "src/entities/product/ui/cart-view";
@@ -14,6 +14,7 @@ export const BasketPage = ({navigation}: any) => {
     const width = useWindowDimensions().width
     const cart = useStateSelector(state => state.cartSlice);
     const { initializing, user } = useStateUserAuth();
+    const [ disabledCheckOut, setDisabledCheckout ] = useState<boolean>(false)
 
     const fontSize = width > 420 ? 22 : 16
 
@@ -30,10 +31,9 @@ export const BasketPage = ({navigation}: any) => {
             
         );
     }
-
-
-   
-
+    
+    
+    
     return (
         <ScrollView 
             contentContainerStyle={styles.container} 
@@ -41,24 +41,33 @@ export const BasketPage = ({navigation}: any) => {
             >
                 
             <View style={styles.contentContainer}>
-                {cart.map((item) => (
+                {cart.length === 0 ? (
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={[styles.text, {fontSize: fontSize}]}>Basket empty</Text>
+                    </View>
+                ) : (
+                 cart.map((item, key) => (
                     <Cart 
-                        key={item.id}
+                        key={key}
                         name={item.name}
                         image={item.img[0]}
                         price={item.price}
                         id={item.id}
                         quantity={item.quantity}
                     />
-            ))} 
+                ))   
+                )}
+ 
             </View>
 
             <View style={styles.footer}>
+                
                 <CounterTotalPrice/>
                 <ActionButtonsProduct 
                     title="Proceed to Checkout" 
                     typeButton="continue to pay"
                     action={() => navigation.navigate('CheckOutPage')}
+                    disabled={cart.length < 1 ? true : false}
                 />
             </View>
             
@@ -90,8 +99,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     contentContainer: {
-        gap: 20
-          
+        gap: 20,
+        flex: 1
+    },
+    text: {
+        fontFamily: "Avenir-Black",
+        color: 'black'
     },
     footer: {
         width: '100%',
