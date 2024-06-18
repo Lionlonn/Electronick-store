@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 
-export const PhoneNumberInput = () => {
+interface PropsProneNumber {
+  colorText?: string
+}
+
+export const PhoneNumberInput:React.FC<PropsProneNumber> = ({colorText}) => {
   const [countryCode, setCountryCode] = useState('+7');
   const [phoneNumber, setPhoneNumber] = useState('');
 
   return (
     <View style={styles.container}>
       <View style={styles.countryCodeContainer}>
-        <Text style={styles.countryCodeText}>{countryCode}</Text>
+        <Text style={[styles.countryCodeText, {color: colorText}]}>{countryCode}</Text>
       </View>
       <View style={styles.phoneNumberContainer}>
         <TextInput
-          style={styles.phoneNumberInput}
+          style={[styles.phoneNumberInput, {color: colorText}]}
           placeholder="Enter phone number"
           keyboardType="phone-pad"
           value={phoneNumber}
