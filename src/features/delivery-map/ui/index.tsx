@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
+import React, { lazy, useEffect, useState } from 'react';
+import { View, StyleSheet, TextInput, TouchableOpacity, Text, Alert, Image } from 'react-native';
 import YaMap, { Marker, Geocoder } from 'react-native-yamap';
 
 YaMap.init('c330a73d-3750-4bc6-a048-5cb17e539dd0');
@@ -7,7 +7,7 @@ Geocoder.init('79a9313d-8f4b-44c4-aa2e-d2aebbbdd5f0');
 
 export const DeliveryMap = () => {
     const [address, setAddress] = useState<string>('');
-    const [coordinates, setCoordinates] = useState<{ lat: number, lon: number } | null>(null);
+    const [coordinates, setCoordinates] = useState<{ lat: number, lon: number } | null>({lat: 56.094731, lon: 43.512434});
 
     const handleAddressChange = (text: string) => {
         setAddress(text);
@@ -28,25 +28,36 @@ export const DeliveryMap = () => {
         }
     };
 
+
+    
+
     return (
         <View style={styles.container}>
-            <YaMap
+            {coordinates && 
+                <YaMap
+                nightMode={true}
                 initialRegion={{
-                    lat: 56.094731,
-                    lon: 43.512434,
-                    zoom: 10,
+                    lat: coordinates.lat,
+                    lon: coordinates.lon,
+                    zoom: address ? 18 : 10,
                     azimuth: 80,
-                    tilt: 100
+                    tilt: 50
                 }}
                 style={{ flex: 1 }}
-            >
-                {coordinates && (
+                >
+                {address && (
                     <Marker
-                        scale={3}
+                        anchor={{x: 0.5, y: 1.3}} 
+                        children={<Image
+                            style={{width: 25, height: 25}}
+                            source={require('../images/icons8-location-48.png')}
+                        />}
                         point={{ lat: coordinates.lat, lon: coordinates.lon }}
                     />
                 )}
-            </YaMap>
+                </YaMap>
+            }
+            
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
@@ -59,7 +70,7 @@ export const DeliveryMap = () => {
                 </TouchableOpacity>
             </View>
         </View>
-    );
+    )
 };
 
 const styles = StyleSheet.create({
@@ -67,15 +78,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     inputContainer: {
-        position: 'absolute',
-        top: 10,
-        left: 10,
-        right: 10,
-        flexDirection: 'row',
-        zIndex: 1,
+        flex: 1
     },
     input: {
-        flex: 1,
+        width: '100%',
+        height: 60,
         padding: 10,
         backgroundColor: 'white',
         borderRadius: 5,

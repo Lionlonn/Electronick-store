@@ -24,14 +24,14 @@ export const CheckOutPage = ({navigation}: any) => {
     if (initializing) return <Text>Loading...</Text>;
 
     const publishKey = process.env.REACT_APP_PUBLISH_KEY
-    if (!publishKey) return    
+    if (!publishKey) return null   
    
     return (
         <ScrollView contentContainerStyle={styles.container}>
                 
             <View style={styles.contentContainer}>
-               <Text>SHIPPING INFORMATION</Text>
-               <DeliveryMap/>
+                <Text>SHIPPING INFORMATION</Text>
+                <DeliveryMap/>
             </View>
 
             <View style={styles.footer}>
