@@ -3,11 +3,19 @@ import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { useStateSelector } from "src/shared/hooks";
 
 
-export const CounterTotalPrice = () => {
+interface TotalPriceProps {
+    totalCost?: number
+}
+
+export const CounterTotalPrice:React.FC<TotalPriceProps> = ({totalCost}) => {
     const cart = useStateSelector(state => state.cartSlice);
     const defaultSize = 16;
     const width = useWindowDimensions().width;
     const totalPrice = (cart.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2);
+    
+
+    const price = totalCost ? (parseFloat(totalPrice) + parseFloat('50.0')).toFixed(2) : totalPrice
+   
     
     return (
             <View style={styles.totalPrice}>
@@ -18,7 +26,7 @@ export const CounterTotalPrice = () => {
                 <Text style={[
                     styles.textPrice,
                     {fontSize: width > 420 ? defaultSize * 1.4 : defaultSize}
-                ]}>${totalPrice}</Text>
+                ]}>${price}</Text>
             </View>
     )
 }

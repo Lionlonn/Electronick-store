@@ -50,7 +50,7 @@ export const CheckOutPage = ({navigation}: any) => {
             </View>
 
             <View style={styles.footer}>
-                <CounterTotalPrice/>
+                <CounterTotalPrice totalCost={50}/>
                 <View>
                     <StripeProvider publishableKey={publishKey} >
                         <PaymentScreen/>
