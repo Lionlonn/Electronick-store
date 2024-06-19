@@ -66,7 +66,6 @@ export const PaymentScreen:React.FC<TotalPriceProps> = ({totalCost}) => {
 
   const openPaymentSheet = async () => {
     const { error } = await presentPaymentSheet();
-12
     if (error) {
       Alert.alert(`Error code: ${error.code}`, error.message);
     } else {
