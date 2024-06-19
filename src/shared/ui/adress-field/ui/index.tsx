@@ -16,6 +16,7 @@ export const AdressField:React.FC<AdressProps> = ({adress, setAdress}) => {
             placeholder="City, street, house"
             onChangeText={(text) => setAdress(text)}
             value={adress}
+            placeholderTextColor={'rgb(166, 167, 152)'}
         />
     )
 }
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 15,
         fontFamily: "Avenir-Heavy",
+        color: 'black'
 
     }
 })

@@ -7,7 +7,7 @@ import { CounterTotalPrice } from "src/features/total-price";
 import { useStateSelector } from "src/shared/hooks";
 import { useStateUserAuth } from "features/auth/firebase/state-user";
 import { StripeProvider } from "@stripe/stripe-react-native";
-import PaymentScreen from "src/features/payment-screen/ui";
+import { PaymentScreen } from "src/features/payment-screen/ui";
 import { DeliveryMap } from "src/features/delivery-map";
 import { AdressField } from "src/shared/ui/adress-field";
 import { PhoneNumberInput } from "src/shared/ui/number-field";
@@ -18,9 +18,10 @@ import { PhoneNumberInput } from "src/shared/ui/number-field";
 export const CheckOutPage = ({navigation}: any) => {
     const width = useWindowDimensions().width
     const cart = useStateSelector(state => state.cartSlice);
+    const totalPrice = (cart.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2);
     const { initializing, user } = useStateUserAuth();
     const [address, setAddress] = useState<string>('');
-  
+    
     const fontSize = width > 420 ? 22 : 14
 
     if (initializing) return <Text>Loading...</Text>;
@@ -49,11 +50,24 @@ export const CheckOutPage = ({navigation}: any) => {
                 
             </View>
 
+            <View style={styles.tape}></View>
+
+            <View style={styles.infoPriceCost}>
+                <View style={styles.subInfoPriceCost}>
+                    <Text style={[styles.textInfoPriceCost, {fontSize: fontSize}]}>SubTotal</Text>
+                    <Text style={[styles.textInfoPriceCost, {fontSize: fontSize * 1.1}]}>${totalPrice}</Text>
+                </View>
+                <View style={styles.subInfoPriceCost}>
+                    <Text style={[styles.textInfoPriceCost, {fontSize: fontSize}]}>Shoping cost</Text>
+                    <Text style={[styles.textInfoPriceCost, {fontSize: fontSize * 1.1}]}>$50.0</Text>
+                </View>
+            </View>
+            
             <View style={styles.footer}>
-                <CounterTotalPrice totalCost={50}/>
-                <View>
+                <CounterTotalPrice totalCost='50.0'/>
+                <View >
                     <StripeProvider publishableKey={publishKey} >
-                        <PaymentScreen/>
+                        <PaymentScreen totalCost="50.0"/>
                     </StripeProvider>
                 </View>
             </View>
@@ -83,12 +97,30 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir-Heavy',
         color: 'rgb(166, 167, 152)'
     },
-    
+    tape: {
+        width: '100%',
+        borderWidth: 1,
+        borderColor: 'rgb(244, 245, 247)',
+        marginVertical: 23
+    },
+    infoPriceCost: {
+        gap: 13
+    },
+    subInfoPriceCost: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+        
+    },
+    textInfoPriceCost: {
+        color: "rgb(166, 167, 152)",
+        fontFamily: 'Avenir-Heavy'
+    },
     footer: {
         width: '100%',
         paddingVertical: 20,
         alignSelf: 'center',
-        gap: 20
+        gap: 20,
     }
     
 })

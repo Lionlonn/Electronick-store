@@ -34,8 +34,8 @@ export const ActionButtonsProduct:React.FC<ActionButtonProps> = ({title, typeBut
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        height: 60,
-
+        minHeight: 50,
+        
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,

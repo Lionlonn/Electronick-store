@@ -3,8 +3,8 @@ import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { useStateSelector } from "src/shared/hooks";
 
 
-interface TotalPriceProps {
-    totalCost?: number
+export interface TotalPriceProps {
+    totalCost?: string
 }
 
 export const CounterTotalPrice:React.FC<TotalPriceProps> = ({totalCost}) => {
@@ -14,8 +14,8 @@ export const CounterTotalPrice:React.FC<TotalPriceProps> = ({totalCost}) => {
     const totalPrice = (cart.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2);
     
 
-    const price = totalCost ? (parseFloat(totalPrice) + parseFloat('50.0')).toFixed(2) : totalPrice
-   
+    const price = totalCost ? (parseFloat(totalPrice) + parseFloat(totalCost)).toFixed(2) : totalPrice;
+    
     
     return (
             <View style={styles.totalPrice}>
