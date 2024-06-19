@@ -4,7 +4,7 @@ import { useStateSelector } from "src/shared/hooks";
 
 
 export interface TotalPriceProps {
-    totalCost?: string
+    totalCost?: string;
 }
 
 export const CounterTotalPrice:React.FC<TotalPriceProps> = ({totalCost}) => {

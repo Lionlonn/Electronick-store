@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, useWindowDimensions } from "react-native";
+import { Button, Text, TouchableOpacity, useWindowDimensions } from "react-native";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Cart } from "src/entities/product/ui/cart-view";
 import { ActionButtonsProduct } from "src/features/action-button";
@@ -61,7 +61,6 @@ export const BasketPage = ({navigation}: any) => {
             </View>
 
             <View style={styles.footer}>
-                
                 <CounterTotalPrice/>
                 <ActionButtonsProduct 
                     title="Proceed to Checkout" 

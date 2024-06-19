@@ -5,7 +5,7 @@ import { Dimensions, StyleSheet, Text, TouchableOpacity, useWindowDimensions } f
 
 interface ActionButtonProps {
     title: string;
-    typeButton: 'add card' | 'continue to pay' | 'to pay';
+    typeButton?: 'add card' | 'continue to pay' | 'to pay';
     action: () => void;
     disabled?: boolean;
 }

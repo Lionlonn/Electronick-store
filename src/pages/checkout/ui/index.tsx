@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Text, TouchableOpacity, useWindowDimensions } from "react-native";
+import { Alert, Button, Text, TouchableOpacity, useWindowDimensions } from "react-native";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Cart } from "src/entities/product/ui/cart-view";
 import { ActionButtonsProduct } from "src/features/action-button";
@@ -65,9 +65,10 @@ export const CheckOutPage = ({navigation}: any) => {
             
             <View style={styles.footer}>
                 <CounterTotalPrice totalCost='50.0'/>
+                
                 <View >
                     <StripeProvider publishableKey={publishKey} >
-                        <PaymentScreen totalCost="50.0"/>
+                        <PaymentScreen totalCost="50.0" navigation={navigation}/>
                     </StripeProvider>
                 </View>
             </View>

@@ -7,13 +7,16 @@ import { ActionButtonsProduct } from 'src/features/action-button';
 import { TotalPriceProps } from 'src/features/total-price/ui';
 import { useStateSelector } from 'src/shared/hooks';
 
+interface PaymentScreenProps {
+  totalCost: string;
+  navigation: any
+}
 
-
-
-export const PaymentScreen:React.FC<TotalPriceProps> = ({totalCost}) => {
+export const PaymentScreen:React.FC<PaymentScreenProps> = ({totalCost, navigation}) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
-
+  
+  
   const cart = useStateSelector(state => state.cartSlice);
   const totalPrice = (cart.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2);
   const price = totalCost ? (parseFloat(totalPrice) + parseFloat(totalCost)).toFixed(2) : totalPrice;
@@ -69,7 +72,7 @@ export const PaymentScreen:React.FC<TotalPriceProps> = ({totalCost}) => {
     if (error) {
       Alert.alert(`Error code: ${error.code}`, error.message);
     } else {
-      Alert.alert('Success', 'Your order is confirmed!');
+      navigation.navigate('PaidPage')
     }
   };
 
