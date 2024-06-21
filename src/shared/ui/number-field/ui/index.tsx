@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 
 interface PropsProneNumber {
-  colorText?: string
+  colorText?: string;
+  phoneNumber: string;
+  setPhoneNumber: (phoneNumber: string) => void;
 }
 
-export const PhoneNumberInput:React.FC<PropsProneNumber> = ({colorText}) => {
+export const PhoneNumberInput:React.FC<PropsProneNumber> = ({colorText, phoneNumber, setPhoneNumber}) => {
   const [countryCode, setCountryCode] = useState('+7');
-  const [phoneNumber, setPhoneNumber] = useState('');
 
   return (
     <View style={styles.container}>

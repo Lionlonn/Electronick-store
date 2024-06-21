@@ -31,6 +31,7 @@ import { CartItem } from 'src/entities/product/model/action-creators';
 import { CheckOutPage } from 'src/pages/checkout/ui';
 import { StripeProvider } from '@stripe/stripe-react-native';
 import { PaidPage } from 'src/pages/paid/ui';
+import { OrdersPage } from 'src/pages/orders/ui';
 
 
 
@@ -124,6 +125,14 @@ export const App = () => {
             component={PaidPage}
             options={{
               title: "PaidPage",
+              headerTitleAlign: 'center'
+            }}
+          />
+          <Stack.Screen
+            name='OrdersPage'
+            component={OrdersPage}
+            options={{
+              title: "OrdersPage",
               headerTitleAlign: 'center'
             }}
           />

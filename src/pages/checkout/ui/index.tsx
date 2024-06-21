@@ -21,14 +21,24 @@ export const CheckOutPage = ({navigation}: any) => {
     const totalPrice = (cart.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2);
     const { initializing, user } = useStateUserAuth();
     const [address, setAddress] = useState<string>('');
-    
+    const [ disableButton, setDisabledButton ] = useState<boolean>(true)
+    const [phoneNumber, setPhoneNumber] = useState('');
+
     const fontSize = width > 420 ? 22 : 14
+
+    useEffect(() => {
+        if (address.length > 10 && phoneNumber.length == 10) {
+            setDisabledButton(false)
+        } else {
+            setDisabledButton(true)
+        }
+    }, [address, phoneNumber])
 
     if (initializing) return <Text>Loading...</Text>;
 
     const publishKey = process.env.REACT_APP_PUBLISH_KEY
-    if (!publishKey) return null   
-    
+    if (!publishKey) return null 
+
     
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -43,7 +53,7 @@ export const CheckOutPage = ({navigation}: any) => {
                     </View>
                     <View style={{gap: 5}}>
                         <Text style={[styles.text, {fontSize: fontSize}]}>Phone number</Text>
-                        <PhoneNumberInput colorText="black"/>
+                        <PhoneNumberInput colorText="black" phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber}/>
                     </View>
                     
                 </View>
@@ -68,7 +78,7 @@ export const CheckOutPage = ({navigation}: any) => {
                 
                 <View >
                     <StripeProvider publishableKey={publishKey} >
-                        <PaymentScreen totalCost="50.0" navigation={navigation}/>
+                        <PaymentScreen totalCost="50.0" navigation={navigation} disableButton={disableButton}/>
                     </StripeProvider>
                 </View>
             </View>

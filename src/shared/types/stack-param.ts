@@ -13,6 +13,7 @@ export type StackParamList = {
     BasketPage: undefined;
     CheckOutPage: undefined;
     PaidPage: undefined;
+    OrdersPage: undefined;
     LoginPage: undefined;
     RegistrationPage: undefined;
 }

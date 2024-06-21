@@ -9,10 +9,11 @@ import { useStateSelector } from 'src/shared/hooks';
 
 interface PaymentScreenProps {
   totalCost: string;
-  navigation: any
+  navigation: any;
+  disableButton: boolean;
 }
 
-export const PaymentScreen:React.FC<PaymentScreenProps> = ({totalCost, navigation}) => {
+export const PaymentScreen:React.FC<PaymentScreenProps> = ({totalCost, navigation, disableButton}) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
   
@@ -76,13 +77,13 @@ export const PaymentScreen:React.FC<PaymentScreenProps> = ({totalCost, navigatio
     }
   };
 
-  
   return (
     <Screen>
       <ActionButtonsProduct 
         title={"checkout $" + price}
         typeButton='to pay'
         action={initializePaymentSheet}
+        disabled={disableButton}
       />
       {
         (loading)&&

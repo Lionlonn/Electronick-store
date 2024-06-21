@@ -11,7 +11,7 @@ export const PaidPage = ({navigation}: any) => {
             <Text style={[styles.titleText, {fontSize: fontSize}]}>All Done!</Text>
             <LottieView style={{width: '100%', height: 360}} source={{uri:'https://lottie.host/16c8f615-682a-476c-a8ac-91c87c6d0762/UNugjr4sez.json'}} autoPlay loop />
             <View style={styles.buttonWrapper}>
-                <ActionButtonsProduct title="Go to orders" action={() => navigation.navigate('HomePage')}/>
+                <ActionButtonsProduct title="Go to orders" action={() => navigation.navigate('OrdersPage')}/>
             </View>
             
         </ScrollView>
