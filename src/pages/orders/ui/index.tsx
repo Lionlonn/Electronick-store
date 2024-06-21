@@ -1,19 +1,19 @@
 import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { SearchInputField } from "src/features/input";
 import { CartOrder } from "src/shared/ui/card";
 import { OrdersList } from "src/widgets/products-list";
 
 
 
-export const OrdersPage = () => {
+export const OrdersPage = ({navigation}: any) => {
  
     
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
             <SearchInputField/>
-            <OrdersList/>
-        </ScrollView>
+            <OrdersList navigation={navigation}/>
+        </View>
     )
 }
 

@@ -5,10 +5,12 @@ import { CartOrder } from "src/shared/ui/card";
 
 
 
-export const OrdersList = () => {
+export const OrdersList = ({navigation}: any) => {
     const [ items, date ] = useStateSelector(state => state.orderSlice)
     
-    console.log(items.items, "ITEM")
+    
+
+   
 
     return (
         <View>
@@ -20,8 +22,10 @@ export const OrdersList = () => {
                         <CartOrder 
                             id={item.id}
                             image={item.img[0]}
+                            items={items.items}
                             date="2"
                             name={item.name}
+                            navigation={navigation}
                         />
                     </View>
                 )}

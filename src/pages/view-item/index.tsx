@@ -15,7 +15,7 @@ export const ViewItemPage: React.FC<PropsParam> = ({route}) => {
     const width = useWindowDimensions().width
     const item = route.params.item
     const favoriteItems = useStateSelector(state => state.favorite.items)
-
+    
     const handleAddToCart = (product: CartItem) => {
         dispatch(addToCart(product))
     }

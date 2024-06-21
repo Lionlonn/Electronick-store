@@ -7,16 +7,22 @@ interface CartOrderProps {
     image: string;
     date: string;
     name: string;
-    linkCart?: string;
+    items?: any;
+    navigation: any
 }
 
 
-export const CartOrder:React.FC<CartOrderProps> = ({id, image, date, name, linkCart}) => {
+export const CartOrder:React.FC<CartOrderProps> = ({id, image, date, name, navigation, items}) => {
     
     const width = useWindowDimensions().width
     const fontSize = width > 420 ? 18 : 14 
 
     
+    const OpenViewItem = () => {
+        items.forEach((item: any) => {
+            return navigation.navigate('ViewItem', {item: item})
+        }
+    )}
 
     return (
         <View style={styles.container}>
@@ -29,12 +35,12 @@ export const CartOrder:React.FC<CartOrderProps> = ({id, image, date, name, linkC
                 </View>
                 <View style={styles.contentInfo}>
                     <Text style={[styles.text, {fontSize: fontSize}]}>Delivered september {date}</Text>
-                    <Text style={[styles.text, {fontSize: fontSize * 1.3}]}>{name}</Text>
+                    <Text style={[styles.text, {fontSize: fontSize * 1.2}]}>{name}</Text>
                 </View>
                 <Text style={styles.textId}>#{id}</Text>
             </View> 
             <TouchableOpacity style={styles.button}>
-               <Text style={[styles.text]}>View Item</Text> 
+               <Text style={[styles.text, {fontSize: fontSize * 1.2}]} onPress={() => OpenViewItem()}>View Item</Text> 
             </TouchableOpacity>
         </View>
     )
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
 
     },
     button: {
-        flex: 1,
+        flex: 0.5,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 0.5,
