@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Button } from 'react-native';
 import { Screen } from 'react-native-screens';
+import { placeOrder } from 'src/entities/product/model/action-creators';
 import { ActionButtonsProduct } from 'src/features/action-button';
 import { TotalPriceProps } from 'src/features/total-price/ui';
-import { useStateSelector } from 'src/shared/hooks';
+import { useAppDispatch, useStateSelector } from 'src/shared/hooks';
 
 interface PaymentScreenProps {
   totalCost: string;
@@ -16,6 +17,8 @@ interface PaymentScreenProps {
 export const PaymentScreen:React.FC<PaymentScreenProps> = ({totalCost, navigation, disableButton}) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
+  const itemsOrder = useStateSelector(state => state.cartSlice)
+  const dispatch = useAppDispatch()
   
   
   const cart = useStateSelector(state => state.cartSlice);
@@ -74,6 +77,7 @@ export const PaymentScreen:React.FC<PaymentScreenProps> = ({totalCost, navigatio
       Alert.alert(`Error code: ${error.code}`, error.message);
     } else {
       navigation.navigate('PaidPage')
+      dispatch(placeOrder({items: itemsOrder, date:'2'}))
     }
   };
 

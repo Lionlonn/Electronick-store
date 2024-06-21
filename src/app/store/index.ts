@@ -3,7 +3,7 @@ import productsReducer from 'entities/product/model/index'
 import favoriteReducer from 'features/favorite/model/index'
 import filterReducer from 'features/filter-button/model/index'
 import buttonProductsReducer from 'features/category-buttons/model/index'
-import  cartReducer  from "src/entities/product/model/action-creators";
+import cartReducer, { ordersSlice }  from "src/entities/product/model/action-creators";
 import userReducer from 'features/auth/model/index'
 
 
@@ -13,8 +13,9 @@ export const store = configureStore({
         favorite: favoriteReducer,
         filter: filterReducer,
         buttonPrudcts: buttonProductsReducer,
-        cartSlice: cartReducer,
-        user: userReducer
+        cartSlice: cartReducer.cartReducer,
+        orderSlice: cartReducer.orderReducer,
+        user: userReducer,
     }
 })
 

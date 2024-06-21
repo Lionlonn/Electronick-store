@@ -6,11 +6,17 @@ export interface CartItem extends ProductItem {
     quantity: number;
 }
 
-const initialState: CartItem[] = []
+export interface Order {
+    items: CartItem[];
+    date: string;
+}
+
+const initialCartState: CartItem[] = [];
+const initialOrderState: Order[] =[];
 
 export const cartSlice = createSlice({
     name: 'cart',
-    initialState,
+    initialState: initialCartState,
     reducers: {
         addToCart: (state, action: PayloadAction<CartItem>) => {
             const existingItem = state.find(item => item.id === action.payload.id);
@@ -36,6 +42,21 @@ export const cartSlice = createSlice({
     }
 })
 
-export const {addToCart, removeFromCart, updateQuantity} = cartSlice.actions
 
-export default cartSlice.reducer
+export const ordersSlice = createSlice({
+    name: 'orders',
+    initialState: initialOrderState,
+    reducers: {
+        placeOrder: (state, action: PayloadAction<Order>) => {
+            state.push(action.payload);
+        }
+    }
+})
+
+export const {addToCart, removeFromCart, updateQuantity} = cartSlice.actions
+export const { placeOrder } = ordersSlice.actions 
+
+export default {
+    cartReducer: cartSlice.reducer,
+    orderReducer: ordersSlice.reducer
+}

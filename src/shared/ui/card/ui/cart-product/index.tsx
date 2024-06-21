@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View, Text, Image, Dimensions, useWindowDimensions } from "react-native";
 import UsbImage from '../image/usb.svg'
 import { ProductItem } from "src/entities/product";
-import StarImage from '../image/star.svg'
+import StarImage from '../../image/star.svg'
 import { FavoriteProps } from "src/features/favorite/ui";
 
 
