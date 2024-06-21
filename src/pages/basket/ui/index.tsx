@@ -59,7 +59,7 @@ export const BasketPage = ({navigation}: any) => {
                 )}
  
             </View>
-
+            <Button title="order page" onPress={() => navigation.navigate('OrdersPage')}/>        
             <View style={styles.footer}>
                 <CounterTotalPrice/>
                 <ActionButtonsProduct 
