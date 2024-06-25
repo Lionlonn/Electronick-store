@@ -6,12 +6,12 @@ import { _signInWithGoogle } from "features/auth/firebase/social-user";
 interface AuthButtonProps {
     typeButton: 'gmail' | 'facebook';
     navigation?: any;
-
+    setLoading: (loading: boolean) => void;
 }
 
 
 
-export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation}) => {
+export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation, setLoading}) => {
     const [authenticated, setAutheticated] = useState(false);
    
     const width = useWindowDimensions().width;
@@ -20,6 +20,7 @@ export const SocialAuthButton: React.FC<AuthButtonProps> = ({typeButton, navigat
     const dispatch = useAppDispatch()
 
     const GoogleSingUp =  () => {
+        setLoading(true)
         _signInWithGoogle()
     }
     

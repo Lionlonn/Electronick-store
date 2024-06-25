@@ -43,7 +43,7 @@ export const LoginPage = ({navigation}: any) => {
     if (user) {
         navigation.navigate('HomePage')
     }
-    // if (loading) return <LoadingIndicator/>
+    
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -61,8 +61,8 @@ export const LoginPage = ({navigation}: any) => {
                 
                 
                 <View style={styles.socialAuthBlock}>
-                    <SocialAuthButton typeButton="gmail"/>
-                    <SocialAuthButton typeButton="facebook"/>
+                    <SocialAuthButton typeButton="gmail" setLoading={setLoading}/>
+                    <SocialAuthButton typeButton="facebook" setLoading={setLoading}/>
                 </View>
                 <View style={styles.fields}>
                     <FieldsAuth 

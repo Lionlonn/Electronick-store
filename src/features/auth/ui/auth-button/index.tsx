@@ -32,7 +32,10 @@ export const AuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation, e
         )
     }
     const handleRegister = () => {
-        if (email && password !== null) _signUpEmailAndPassword(email, password)
+        if (email && password !== null) (
+            setLoading(true),
+            _signUpEmailAndPassword(email, password)
+        )
         
     }
 

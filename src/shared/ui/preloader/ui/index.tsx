@@ -3,7 +3,6 @@ import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native'
 export const LoadingIndicator = () => (
     <View style={styles.loadingContainer}>
-        {/* <ActivityIndicator size="large" color="#0000ff" /> */}
         <LottieView 
             source={require('../animation/anim.json')}
             autoPlay

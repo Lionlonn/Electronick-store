@@ -5,6 +5,7 @@ import { AuthButton } from "src/features/auth/ui/auth-button/index";
 import { SocialAuthButton } from "src/features/auth";
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import { HomePage } from "src/pages/home/ui/intex";
+import { LoadingIndicator } from "src/shared/ui/preloader";
 
 
 export const RegistrationPage = ({navigation}: any) => {
@@ -45,6 +46,7 @@ export const RegistrationPage = ({navigation}: any) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
+                {loading ? <LoadingIndicator/> : false}
                 <View style={styles.containerContent}>
                     <View style={styles.titleBlock}>
                             <View style={styles.greetingBlock}>
@@ -79,6 +81,7 @@ export const RegistrationPage = ({navigation}: any) => {
                         navigation={navigation}
                         email={email}
                         password={password}
+                        setLoading={setLoading}
                     />
                 </View>
             </View>
