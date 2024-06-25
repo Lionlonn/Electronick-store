@@ -19,7 +19,7 @@ export const ViewItemPage: React.FC<PropsParam> = ({route}) => {
     const handleAddToCart = (product: CartItem) => {
         dispatch(addToCart(product))
     }
-    
+    console.log(item) 
     return (
         <ScrollView style={styles.bacground}>
             <View style={styles.container}>
@@ -50,11 +50,10 @@ export const ViewItemPage: React.FC<PropsParam> = ({route}) => {
 const styles = StyleSheet.create({
     bacground: {
         backgroundColor: '#FFF',
+        
     },
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     info: {
         marginVertical: 20

@@ -15,10 +15,10 @@ export const ProductInfo = (props: Props) => {
     const width = useWindowDimensions().width
     
     return (
-        <View style={[styles.container, {width: width}]}> 
+        <View style={[styles.container]}> 
             <View style={styles.wrapperHeader}>
                 <View>
-                    <Text style={styles.titleProduct}>{props.name}</Text>
+                    <Text style={[styles.titleProduct, {width: width > 420 ? '100%' : 251}]}>{props.name}</Text>
                     <View style={styles.subTitleInfo}>
                         <Text style={styles.textCategory}>{props.category}</Text>
                         <View style={styles.point}></View>
@@ -41,10 +41,12 @@ export const ProductInfo = (props: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
-        minHeight: 200
+        flex: 1,
+        minHeight: 200,
+        paddingHorizontal: 20
     },
     wrapperHeader: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -55,13 +57,15 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         lineHeight: 29,
         color: 'black',
-        marginBottom: 8
+        marginBottom: 8,
+        
+        flexWrap: 'wrap',
     },
     subTitleInfo: {
         flexDirection: 'row',
         gap: 10,
         alignItems: 'center',
-        justifyContent: 'center',
+        
         
     },
     textCategory: {
