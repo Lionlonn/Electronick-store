@@ -21,8 +21,9 @@ export const CheckOutPage = ({navigation}: any) => {
     const totalPrice = (cart.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2);
     const { initializing, user } = useStateUserAuth();
     const [address, setAddress] = useState<string>('');
-    const [ disableButton, setDisabledButton ] = useState<boolean>(true)
+    const [ disableButton, setDisabledButton ] = useState<boolean>(true);
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [loading, setLoading ] = useState<boolean>(false);
 
     const fontSize = width > 420 ? 22 : 14
 

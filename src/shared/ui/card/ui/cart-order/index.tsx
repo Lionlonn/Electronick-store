@@ -18,6 +18,9 @@ export const CartOrder:React.FC<CartOrderProps> = ({id, image, date, name, navig
     const width = useWindowDimensions().width
     const fontSize = width > 420 ? 18 : 14 
 
+    const openItem = () => {
+        navigation.navigate("ViewItem", {item: item})
+    }
 
     return (
         <View style={styles.container}>
@@ -34,8 +37,8 @@ export const CartOrder:React.FC<CartOrderProps> = ({id, image, date, name, navig
                 </View>
                 <Text style={styles.textId}>#{id}</Text>
             </View> 
-            <TouchableOpacity style={styles.button}>
-               <Text style={[styles.text, {fontSize: fontSize * 1.2}]} onPress={() => navigation.navigate("ViewItem", {item: item})}>View Item</Text> 
+            <TouchableOpacity style={styles.button} onPress={openItem}>
+               <Text style={[styles.text, {fontSize: fontSize * 1.2}]}>View Item</Text> 
             </TouchableOpacity>
         </View>
     )

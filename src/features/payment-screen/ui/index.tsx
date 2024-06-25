@@ -7,6 +7,7 @@ import { placeOrder } from 'src/entities/product/model/action-creators';
 import { ActionButtonsProduct } from 'src/features/action-button';
 import { TotalPriceProps } from 'src/features/total-price/ui';
 import { useAppDispatch, useStateSelector } from 'src/shared/hooks';
+import { LoadingIndicator } from 'src/shared/ui/preloader';
 
 interface PaymentScreenProps {
   totalCost: string;
@@ -91,7 +92,7 @@ export const PaymentScreen:React.FC<PaymentScreenProps> = ({totalCost, navigatio
       />
       {
         (loading)&&
-        <ActivityIndicator/>
+        <LoadingIndicator/>
       }
     </Screen>
   );
