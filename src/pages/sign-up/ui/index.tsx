@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {  Alert, Button, Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import {  ActivityIndicator, Alert, Button, Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { FieldsAuth } from "src/shared/ui/auth-field";
 import { AuthButton } from "src/features/auth/ui/auth-button/index";
 import { SocialAuthButton } from "src/features/auth";
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
-import { HomePage } from "src/pages/home/ui/intex";
+
 
 
 export const SignUpPage = ({navigation}: any) => {
@@ -43,15 +43,18 @@ export const SignUpPage = ({navigation}: any) => {
         navigation.navigate('HomePage')
     }
 
+    if (loading) {
+        return <ActivityIndicator/>
+    }
+
+    console.log(loading)
     return (
         <ScrollView contentContainerStyle={styles.container}>
+                
                 <View style={styles.containerContent}>
                 <View style={styles.titleBlock}>
                         <View style={styles.greetingBlock}>
                             <Text style={[styles.greetingText, {fontSize: fontSize}]}>HI FELLA</Text>
-                            {/* <Image
-                                source={require('../image/hello_image.png')}
-                            /> */}
                         </View>
                     <Text style={[styles.sybGreetingText, {fontSize: fontSize * 1.3}]}>WELCOME BACK</Text>
                 </View>
@@ -75,7 +78,6 @@ export const SignUpPage = ({navigation}: any) => {
                 
                 <View style={{height: 50, width: '100%'}}>
                     <AuthButton
-                        title="Login"
                         typeButton="login"
                         navigation={navigation}
                         email={email}

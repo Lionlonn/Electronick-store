@@ -9,13 +9,13 @@ interface AuthButtonProps {
     typeButton: 'login' | 'signup';
     navigation?: any;
     email: string;
-    password: string
-
+    password: string;
+    setLoading: (loading: boolean) => void;
 }
 
 
 
-export const AuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation, email, password}) => {
+export const AuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation, email, password, setLoading}) => {
       
    
     const width = useWindowDimensions().width;
@@ -25,11 +25,11 @@ export const AuthButton: React.FC<AuthButtonProps> = ({typeButton, navigation, e
     
     
     const handleLogin = () => {
-        if (email && password !== null) _signInEmailAndPassword(email, password)
-            
-        
-        
-        
+        if (email && password !== null) (
+            setLoading(true),
+            _signInEmailAndPassword(email, password)
+
+        )
     }
     const handleRegister = () => {
         if (email && password !== null) _signUpEmailAndPassword(email, password)
