@@ -3,11 +3,12 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { FeaturedWorkspace } from "src/entities/featured-workspace";
 import { CategoryButtons } from "src/features/category-buttons";
 import { SearchInputField } from "src/features/input";
+import { BrowseWorkSpaces } from "src/widgets/browse-workspaces";
 import { SearchUsers } from "src/widgets/search-users";
 
 
 export const WorkSpacesPage = ({navigation}: any) => {
-    const [ categoryTitle, setCategoryTitle ] = useState<string>("Show all")
+    
 
 
     return (
@@ -17,11 +18,8 @@ export const WorkSpacesPage = ({navigation}: any) => {
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
-                <Text>{categoryTitle}</Text>
-                <View style={{gap: 32}}>
-                    <CategoryButtons setCategory={setCategoryTitle}/>
-                    <SearchUsers navigation={navigation}/>
-                </View>
+               
+                <BrowseWorkSpaces navigation={navigation}/>
                 
             </ScrollView>
             

@@ -6,11 +6,12 @@ import { SeeMoreButton } from "src/shared/ui/see-more-button";
 import { ProductsList } from "src/widgets/products-list";
 import { handleCategoryTitle } from "./category-title";
 
-interface Props {
-    navigation: any
+interface SearchUsersProps {
+    navigation: any;
+    categoryTitle: string;
 }
 
-export const SearchUsers = (props: Props) => {
+export const SearchUsers:React.FC<SearchUsersProps> = ({navigation, categoryTitle}) => {
     const { item, status } = useStateSelector(state => state.buttonPrudcts)
     const dispatch = useAppDispatch()
 
@@ -19,15 +20,16 @@ export const SearchUsers = (props: Props) => {
     }, [])
 
     
-    const categoryTitle = item?.find(obj => {return obj.category})
+    // const categoryTitle = item?.find(obj => {return obj.category})
+    
 
     return (
         <View>
-            {categoryTitle && handleCategoryTitle(categoryTitle.category, props.navigation)}
+            {categoryTitle && handleCategoryTitle(categoryTitle, navigation)}
             <ProductsList 
                 shapeView='boxHorizontal' 
                 item={item} 
-                navigation={props.navigation}/> 
+                navigation={navigation}/> 
         </View>
 
         

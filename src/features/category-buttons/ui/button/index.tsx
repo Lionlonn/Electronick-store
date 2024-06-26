@@ -24,7 +24,8 @@ export const CategoryButtons:React.FC<CategoryButtonsProps> = ({setCategory}) =>
     const sizeM = width > 420
 
     const handleCategory = handleClickCategoryActions(dispatch, setIsPressed);
- 
+    
+    console.log(isPressed)
 
     const buttonStyle = (category: string) => ({
        backgroundColor: isPressed === category ? "rgb(4, 11, 20)" : "rgb(244, 245, 247)",
