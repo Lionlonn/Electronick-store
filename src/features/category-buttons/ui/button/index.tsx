@@ -3,14 +3,18 @@ import {ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimension
 import { useAppDispatch } from "src/shared/hooks";
 import { getButtonDeveloperProduct, getButtonProductsAll, getFilmakingProduct, getPhotographyProduct, getPodcastProduct } from "../../model";
 import { Button } from "react-native-paper";
+import { handleClickCategoryActions } from "../actions";
 
 interface ClickHandles {
-    [key: string]: () => void
-    
+    [key: string]: () => void;
+}
+
+interface CategoryButtonsProps {
+    setCategory: (category: string) => void;
 }
 
 
-export const CategoryButtons = () => {
+export const CategoryButtons:React.FC<CategoryButtonsProps> = ({setCategory}) => {
     const [ isPressed, setIsPressed ] = useState<string>('Show all')
     const categories = ['Show all', 'Developer', 'Podcast creator', 'Filmaking', 'Photography']; 
     const dispatch = useAppDispatch();
@@ -19,36 +23,14 @@ export const CategoryButtons = () => {
 
     const sizeM = width > 420
 
-    
-    const handleClickCategoryActions: ClickHandles = {
-        'Show all': () => {
-            dispatch(getButtonProductsAll());
-            setIsPressed('Show all');
-        },
-        'Developer': () => {
-            dispatch(getButtonDeveloperProduct());
-            setIsPressed('Developer');
-        },
-        'Podcast creator': () => {
-            dispatch(getPodcastProduct());
-            setIsPressed('Podcast creator');
-        },
-        'Filmaking': () => {
-            dispatch(getFilmakingProduct());
-            setIsPressed('Filmaking');
-        },
-        'Photography': () => {
-            dispatch(getPhotographyProduct());
-            setIsPressed('Photography');
-        }
-    };
+    const handleCategory = handleClickCategoryActions(dispatch, setIsPressed);
+ 
 
     const buttonStyle = (category: string) => ({
        backgroundColor: isPressed === category ? "rgb(4, 11, 20)" : "rgb(244, 245, 247)",
        color: isPressed === category ? "white" : "black"
     })
 
-    console.log(isPressed, "IsPressed Category")    
     return (
         <View>
             <Text style={styles.title}>Browse workspaces</Text>
@@ -58,7 +40,7 @@ export const CategoryButtons = () => {
                 horizontal={true}>
                 {categories.map((category, index) => (
                     <View key={index}>
-                        <Button onPress={handleClickCategoryActions[category]} 
+                        <Button onPress={handleCategory[category]} 
                             style={[
                                 {   
                                     padding: 3

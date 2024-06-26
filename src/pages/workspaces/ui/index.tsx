@@ -1,15 +1,15 @@
-import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { FeaturedWorkspace } from "src/entities/featured-workspace";
-import { Product } from "src/entities/product";
 import { CategoryButtons } from "src/features/category-buttons";
-import { ContainerCategoryButton } from "src/features/category-buttons/ui";
 import { SearchInputField } from "src/features/input";
-import { ProductsList } from "src/widgets/products-list";
 import { SearchUsers } from "src/widgets/search-users";
 
 
 export const WorkSpacesPage = ({navigation}: any) => {
+    const [ categoryTitle, setCategoryTitle ] = useState<string>("Show all")
+
+
     return (
         <View style={styles.container}>
             <SearchInputField/>
@@ -17,8 +17,9 @@ export const WorkSpacesPage = ({navigation}: any) => {
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
+                <Text>{categoryTitle}</Text>
                 <View style={{gap: 32}}>
-                    <ContainerCategoryButton/>
+                    <CategoryButtons setCategory={setCategoryTitle}/>
                     <SearchUsers navigation={navigation}/>
                 </View>
                 

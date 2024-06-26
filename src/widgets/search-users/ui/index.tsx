@@ -20,8 +20,6 @@ export const SearchUsers = (props: Props) => {
 
     
     const categoryTitle = item?.find(obj => {return obj.category})
-    
-    
 
     return (
         <View>
