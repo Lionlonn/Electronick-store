@@ -48,8 +48,7 @@ export const CategoryButtons = () => {
        color: isPressed === category ? "white" : "black"
     })
 
-    
-    
+    console.log(isPressed, "IsPressed Category")    
     return (
         <View>
             <Text style={styles.title}>Browse workspaces</Text>
@@ -62,7 +61,6 @@ export const CategoryButtons = () => {
                         <Button onPress={handleClickCategoryActions[category]} 
                             style={[
                                 {   
-                                    
                                     padding: 3
                                 },
                                 buttonStyle(category)

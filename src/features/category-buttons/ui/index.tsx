@@ -9,8 +9,6 @@ import { useDispatch } from "react-redux";
 export const ContainerCategoryButton = () => {
     return (
         <View>
-            
-            
             <CategoryButtons/>
         </View>
     )

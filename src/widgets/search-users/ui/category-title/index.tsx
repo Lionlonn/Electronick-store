@@ -4,37 +4,22 @@ import { getButtonProductsAll } from "src/features/category-buttons/model";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { SeeMoreButton } from "src/shared/ui/see-more-button";
 import { ProductsList } from "src/widgets/products-list";
-import { handleCategoryTitle } from "./category-title";
 
-interface Props {
-    navigation: any
-}
 
-export const SearchUsers = (props: Props) => {
-    const { item, status } = useStateSelector(state => state.buttonPrudcts)
-    const dispatch = useAppDispatch()
 
-    useEffect(() => {
-        dispatch(getButtonProductsAll())
-    }, [])
+export const handleCategoryTitle = (category: string, navigation: any) => {
 
     
-    const categoryTitle = item?.find(obj => {return obj.category})
-    
-    
-
     return (
-        <View>
-            {categoryTitle && handleCategoryTitle(categoryTitle.category, props.navigation)}
-            <ProductsList 
-                shapeView='boxHorizontal' 
-                item={item} 
-                navigation={props.navigation}/> 
+        <View style={styles.titleWrapper}>
+            <View style={{flexDirection: 'row'}}>
+                <Text style={styles.titleText}>What </Text>
+                <Text style={[styles.titleText, {color: 'rgb(186, 92, 61)'}]}>{category}</Text>
+                <Text style={styles.titleText}> search for</Text>
+            </View>
+            <SeeMoreButton navigation={navigation} path="ProductsWorkspace"/>
         </View>
-
-        
     )
-
 }
 
 

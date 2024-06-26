@@ -34,7 +34,8 @@ export const ContainerNewArrialProduct = ({navigation}: any) => {
                     item={product}
                     navigation={navigation}
                     favorite={
-                        <Favorite 
+                        <Favorite
+                            type="mainIcon" 
                             product={product}
                             isFavorite={isFavorite}
                         />

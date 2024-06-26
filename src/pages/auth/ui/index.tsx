@@ -22,6 +22,7 @@ export const LoginPage = ({navigation}: any) => {
         if (initializing) {
             setInitializing(false)
         };
+        setLoading(false)
     }
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -31,23 +32,15 @@ export const LoginPage = ({navigation}: any) => {
     useEffect(() => {
         auth().onAuthStateChanged(userState => {
         setUser(userState);
-
-        if (loading) {
-            setLoading(false);
-            
-           
-        }
         });
     }, []);
     
     if (user) {
         navigation.navigate('HomePage')
-    }
-    
-
+    } 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-                {loading ? <LoadingIndicator/> : false}
+                {loading ? <LoadingIndicator/> : ''}
                 <View style={styles.containerContent}>
                     <View style={styles.titleBlock}>
                             <View style={styles.greetingBlock}>
