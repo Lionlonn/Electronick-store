@@ -25,12 +25,18 @@ export const CategoryButtons:React.FC<CategoryButtonsProps> = ({setCategory}) =>
 
     const handleCategory = handleClickCategoryActions(dispatch, setIsPressed);
     
-    console.log(isPressed)
+    function ActionsCategory(category:string) {
+        handleCategory[category];
+        setCategory(category);
+        setIsPressed(category)
+    }
+
 
     const buttonStyle = (category: string) => ({
        backgroundColor: isPressed === category ? "rgb(4, 11, 20)" : "rgb(244, 245, 247)",
        color: isPressed === category ? "white" : "black"
     })
+
 
     return (
         <View>
@@ -41,7 +47,7 @@ export const CategoryButtons:React.FC<CategoryButtonsProps> = ({setCategory}) =>
                 horizontal={true}>
                 {categories.map((category, index) => (
                     <View key={index}>
-                        <Button onPress={handleCategory[category]} 
+                        <Button onPress={() => ActionsCategory(category)} 
                             style={[
                                 {   
                                     padding: 3
