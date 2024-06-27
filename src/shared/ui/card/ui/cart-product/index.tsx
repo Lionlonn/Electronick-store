@@ -7,7 +7,7 @@ import { FavoriteProps } from "src/features/favorite/ui";
 
 
 
-interface Props {
+interface CardProductProps {
     item: ProductItem;
     shape: 'box' | 'rect' | 'boxHorizontal';
     rightTopSlot: React.ReactNode;
@@ -17,9 +17,9 @@ interface Props {
 
 const baseFontSIze = 14
 
-export const CardProduct = (props: Props) => {
-    const {name, category, price, rating} = props.item;
-    const img = props.item.img[0]
+export const CardProduct:React.FC<CardProductProps> = ({item, shape, rightTopSlot, navigation}) => {
+    const {name, category, price, rating} = item;
+    const img = item.img[0]
     const width = useWindowDimensions().width;
 
     const cardWidth = (width - 23 * 3) / 2;
@@ -29,13 +29,13 @@ export const CardProduct = (props: Props) => {
     const responsePositionIconStar = sizeM ?  -2.5 : -1.2
 
     const openProduct = () => {
-       props.navigation.navigate('ViewItem', {item: props.item}) 
+       navigation.navigate('ViewItem', {item: item}) 
     }
     
     return (
         <TouchableOpacity style={styles.container} onPress={() => openProduct()}>
             <View style={[
-                props.shape == 'box' || props.shape === 'boxHorizontal'
+                shape == 'box' || shape === 'boxHorizontal'
                 ? [styles.wrapperBox, {width: cardWidth}]
                 : [styles.wrapperRect, {minWidth: '90%'}],
                 
@@ -46,17 +46,17 @@ export const CardProduct = (props: Props) => {
                         source={{uri: img}}
                         />
                     <View style={styles.addFaforites}>
-                        {props.rightTopSlot}
+                        {rightTopSlot}
                     </View>
                 </View>
                 
                 <View style={[
-                    props.shape == 'box' || props.shape === 'boxHorizontal'
-                    ? [styles.aboutBox, {width: (cardWidth - 20), }] 
+                    shape == 'box' || shape === 'boxHorizontal'
+                    ? [styles.aboutBox] 
                     : [styles.aboutRect]]
                     }>
                     
-                    {props.shape == 'box' || props.shape === 'boxHorizontal'
+                    {shape == 'box' || shape === 'boxHorizontal'
                     ? 
                         <View style={styles.infoCard}>
                             <Text style={[styles.titleCard, {fontSize: sizeM ? baseFontSIze * 1.6 : baseFontSIze * 1.3}]}>
@@ -74,7 +74,8 @@ export const CardProduct = (props: Props) => {
                                 <Text style={[
                                     styles.textRating,
                                     {
-                                        fontSize: sizeM ? baseFontSIze : baseFontSIze * 0.9 
+                                        fontSize: sizeM ? baseFontSIze : baseFontSIze * 0.9,
+                                         
                                     }
                                     ]}>
                                         {rating}
@@ -132,7 +133,7 @@ export const CardProduct = (props: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        
+        flex: 1
     },
     
     wrapperBox: {
@@ -143,7 +144,9 @@ const styles = StyleSheet.create({
         gap: 10,
         position: 'relative',
         overflow: 'hidden',
-        padding: 10
+        padding: 10,
+        
+        
     },
     cardImage: {   
         borderRadius: 22,
@@ -156,15 +159,18 @@ const styles = StyleSheet.create({
         top: 0
     },
     aboutBox: {
-        width: '100%',
-        height: 'auto',
         backgroundColor: '#FFF',
         borderRadius: 8,
         padding: 10,
+        width: '100%',
+        minHeight: 100,
+        justifyContent: 'center'
         
     },
     infoCard: {
-        gap: 4
+        gap: 4,
+        flex: 1,
+        position: 'relative'
     },
     titleCard: {
         fontFamily: 'Avenir-Heavy',
@@ -183,10 +189,12 @@ const styles = StyleSheet.create({
     },
     blockRating: {
         alignSelf: 'flex-end',
-        paddingTop: 5,
         flexDirection: 'row',
         alignItems:'center',
-        gap: 5
+        // justifyContent: 'flex-end',
+        position: 'absolute',
+        gap: 5,
+        bottom: 0
     },
     textRating: {
         fontFamily: 'Avenir-Heavy',

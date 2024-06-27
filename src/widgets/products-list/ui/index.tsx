@@ -6,13 +6,13 @@ import { Button, Text } from "react-native-paper";
 import { productsAll } from "src/entities/product/model";
 import { Favorite } from "src/features/favorite";
 
-interface PropsProductList {
+interface ProductListProps {
     shapeView: 'box' | 'rect' | 'boxHorizontal';
     item: ProductItem[] | undefined;
     navigation: any
 }
 
-export const ProductsList = (props: PropsProductList) => {
+export const ProductsList:React.FC<ProductListProps> = ({shapeView, item, navigation}) => {
     const favoriteItems = useStateSelector(state => state.favorite.items)
 
     useEffect(() => {
@@ -32,9 +32,9 @@ export const ProductsList = (props: PropsProductList) => {
     return (
         <View>
             
-            {props.shapeView === 'box' ? (
+            {shapeView === 'box' ? (
                 <FlatList 
-                    data={props.item}
+                    data={item}
                     keyExtractor={(item) => item.id.toString()}
                     style={{alignSelf: 'center',}} 
                     renderItem={({item}) => (
@@ -42,8 +42,8 @@ export const ProductsList = (props: PropsProductList) => {
                             <Product 
                                 key={item.id} 
                                 item={item} 
-                                shapeView={props.shapeView}
-                                navigation={props.navigation}
+                                shapeView={shapeView}
+                                navigation={navigation}
                                 favorite={
                                     <Favorite
                                         type='mainIcon' 
@@ -61,9 +61,9 @@ export const ProductsList = (props: PropsProductList) => {
                 
             /> 
             ) 
-                : props.shapeView === 'rect' ? (
+                : shapeView === 'rect' ? (
                     <FlatList 
-                        data={props.item}
+                        data={item}
                         keyExtractor={(item) => item.id.toString()}
                         style={{alignSelf: 'center',}}
                         renderItem={({item}) => (
@@ -71,8 +71,8 @@ export const ProductsList = (props: PropsProductList) => {
                                 <Product 
                                     key={item.id} 
                                     item={item} 
-                                    shapeView={props.shapeView}
-                                    navigation={props.navigation}
+                                    shapeView={shapeView}
+                                    navigation={navigation}
                                     favorite={
                                         <Favorite
                                             type='mainIcon'
@@ -88,7 +88,7 @@ export const ProductsList = (props: PropsProductList) => {
                 /> 
                 ) : (
                     <FlatList 
-                        data={props.item}
+                        data={item}
                         keyExtractor={(item) => item.id.toString()}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
@@ -98,8 +98,8 @@ export const ProductsList = (props: PropsProductList) => {
                                 <Product 
                                     key={item.id} 
                                     item={item}
-                                    shapeView={props.shapeView}
-                                    navigation={props.navigation}
+                                    shapeView={shapeView}
+                                    navigation={navigation}
                                     favorite={
                                         <Favorite 
                                             type='mainIcon'

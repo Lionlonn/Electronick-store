@@ -18,8 +18,10 @@ export const WorkSpacesPage = ({navigation}: any) => {
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
-               
-                <BrowseWorkSpaces navigation={navigation}/>
+                <View style={{marginBottom: 20}}>
+                    <BrowseWorkSpaces navigation={navigation}/>
+                </View> 
+                
                 
             </ScrollView>
             
