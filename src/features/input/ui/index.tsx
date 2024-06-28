@@ -7,11 +7,11 @@ import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { Button } from "src/shared/ui";
 
 interface SearchInputFieldProps {
-    multisliderBlock: ReactNode
+    multisliderBlock: ReactNode;
+    listItem: ReactNode;
 }
 
-export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlock}) => {
-    const { items, status } = useStateSelector(item => item.filter);
+export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlock, listItem}) => {
     const [text, onChangeText] = React.useState('');
     const [isOpen, setIsOpen] = useState<boolean>(false) 
     const { width, height} = useWindowDimensions()
@@ -23,18 +23,7 @@ export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlo
         outputRange: [0, height - 100],
     });
 
-    const handleCheckboxChange = (label: string, checked: boolean) => {
-        const newData = items.map((item) => {
-            const updateProductData = item.data.map((dataItem) =>
-                dataItem.label == label ? {...dataItem, checked} : dataItem
-                
-            );
-            
-            return {...item, data: updateProductData}
-        })
-        
-    }
-   
+    
 
     const toggleListItem = () => {
         const targetHeight = isOpen ? 0 : height - 100
@@ -89,20 +78,7 @@ export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlo
                             {multisliderBlock}
                         </View>
 
-
-                        <SectionList 
-                            sections={items}
-                            keyExtractor={(item) => item.label}
-                            scrollEnabled={false}
-                            renderItem={({item}) => (
-                                <View style={styles.item}>
-                                    <RenderItem {...item} onChange={handleCheckboxChange}/>
-                                </View>
-                            )}
-                            renderSectionHeader={({section: {title}}) => (
-                                <Text style={styles.headerItem}>{title}</Text>
-                            )}
-                        />
+                        {listItem}
 
                         <View style={[
                             styles.sectionButton, {display: isOpen ? 'flex' : 'none',}]}>
@@ -164,23 +140,7 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
     },
-    headerItem: {
-        fontFamily: 'Avenir-Black',
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#8A8B7A',
-        fontStyle: 'normal',
-        paddingLeft: 22,
-        paddingRight: 20,
-        marginBottom: 20,
-        marginTop: 20,
-    },
-    item: {
-        paddingLeft: 22,
-        paddingRight: 20,
-        marginBottom: 20,
-        marginTop: 20, 
-    },
+    
     contentContainer: {
         zIndex: 1,
         borderRadius: 16,
