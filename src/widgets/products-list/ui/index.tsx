@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useStateSelector } from "shared/hooks";
 import { Product, ProductItem } from "entities/product";
-import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { productsAll } from "src/entities/product/model";
 import { Favorite } from "src/features/favorite";
@@ -30,7 +30,7 @@ export const ProductsList:React.FC<ProductListProps> = ({shapeView, item, naviga
     
     
     return (
-        <View>
+        <ScrollView showsVerticalScrollIndicator={false}>
             
             {shapeView === 'box' ? (
                 <FlatList 
@@ -115,7 +115,7 @@ export const ProductsList:React.FC<ProductListProps> = ({shapeView, item, naviga
                 )
             }
             
-        </View>
+        </ScrollView>
     )
 }
 

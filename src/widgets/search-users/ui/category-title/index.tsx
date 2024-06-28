@@ -5,19 +5,23 @@ import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { SeeMoreButton } from "src/shared/ui/see-more-button";
 import { ProductsList } from "src/widgets/products-list";
 
+interface handleCategoryTitleProps {
+    categoryTtile: string;
+    navigation: any;
+    // title: string
+}
 
-
-export const handleCategoryTitle = (category: string, navigation: any) => {
+export const HandleCategoryTitle:React.FC<handleCategoryTitleProps> = ({categoryTtile, navigation}) => {
 
     
     return (
         <View style={styles.titleWrapper}>
             <View style={{flexDirection: 'row'}}>
                 <Text style={styles.titleText}>What </Text>
-                <Text style={[styles.titleText, {color: 'rgb(186, 92, 61)'}]}>{category}</Text>
+                <Text style={[styles.titleText, {color: 'rgb(186, 92, 61)'}]}>{categoryTtile}</Text>
                 <Text style={styles.titleText}> search for</Text>
             </View>
-            <SeeMoreButton navigation={navigation} path="ProductsWorkspace"/>
+            <SeeMoreButton navigation={navigation} path="ProductsWorkspace" categoryTitle={categoryTtile}/>
         </View>
     )
 }

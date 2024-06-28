@@ -2,17 +2,18 @@ import React from "react";
 import { View, Text, SafeAreaView, FlatList, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
 import Arrow from 'src/assets/images/arrow.svg'
 
-interface Props {
+interface SeeMoreButtonProps {
     navigation: any;
-    path: string
+    path: string;
+    categoryTitle?: string;
 }
 
-export const SeeMoreButton = (props: Props) => {
+export const SeeMoreButton:React.FC<SeeMoreButtonProps> = ({navigation, path, categoryTitle}) => {
 
     
     return (
        <View>
-            <TouchableOpacity style={styles.seeMore} onPress={() => {props.navigation.navigate(props.path)}}>
+            <TouchableOpacity style={styles.seeMore} onPress={() => {navigation.navigate(path, {title: categoryTitle})}}>
                 <Text>See more</Text>
                 <Arrow style={{position: 'absolute', right: 0, bottom: 0}}/>
             </TouchableOpacity>

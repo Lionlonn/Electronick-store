@@ -4,7 +4,7 @@ import { getButtonProductsAll } from "src/features/category-buttons/model";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { SeeMoreButton } from "src/shared/ui/see-more-button";
 import { ProductsList } from "src/widgets/products-list";
-import { handleCategoryTitle } from "./category-title";
+import { HandleCategoryTitle } from "./category-title";
 
 interface SearchUsersProps {
     navigation: any;
@@ -23,7 +23,7 @@ export const SearchUsers:React.FC<SearchUsersProps> = ({navigation, categoryTitl
 
     return (
         <View>
-            {categoryTitle && handleCategoryTitle(categoryTitle, navigation)}
+            {categoryTitle && <HandleCategoryTitle categoryTtile={categoryTitle} navigation={navigation}/>}
             <ProductsList 
                 shapeView='boxHorizontal' 
                 item={item} 

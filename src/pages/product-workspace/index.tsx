@@ -5,9 +5,9 @@ import { useStateSelector } from "src/shared/hooks";
 import { ProductsList } from "src/widgets/products-list";
 
 
-export const ProducstWorkSpace = ({navigation}: any) => {
+export const ProducstWorkSpace = ({navigation, route}: any) => {
     const { item, status} = useStateSelector(state => state.buttonPrudcts)
-    const categoryTitle = item?.find(obj => {return obj.category})
+    const categoryTitle = route.params.title
 
     const handleCategoryTitle = (category: string) => {
         return (
@@ -16,11 +16,11 @@ export const ProducstWorkSpace = ({navigation}: any) => {
     }
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                {categoryTitle && handleCategoryTitle(categoryTitle.category)}
+        <ScrollView contentContainerStyle={styles.container}>
+            <View style={styles.contentContainer}> 
+                {categoryTitle && handleCategoryTitle(categoryTitle)}
                 <SearchInputField/>
-                <Text style={styles.textSuggest}>Suggest items</Text>
+                <Text style={styles.textSuggest}>Items</Text>
                 <ProductsList shapeView="box" item={item} navigation={navigation}/>
             </View>
         </ScrollView>
@@ -30,6 +30,13 @@ export const ProducstWorkSpace = ({navigation}: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#FFFF',
+        paddingHorizontal: 20,
+    },
+    contentContainer: {
+        flex: 1,
+        alignItems: 'center',
+        marginBottom: 20,
     },
     titleWorkspace: {
         fontSize: 21,
@@ -41,11 +48,12 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     textSuggest: {
-        marginLeft: 25,
         fontSize: 12,
         fontWeight: '400',
         lineHeight: 16,
         color: 'rgb(138, 139, 122)',
-        fontFamily: 'Avenir-Heavy'
+        fontFamily: 'Avenir-Heavy',
+        alignSelf: 'flex-start',
+        
     }    
 })
