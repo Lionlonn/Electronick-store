@@ -1,12 +1,13 @@
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 
 
 
 
 export const MultisliderCustom = () => {
     const [ values, setValue ] = useState<number[]>([10, 2000]);
+    const width = useWindowDimensions().width
 
     const multiSliderValuesChange = (values: number[]) => {
         setValue(values)
@@ -16,7 +17,7 @@ export const MultisliderCustom = () => {
         <View style={styles.container}>
             <MultiSlider 
                     values={values}
-                    sliderLength={360}
+                    sliderLength={width - 45}
                     onValuesChange={multiSliderValuesChange}
                     min={10}
                     max={2000}
@@ -41,7 +42,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'orange'
     },
     priceContainer: {
         flexDirection: 'row',
