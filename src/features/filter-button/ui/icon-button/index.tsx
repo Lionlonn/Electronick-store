@@ -11,7 +11,7 @@ interface Props {
     toggleButton: () => void
 }
 
-export const ButtonFilterTest: React.FC<Props> = ({toggleButton}) => {
+export const ButtonFilter: React.FC<Props> = ({toggleButton}) => {
 
 
 

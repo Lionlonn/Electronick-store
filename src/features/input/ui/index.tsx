@@ -1,9 +1,8 @@
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import {Animated, Dimensions, ScrollView, SectionList, StyleSheet, Text, TextInput, View, useWindowDimensions} from 'react-native';
-import { RenderItem } from "src/features/filter-button";
+import { ButtonFilter, RenderItem } from "src/features/filter-button";
 import { fetchFilterData } from "src/features/filter-button/model";
-import { ButtonFilterTest } from "src/features/filter-button/ui/button-test";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { Button } from "src/shared/ui";
 
@@ -72,7 +71,7 @@ export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlo
                     autoCorrect={false}
                 />
                 <View style={styles.inputInnerContainer}>
-                        <ButtonFilterTest toggleButton={toggleListItem}/>
+                        <ButtonFilter toggleButton={toggleListItem}/>
                 </View>
                 
              </View>

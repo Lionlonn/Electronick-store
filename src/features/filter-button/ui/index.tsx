@@ -4,7 +4,7 @@ import { FilterButton } from "./filter-button";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { fetchFilterData } from "../model";
 import { Button } from "react-native-paper";
-import { ButtonFilterTest } from "./button-test";
+import { ButtonFilterTest } from "./icon-button";
 
 
 
