@@ -70,7 +70,7 @@ export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlo
                     height:bodyHeight,
                 }
                 ]}>
-                    <ScrollView >
+                    <ScrollView contentContainerStyle={{paddingHorizontal: 20}}>
                         <Text style={styles.titleFilter}>Filter by</Text>
                         <Text style={styles.priceTitle}>Price</Text>
                         
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     container: {
         minWidth: '100%',
         
+        
     },
     wrapper: {
         alignSelf: 'center'
@@ -131,8 +132,6 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         fontSize: 21,
         color: 'black',
-        paddingLeft: 22,
-        paddingRight: 20,
         marginBottom: 20,
         marginTop: 20,
     },
@@ -149,7 +148,6 @@ const styles = StyleSheet.create({
     sectionButton: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 20,
         marginBottom: 30,
         gap: 40
         
@@ -161,7 +159,7 @@ const styles = StyleSheet.create({
     },
     priceTitle: {
         color: '#8A8B7A',
-        paddingLeft: 22,
+        fontFamily: "Avenir-Black"
     },
     priceText: {
         color: 'black',
@@ -172,9 +170,6 @@ const styles = StyleSheet.create({
     priceContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        
-        paddingLeft: 22,
-        paddingRight: 20,
         
        
     },

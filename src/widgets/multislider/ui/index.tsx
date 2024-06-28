@@ -13,7 +13,7 @@ export const MultisliderCustom = () => {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <MultiSlider 
                     values={values}
                     sliderLength={360}
@@ -38,10 +38,15 @@ export const MultisliderCustom = () => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: 'orange'
+    },
     priceContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-       
+        width: '100%'
     },
     priceText: {
         color: 'black',

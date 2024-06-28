@@ -46,8 +46,6 @@ export const FilterListAccordion = () => {
 
 const styles = StyleSheet.create({
     item: {
-        paddingLeft: 22,
-        paddingRight: 20,
         marginBottom: 20,
         marginTop: 20, 
     },
@@ -57,8 +55,6 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: '#8A8B7A',
         fontStyle: 'normal',
-        paddingLeft: 22,
-        paddingRight: 20,
         marginBottom: 20,
         marginTop: 20,
     },
