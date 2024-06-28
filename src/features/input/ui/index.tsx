@@ -1,20 +1,20 @@
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
-import React, { useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import {Animated, Dimensions, ScrollView, SectionList, StyleSheet, Text, TextInput, View, useWindowDimensions} from 'react-native';
-import { FilterButtonContainer, FilterData, RenderItem } from "src/features/filter-button";
+import { RenderItem } from "src/features/filter-button";
 import { fetchFilterData } from "src/features/filter-button/model";
 import { ButtonFilterTest } from "src/features/filter-button/ui/button-test";
-import { FilterButton } from "src/features/filter-button/ui/filter-button";
 import { useAppDispatch, useStateSelector } from "src/shared/hooks";
 import { Button } from "src/shared/ui";
 
+interface SearchInputFieldProps {
+    multisliderBlock: ReactNode
+}
 
-
-export const SearchInputField = () => {
+export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlock}) => {
     const { items, status } = useStateSelector(item => item.filter);
     const [text, onChangeText] = React.useState('');
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [ values, setValue ] = useState<number[]>([10, 2000]);
+    const [isOpen, setIsOpen] = useState<boolean>(false) 
     const { width, height} = useWindowDimensions()
 
     const animatedController = useRef(new Animated.Value(0)).current;
@@ -35,9 +35,7 @@ export const SearchInputField = () => {
         })
         
     }
-    const multiSliderValuesChange = (values: number[]) => {
-        setValue(values)
-    }
+   
 
     const toggleListItem = () => {
         const targetHeight = isOpen ? 0 : height - 100
@@ -89,26 +87,9 @@ export const SearchInputField = () => {
                         <Text style={styles.priceTitle}>Price</Text>
                         
                         <View style={[styles.multisliderStyle, {display: isOpen ? 'flex' : 'none'}]}>
-                            <MultiSlider 
-                                values={values}
-                                sliderLength={360}
-                                onValuesChange={multiSliderValuesChange}
-                                min={10}
-                                max={2000}
-                                step={1}
-                                allowOverlap = {false}
-                                snapped
-                                minMarkerOverlapDistance = {30}
-                                trackStyle={{backgroundColor: '#F4F5FA', height: 6, borderRadius: 8}}
-                                markerStyle={{backgroundColor: '#FF7F50', height: 15, width: 15}}
-                                selectedStyle={{backgroundColor: '#FF7F50'}}
-                            />
+                            {multisliderBlock}
                         </View>
 
-                        <View style={styles.priceContainer}>
-                            <Text style={styles.priceText}>${values[0]}</Text>
-                            <Text style={styles.priceText}>${values[1]}</Text>
-                        </View>
 
                         <SectionList 
                             sections={items}

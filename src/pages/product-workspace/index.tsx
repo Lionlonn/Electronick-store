@@ -2,12 +2,15 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View} from "react-native";
 import { SearchInputField } from "src/features/input";
 import { useStateSelector } from "src/shared/hooks";
+import { AccordionContent } from "src/widgets/accordion";
+
 import { ProductsList } from "src/widgets/products-list";
 
 
 export const ProducstWorkSpace = ({navigation, route}: any) => {
     const { item, status} = useStateSelector(state => state.buttonPrudcts)
     const categoryTitle = route.params.title
+    const totalItems = item?.length
 
     const handleCategoryTitle = (category: string) => {
         return (
@@ -16,14 +19,21 @@ export const ProducstWorkSpace = ({navigation, route}: any) => {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
             <View style={styles.contentContainer}> 
-                {categoryTitle && handleCategoryTitle(categoryTitle)}
-                <SearchInputField/>
+                <View style={styles.titleContainer}>
+                    {categoryTitle && handleCategoryTitle(categoryTitle)}
+                    <Text style={styles.textSuggest}>{totalItems} suggested items</Text>
+                </View>
+                <View style={{marginBottom: 24}}>
+                    {/* <SearchInputField/> */}
+                    <AccordionContent/> 
+                </View>
+                
                 <Text style={styles.textSuggest}>Items</Text>
                 <ProductsList shapeView="box" item={item} navigation={navigation}/>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
@@ -38,13 +48,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 20,
     },
+    titleContainer: {
+        alignSelf: 'flex-start',
+        marginBottom: 24
+    },
     titleWorkspace: {
         fontSize: 21,
         lineHeight: 29,
         fontWeight: '900',
         fontFamily: 'Avenir-Heavy',
         color: 'black',
-        marginLeft: 25,
         marginTop: 20
     },
     textSuggest: {

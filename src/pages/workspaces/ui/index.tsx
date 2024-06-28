@@ -4,6 +4,7 @@ import { FeaturedWorkspace } from "src/entities/featured-workspace";
 import { CategoryButtons } from "src/features/category-buttons";
 import { SearchInputField } from "src/features/input";
 import { BrowseWorkSpaces } from "src/widgets/browse-workspaces";
+import { MultisliderCustom } from "src/widgets/multislider";
 import { SearchUsers } from "src/widgets/search-users";
 
 
@@ -13,7 +14,7 @@ export const WorkSpacesPage = ({navigation}: any) => {
 
     return (
         <View style={styles.container}>
-            <SearchInputField/>
+            <SearchInputField multisliderBlock={<MultisliderCustom/>}/>
             <ScrollView showsVerticalScrollIndicator={false}> 
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />

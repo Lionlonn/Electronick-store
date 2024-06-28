@@ -1,0 +1,1 @@
+export { MultisliderCustom } from './ui/index'

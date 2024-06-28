@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SearchInputField } from "src/features/input";
+import { MultisliderCustom } from "src/widgets/multislider";
 
 
 export const SearchPage = () => {
    
     return (
         <View style={styles.container}>
-            <SearchInputField/>
+            <SearchInputField multisliderBlock={<MultisliderCustom/>}/>
         </View>
     )
 }
