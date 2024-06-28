@@ -19,6 +19,8 @@ export const SearchUsers:React.FC<SearchUsersProps> = ({navigation, categoryTitl
         dispatch(getButtonProductsAll())
     }, [])
 
+  
+
     return (
         <View>
             {categoryTitle && handleCategoryTitle(categoryTitle, navigation)}

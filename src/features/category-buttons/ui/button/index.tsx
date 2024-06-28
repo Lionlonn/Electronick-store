@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimension
 import { useAppDispatch } from "src/shared/hooks";
 import { getButtonDeveloperProduct, getButtonProductsAll, getFilmakingProduct, getPhotographyProduct, getPodcastProduct } from "../../model";
 import { Button } from "react-native-paper";
-import { handleClickCategoryActions } from "../actions";
+import { ClickHandlesCategory } from "../actions";
 
 interface ClickHandles {
     [key: string]: () => void;
@@ -18,19 +18,14 @@ export const CategoryButtons:React.FC<CategoryButtonsProps> = ({setCategory}) =>
     const [ isPressed, setIsPressed ] = useState<string>('Show all')
     const categories = ['Show all', 'Developer', 'Podcast creator', 'Filmaking', 'Photography']; 
     const dispatch = useAppDispatch();
-
     const width = useWindowDimensions().width
-
     const sizeM = width > 420
 
-    const handleCategory = handleClickCategoryActions(dispatch, setIsPressed);
+    const handles = ClickHandlesCategory(dispatch, setIsPressed, setCategory);
     
-    function ActionsCategory(category:string) {
-        handleCategory[category];
-        setCategory(category);
-        setIsPressed(category)
+    const handleClick = (key: string) => {
+        handles[key]()
     }
-
 
     const buttonStyle = (category: string) => ({
        backgroundColor: isPressed === category ? "rgb(4, 11, 20)" : "rgb(244, 245, 247)",
@@ -47,7 +42,7 @@ export const CategoryButtons:React.FC<CategoryButtonsProps> = ({setCategory}) =>
                 horizontal={true}>
                 {categories.map((category, index) => (
                     <View key={index}>
-                        <Button onPress={() => ActionsCategory(category)} 
+                        <Button onPress={() => handleClick(category)} 
                             style={[
                                 {   
                                     padding: 3
