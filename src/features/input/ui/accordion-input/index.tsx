@@ -1,6 +1,6 @@
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
-import { LayoutAnimation, Platform, ScrollView, SectionList, StyleSheet, Text, TextInput, UIManager, View, useWindowDimensions} from 'react-native';
+import { Dimensions, FlatList, LayoutAnimation, Platform, ScrollView, SectionList, StyleSheet, Text, TextInput, UIManager, View, useWindowDimensions} from 'react-native';
 
 import { ButtonFilter } from "src/features/filter-button";
 import { fetchFilterData } from "src/features/filter-button/model";
@@ -14,22 +14,24 @@ interface SearchInputFieldProps {
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
     UIManager.setLayoutAnimationEnabledExperimental(true);
 }
-// [{display: isOpen ? 'flex' : 'none',}, styles.scrollViewStyle]} showsVerticalScrollIndicator={false}
 
-export const AccordionInputTest:React.FC<SearchInputFieldProps> = ({multisliderBlock, listItem}) => {
+
+
+export const FieldFilter:React.FC<SearchInputFieldProps> = ({multisliderBlock, listItem}) => {
     const [text, onChangeText] = React.useState('');
-    const [isOpen, setIsOpen] = useState<boolean>(false) 
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const { width, height} = useWindowDimensions()
+
+    const sizeFlex = width > 420 ? 10 : 2
 
 
     const toggleListItem = () => {
-        // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         LayoutAnimation.configureNext({
-            duration: 500,
+            duration: 100,
             create: { type: 'linear', property: 'opacity' },
             update: {
                 type: LayoutAnimation.Types.spring,
-                springDamping: 0.8,
+                springDamping: 0.3,
             },
             delete: {
                 type: 'linear',
@@ -37,6 +39,7 @@ export const AccordionInputTest:React.FC<SearchInputFieldProps> = ({multisliderB
             },
             });
             setIsOpen(!isOpen);
+            console.log('OPEN')
         };
 
 
@@ -47,11 +50,10 @@ export const AccordionInputTest:React.FC<SearchInputFieldProps> = ({multisliderB
 
 
     
-   
-
 
     return (
-        <View style={styles.container}>
+        
+        <View style={[styles.container, {flex: isOpen ? 2 : 0}]}>
             <View style={styles.wrapper}>
                 <TextInput
                     style={styles.input}
@@ -67,23 +69,36 @@ export const AccordionInputTest:React.FC<SearchInputFieldProps> = ({multisliderB
                 </View>
                 
              </View>
-            <ScrollView style={[{maxHeight: isOpen ? '100%' : 0,}, styles.scrollViewStyle]} showsVerticalScrollIndicator={false}>
-                    
-                        <Text style={styles.titleFilter}>Filter by</Text>
-                        <Text style={styles.priceTitle}>Price</Text>
-                         
-                        <View style={[styles.multisliderStyle]}>
-                            {multisliderBlock}
-                        </View>
-                         
-                        {listItem}
-
-                        <View style={[
-                            styles.sectionButton]}>
-                            <Button buttonColor="white" onClick={toggleListItem} type='Cansel'/>
-                            <Button buttonColor="yellow" onClick={toggleListItem} type='Apply'/>
-                        </View>
-            </ScrollView>
+                {isOpen && 
+                <View style={{flex: 1}}>
+                    <ScrollView 
+                        keyboardDismissMode="on-drag" 
+                        style={[styles.scrollViewStyle,]} 
+                        contentContainerStyle={{ paddingBottom: 20}} 
+                        showsVerticalScrollIndicator={false}
+                        >
+                        <View style={{flex: 1,}}>
+                            <Text style={styles.titleFilter}>Filter by</Text>
+                            <Text style={styles.priceTitle}>Price</Text>
+                            
+                            <View style={[styles.multisliderStyle]}>
+                                {multisliderBlock}
+                            </View>
+                            
+                            {listItem}
+                            
+                            <View style={[
+                                styles.sectionButton]}>
+                                <Button buttonColor="white" onClick={toggleListItem} type='Cansel'/>
+                                <Button buttonColor="yellow" onClick={toggleListItem} type='Apply'/>
+                            </View>
+                        </View> 
+                    </ScrollView>
+                
+               </View> 
+}    
+                                    
+            
             
             
 
@@ -94,17 +109,17 @@ export const AccordionInputTest:React.FC<SearchInputFieldProps> = ({multisliderB
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1
-        
+        // flex: 1,
         
     },
     wrapper: {
-        // alignSelf: 'center'
+        alignSelf: 'center',
+        position: 'relative'
     },
     scrollViewStyle: {
         borderRadius: 8,
-        
-        // paddingHorizontal: 20,
+        flex: 1,
+       
     },
     input: {
         minWidth: '100%',
@@ -133,10 +148,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 20,
     },
-    checkbox: {
-        width: 20,
-        height: 20,
-    },
     
     contentContainer: {
         zIndex: 1,
@@ -146,14 +157,13 @@ const styles = StyleSheet.create({
     sectionButton: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 80,
         gap: 40
         
     },
     multisliderStyle: {
         flexDirection: 'row',
         justifyContent: 'center',
-        position: 'relative',
+        // position: 'relative',
     },
     priceTitle: {
         color: '#8A8B7A',

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { FeaturedWorkspace } from "src/entities/featured-workspace";
 import { CategoryButtons } from "src/features/category-buttons";
-import { SearchInputField } from "src/features/input";
+import { FieldFilter, SearchInputField } from "src/features/input";
 import { BrowseWorkSpaces } from "src/widgets/browse-workspaces";
 import { FilterListAccordion } from "src/widgets/filter-list";
 import { MultisliderCustom } from "src/widgets/multislider";
@@ -14,12 +14,12 @@ export const WorkSpacesPage = ({navigation}: any) => {
 
 
     return (
-        <View style={styles.container}>
-            <SearchInputField 
-                multisliderBlock={<MultisliderCustom/>}
-                listItem={<FilterListAccordion/>}
+        <ScrollView style={styles.container}>
+             <FieldFilter 
+                    multisliderBlock={<MultisliderCustom/>}
+                    listItem={<FilterListAccordion/>}
                 />
-            <ScrollView showsVerticalScrollIndicator={false}> 
+            <View> 
                 <View style={{marginBottom: 40}}>
                     <FeaturedWorkspace />
                 </View>
@@ -28,9 +28,9 @@ export const WorkSpacesPage = ({navigation}: any) => {
                 </View> 
                 
                 
-            </ScrollView>
+            </View>
             
-        </View>
+        </ScrollView>
     )
 }
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        alignItems: 'center',
+        // alignItems: 'center',
         paddingHorizontal: 20,
         
     }

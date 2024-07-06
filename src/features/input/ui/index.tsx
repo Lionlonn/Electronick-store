@@ -20,7 +20,7 @@ export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlo
     const bodyWidth = width
     const bodyHeight = animatedController.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, height - 100],
+        outputRange: [0, height],
     });
 
     
@@ -64,33 +64,40 @@ export const SearchInputField:React.FC<SearchInputFieldProps> = ({multisliderBlo
                 </View>
                 
              </View>
-            <View style={{flex: 1, display: isOpen ? 'flex' : 'none'}}>
-                <Animated.View style={[styles.contentContainer, {
-                    width: bodyWidth, 
-                    height:bodyHeight,
-                }
-                ]}>
-                    <ScrollView contentContainerStyle={{paddingHorizontal: 20}}>
-                        <Text style={styles.titleFilter}>Filter by</Text>
-                        <Text style={styles.priceTitle}>Price</Text>
+            { isOpen && 
+                 <View style={{flex: 1, 
+                // display: isOpen ? 'flex' : 'none'
+                }}>
+                    <Animated.View style={[styles.contentContainer, {
+                        // width: bodyWidth, 
+                        // height: bodyHeight,
+                        flex: 1
+                    }
+                    ]}>
+                        <ScrollView style={{flex: 1}} contentContainerStyle={{}}>
+                            <View style={{flex: 1}}>
+                                <Text style={styles.titleFilter}>Filter by</Text>
+                                <Text style={styles.priceTitle}>Price</Text>
+                                
+                                <View style={[styles.multisliderStyle, {display: isOpen ? 'flex' : 'none'}]}>
+                                    {multisliderBlock}
+                                </View>
+
+                                {listItem}
+
+                                <View style={[
+                                    styles.sectionButton, {display: isOpen ? 'flex' : 'none',}]}>
+                                    <Button buttonColor="white" onClick={toggleListItem} type='Cansel'/>
+                                    <Button buttonColor="yellow" onClick={toggleListItem} type='Apply'/>
+                                </View>
+                            </View>        
+                        </ScrollView>
+                                            
                         
-                        <View style={[styles.multisliderStyle, {display: isOpen ? 'flex' : 'none'}]}>
-                            {multisliderBlock}
-                        </View>
-
-                        {listItem}
-
-                        <View style={[
-                            styles.sectionButton, {display: isOpen ? 'flex' : 'none',}]}>
-                            <Button buttonColor="white" onClick={toggleListItem} type='Cansel'/>
-                            <Button buttonColor="yellow" onClick={toggleListItem} type='Apply'/>
-                        </View>
-
-                    </ScrollView>
-                                        
-                    
-            </Animated.View> 
-            </View>
+                    </Animated.View> 
+            </View>    
+            }
+           
             
             
 
