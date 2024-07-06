@@ -1,47 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View} from "react-native";
+import { ProductItem } from "src/entities/product";
 import { FieldFilter } from "src/features/input";
 import { useStateSelector } from "src/shared/hooks";
 import { FilterListAccordion } from "src/widgets/filter-list";
 import { MultisliderCustom } from "src/widgets/multislider";
 
 import { ProductsList } from "src/widgets/products-list";
-import { SortingItems } from "src/widgets/sorting-items";
 
 
-export const ProducstWorkSpace = ({navigation, route}: any) => {
-    const { item, status} = useStateSelector(state => state.buttonPrudcts)
-    const categoryTitle = route.params.title
-    const totalItems = item?.length
 
-    const handleCategoryTitle = (category: string) => {
-        return (
-            <Text style={styles.titleWorkspace}>{category} Workspace</Text>
-        )
+export const SortingItems = ({navigation}: any) => {
+    const { item, status} = useStateSelector(state => state.buttonPrudcts);
+    const [ text, onChangeText ] = useState<string>('');
+    const [ filterItems, setFilterItems ] = useState<ProductItem[] | undefined>()
+    const getNewItems = (items: ProductItem[] | undefined) => { 
+        return setFilterItems(items)
+    }
+    
+
+    const SearchFilter = (text: string) => {
+        if (text) {
+            const newData = item?.filter(item => {
+                const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+                const textData = text.toUpperCase();
+                return itemData.indexOf(textData) > -1;
+            });
+            return getNewItems(newData)
+        } else {
+            return getNewItems(item)
+        }
     }
 
+    useEffect(() => {
+        SearchFilter(text)
+    }, [text])
+
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.contentContainer}> 
-                <View style={styles.titleContainer}>
-                    {categoryTitle && handleCategoryTitle(categoryTitle)}
-                    <Text style={styles.textSuggest}>{totalItems} suggested items</Text>
-                </View>
-               
-                {/* <FieldFilter 
+        <View style={{gap: 20, flex: 1}}>
+            <FieldFilter 
                     multisliderBlock={<MultisliderCustom/>}
                     listItem={<FilterListAccordion/>}
+                    onChangeText={onChangeText}
+                    text={text}
                 />
                 
                 <View style={{flex: 1, gap: 20}}>
                     <Text style={styles.textSuggest}>Items</Text>
-                    <ProductsList shapeView="box" item={item} navigation={navigation}/>        
-                </View> */}
-               <SortingItems/> 
-            </View>
-        </ScrollView>
+                    <ProductsList shapeView="box" item={filterItems} navigation={navigation}/>        
+                </View>
+        </View>
     )
+
 }
+
 
 const styles = StyleSheet.create({
     container: {

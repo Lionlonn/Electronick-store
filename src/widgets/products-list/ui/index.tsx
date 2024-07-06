@@ -9,7 +9,8 @@ import { Favorite } from "src/features/favorite";
 interface ProductListProps {
     shapeView: 'box' | 'rect' | 'boxHorizontal';
     item: ProductItem[] | undefined;
-    navigation: any
+    navigation: any;
+    
 }
 
 export const ProductsList:React.FC<ProductListProps> = ({shapeView, item, navigation}) => {

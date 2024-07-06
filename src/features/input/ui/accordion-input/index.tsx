@@ -9,6 +9,8 @@ import { Button } from "src/shared/ui";
 interface SearchInputFieldProps {
     multisliderBlock: ReactNode;
     listItem: ReactNode;
+    text?: string;
+    onChangeText?: (titleText: string) => void;
 }
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
@@ -17,8 +19,8 @@ if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental
 
 
 
-export const FieldFilter:React.FC<SearchInputFieldProps> = ({multisliderBlock, listItem}) => {
-    const [text, onChangeText] = React.useState('');
+export const FieldFilter:React.FC<SearchInputFieldProps> = ({multisliderBlock, listItem, onChangeText, text}) => {
+    // const [text, onChangeText] = React.useState('');
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { width, height} = useWindowDimensions()
 
