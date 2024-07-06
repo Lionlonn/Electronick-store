@@ -1,19 +1,23 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { SearchInputField } from "src/features/input";
+import { FieldFilter, SearchInputField } from "src/features/input";
 import { CartOrder } from "src/shared/ui/card";
 import { OrdersList } from "src/widgets/products-list";
-
+import { FilterListAccordion } from "src/widgets/filter-list";
+import { MultisliderCustom } from "src/widgets/multislider";
 
 
 export const OrdersPage = ({navigation}: any) => {
  
     
     return (
-        <View style={styles.container}>
-            <SearchInputField/>
+        <ScrollView style={styles.container} contentContainerStyle={{gap: 20}}>
+            <FieldFilter 
+                    multisliderBlock={<MultisliderCustom/>}
+                    listItem={<FilterListAccordion/>}
+                />
             <OrdersList navigation={navigation}/>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -21,9 +25,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        paddingHorizontal: 20,
-        gap: 20
-    }
+        paddingHorizontal: 20,        
+    },
 })

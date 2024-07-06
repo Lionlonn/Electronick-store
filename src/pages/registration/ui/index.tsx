@@ -60,8 +60,8 @@ export const RegistrationPage = ({navigation}: any) => {
                 
                 
                 <View style={styles.socialAuthBlock}>
-                    <SocialAuthButton typeButton="gmail"/>
-                    <SocialAuthButton typeButton="facebook"/>
+                    <SocialAuthButton typeButton="gmail" setLoading={setLoading}/>
+                    <SocialAuthButton typeButton="facebook" setLoading={setLoading}/>
                 </View>
                 <View style={styles.fields}>
                     <FieldsAuth 
@@ -90,7 +90,7 @@ export const RegistrationPage = ({navigation}: any) => {
                 <TouchableOpacity>
                     <Text style={[styles.footerTextLeft, {fontSize: fontSize}]}>Forgot password</Text> 
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('RegistrationPage')}>
+                <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
                     <Text style={[styles.footerTextRight, {fontSize: fontSize}]}>Login</Text> 
                 </TouchableOpacity>
             </View>
