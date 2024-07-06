@@ -1,8 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View} from "react-native";
-import { FieldFilter, SearchInputField } from "src/features/input";
+import { FieldFilter } from "src/features/input";
 import { useStateSelector } from "src/shared/hooks";
-import { AccordionContent } from "src/widgets/accordion";
 import { FilterListAccordion } from "src/widgets/filter-list";
 import { MultisliderCustom } from "src/widgets/multislider";
 
@@ -28,15 +27,10 @@ export const ProducstWorkSpace = ({navigation, route}: any) => {
                     <Text style={styles.textSuggest}>{totalItems} suggested items</Text>
                 </View>
                
-                
-                
                 <FieldFilter 
                     multisliderBlock={<MultisliderCustom/>}
                     listItem={<FilterListAccordion/>}
                 />
-                
-                    
-                
                 
                 <View style={{flex: 1}}>
                     <Text style={styles.textSuggest}>Items</Text>

@@ -1,7 +1,6 @@
 import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { FieldFilter, SearchInputField } from "src/features/input";
-import { CartOrder } from "src/shared/ui/card";
+import { ScrollView, StyleSheet, } from "react-native";
+import { FieldFilter, } from "src/features/input";
 import { OrdersList } from "src/widgets/products-list";
 import { FilterListAccordion } from "src/widgets/filter-list";
 import { MultisliderCustom } from "src/widgets/multislider";

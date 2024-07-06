@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { FeaturedWorkspace } from "src/entities/featured-workspace";
 import { CategoryButtons } from "src/features/category-buttons";
-import { FieldFilter, SearchInputField } from "src/features/input";
+import { FieldFilter } from "src/features/input";
 import { BrowseWorkSpaces } from "src/widgets/browse-workspaces";
 import { FilterListAccordion } from "src/widgets/filter-list";
 import { MultisliderCustom } from "src/widgets/multislider";

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { FieldFilter, SearchInputField } from "src/features/input";
+import { FieldFilter, } from "src/features/input";
 import { FilterListAccordion } from "src/widgets/filter-list";
 import { MultisliderCustom } from "src/widgets/multislider";
 
